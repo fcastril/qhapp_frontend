@@ -1,0 +1,68 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" class="mt-2">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="far fa-images"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+    <div *ngIf="!isEdit; else edit">
+        <div class="container mr-12 row col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                <label for="idConsent">Consentimiento informado</label>
+                <select name="idConsent" id="idConsent" [(ngModel)]="idConsent" [disabled]="listConsents.length === 0" required #consent="ngModel" [class.is-invalid]="consent.invalid && consent.touched" (change)="selectConsent()">
+                    <option [value]="-1"><span>Seleccione una opción</span>
+                    </option>
+                    <option *ngFor="let obj of listConsents; let idx = index" [value]="idx">
+                    <span>{{ obj.nameConsent }}</span>
+                    </option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="container mr-12 row col-lg-12 col-md-12 col-sm-12">
+            <div *ngIf="regConsent.descriptionConsent!==''" class="form-group col-lg-12 col-md-12 col-sm-12">
+                <ckeditor [(ngModel)]="regConsent.descriptionConsent" name="descriptionConsent"></ckeditor>
+            </div>
+        </div>
+
+        <div *ngIf="regConsent.descriptionConsent!==''" class="container mr-12 row col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                <signature-pad [options]="signaturePadOptions" (onEndEvent)="drawComplete()"></signature-pad>
+            </div>
+            <div class="firma">
+                <label>Firma</label>
+            </div>
+            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                <button class="btn btn-secondary btn-block" (click)="clearSignature()">Limpiar Firma</button>
+            </div>
+        </div>
+    </div>
+    <ng-template #edit>
+        <div class="container mr-12 row col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                <label><strong>{{reg.nameConsent}}</strong></label>
+            </div>
+        </div>
+        <br>
+        <div class="container mr-12 row col-lg-12 col-md-12 col-sm-12">
+            <div *ngIf="reg.descriptionConsent!==''" class="form-group col-lg-12 col-md-12 col-sm-12">
+                <ckeditor [(ngModel)]="reg.descriptionConsent" name="descriptionConsent"></ckeditor>
+            </div>
+        </div>
+
+        <div *ngIf="reg.descriptionConsent!==''" class="container mr-12 row col-lg-12 col-md-12 col-sm-12">
+            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                <img [src]="reg.signature">
+            </div>
+            <div class="firma">
+                <label>Firma</label>
+            </div>
+        </div>
+    </ng-template>
+
+    <div class="row float-right mr-5 ">
+        <button *ngIf="isVisibleSave" type="submit " class="btn btn-success "><i class="fas fa-save " ></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " (click)="return()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

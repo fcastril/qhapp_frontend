@@ -1,0 +1,135 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-dolly"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="codeTypeMovement">Codigo (10 Caracteres)</label>
+            <input type=" text " class="form-control " id="codeTypeMovement" [(ngModel)]="reg.codeTypeMovement" name="codeTypeMovement" autocomplete="off" maxlength="10" required>
+            <span *ngIf="f.submitted && f.controls['codeTypeMovement'].errors" class="text-danger">* Obligatorio</span>
+            <small class="form-text text-muted">El codigo debe ser unico - Solo se permite un maximo de 10 caracteres</small>
+        </div>
+        <div class="form-group col-lg-8 col-md-8 col-sm-12">
+            <label for="descriptionTypeMovement">Nombre</label>
+            <input type=" text " class="form-control " id="descriptionTypeMovement" [(ngModel)]="reg.descriptionTypeMovement" name="descriptionTypeMovement" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['descriptionTypeMovement'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="multiplier">Multiplicador</label>
+            <select name="multiplier" id="multiplier" [(ngModel)]="reg.multiplier">
+                <option *ngFor="let type of TypesMultipliers" [value]="type.id">
+                  <span>{{ type.description }}</span>
+                </option>
+              </select>
+            <small *ngIf="f.submitted && f.controls['multiplier'].errors" class="form-text text-danger">* Obligatorio</small>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="consecutive">Consecutivo</label>
+            <input type=" number " class="form-control " id="consecutive" [(ngModel)]="reg.consecutive" name="consecutive" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['consecutive'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="option">Opcion</label>
+            <select name="option" id="option" [(ngModel)]="reg.option">
+                <option *ngFor="let type of Opciones" [value]="type.id">
+                  <span>{{ type.description }}</span>
+                </option>
+              </select>
+            <small *ngIf="f.submitted && f.controls['multiplier'].errors" class="form-text text-danger">* Obligatorio</small>
+        </div>
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label>Afecta Costos</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.isAffectCost" (click)="reg.isAffectCost = false" class="btn btn-success w-50" type="button">
+                    <i class="far fa-check-circle"></i>
+                    Si
+            </button>
+            <button *ngIf="!reg.isAffectCost" (click)="reg.isAffectCost = true" class="btn btn-outline-danger w-50" type="button">
+                    <i class="far fa-window-close"></i>
+                    No
+            </button>
+        </div>
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label>IVA</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.isIVA" (click)="reg.isIVA = false" class="btn btn-success w-50" type="button">
+                    <i class="far fa-check-circle"></i>
+                    Si
+            </button>
+            <button *ngIf="!reg.isIVA" (click)="reg.isIVA = true" class="btn btn-outline-danger w-50" type="button">
+                    <i class="far fa-window-close"></i>
+                    No
+            </button>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="resolutionDIAN">Resolucion DIAN (10 Caracteres)</label>
+            <input type=" text " class="form-control " id="resolutionDIAN" [(ngModel)]="reg.resolutionDIAN" name="resolutionDIAN" autocomplete="off" maxlength="10" required>
+            <span *ngIf="f.submitted && f.controls['resolutionDIAN'].errors" class="text-danger">* Obligatorio</span>
+            <small class="form-text text-muted">Solo se permite un maximo de 10 caracteres</small>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="prefix">Prefijo (5 Caracteres)</label>
+            <input type=" text " class="form-control " id="prefix" [(ngModel)]="reg.prefix" name="prefix" autocomplete="off" maxlength="5" required>
+            <span *ngIf="f.submitted && f.controls['prefix'].errors" class="text-danger">* Obligatorio</span>
+            <small class="form-text text-muted">Solo se permite un maximo de 5 caracteres</small>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="initialResolutionDIAN">Resolucion DIAN Inicio</label>
+            <input type=" number " class="form-control " id="initialResolutionDIAN" [(ngModel)]="reg.initialResolutionDIAN" name="initialResolutionDIAN" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['initialResolutionDIAN'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="finalResolutionDIAN">Resolucion DIAN Final</label>
+            <input type=" number " class="form-control " id="finalResolutionDIAN" [(ngModel)]="reg.finalResolutionDIAN" name="finalResolutionDIAN" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['finalResolutionDIAN'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-md-4 col-lg-4 col-xl-4 col-sm-12">
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha Resolución</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="reg.dateResolutionDIAN" autocomplete="off" name="dateResolutionDIAN" required #dateResolutionDIAN="ngModel" [class.is-invalid]="dateResolutionDIAN.invalid && dateResolutionDIAN.touched">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="dateResolutionDIAN.invalid && dateResolutionDIAN.touched">* Obligatorio</small>
+        </div>
+
+    </div>
+
+    <div class="row float-right mr-5 ">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " [routerLink]="['/types-movements']"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

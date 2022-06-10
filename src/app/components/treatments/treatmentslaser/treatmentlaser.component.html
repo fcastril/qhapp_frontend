@@ -1,0 +1,78 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" autocomplete="off" id="content" class="mt-5">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-hand-holding-medical"></i> {{ title | uppercase}}</h3>
+        </div>
+        <hr>
+    </div>
+
+    <br>
+
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-md-4 col-lg-4 col-xl-4 col-sm-12">
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha de Control</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="reg.dateTreatmentLaser" autocomplete="off" name="dateTreatmentLaser" required #dateTreatmentLaser="ngModel" [class.is-invalid]="dateTreatmentLaser.invalid && dateTreatmentLaser.touched">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="dateTreatmentLaser.invalid && dateTreatmentLaser.touched">* Obligatorio</small>
+        </div>
+
+    </div>
+
+    <h3 style="color: darkblue;"> {{ titleHarmony | uppercase }}</h3>
+    <br>
+
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="skinType">Tipo de Piel</label>
+            <!-- <input type="text" class="form-control" placeholder="Seleccione un Tipo de Documento" required> -->
+            <select class="form-control" required [(ngModel)]="reg.skinType" name="skinType" #skinType="ngModel" [class.is-invalid]="skinType.invalid && skinType.touched">
+                <option> 1 </option>
+                <option> 2 </option>
+                <option> 3 </option>
+                <option> 4 </option>
+                <option> 5 </option>
+                <option> 6 </option>
+            </select>
+            <small class="form-text text-danger" *ngIf="skinType.invalid && skinType.touched">* Obligatorio</small>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="pulseDuration">Duración Pulso</label>
+            <input type="number" class="form-control" id="pulseDuration" [(ngModel)]="reg.pulseDuration" name="pulseDuration" autocomplete="off" required #pulseDuration="ngModel" [class.is-invalid]="pulseDuration.invalid && pulseDuration.touched">
+            <span *ngIf="pulseDuration.invalid && pulseDuration.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+    </div>
+
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="jcm">j/cm</label>
+            <input type="number" class="form-control" id="jcm" [(ngModel)]="reg.jcm" name="jcm" autocomplete="off" required #jcm="ngModel" [class.is-invalid]="jcm.invalid && jcm.touched">
+            <span *ngIf="jcm.invalid && jcm.touched" class="text-danger">* Obligatorio</span>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="pulseNumber">Número de Pulsos</label>
+            <input type="number" class="form-control" id="pulseNumber" [(ngModel)]="reg.pulseNumber" name="pulseNumber" autocomplete="off" required #pulseNumber="ngModel" [class.is-invalid]="pulseNumber.invalid && pulseNumber.touched">
+            <span *ngIf="pulseNumber.invalid && pulseNumber.touched" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-8 col-md-8 col-sm-12">
+            <label for="laserObservation">Registro de Evolución</label>
+            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <textarea type="text" class="form-control" id="laserObservation" [(ngModel)]="reg.laserObservation" name="laserObservation" autocomplete="off" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="row float-right mr-5">
+        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i>Guardar Datos</button>
+        <button type="button " class="btn btn-danger ml-1 " (click)="regresar()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+
+</form>

@@ -1,0 +1,59 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" autocomplete="off" id="content" class="mt-5">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-hand-holding-medical"></i> {{ title | uppercase}}</h3>
+        </div>
+        <hr>
+    </div>
+
+    <br>
+
+
+
+    <div *ngFor="let reg of regsDetail; let idx = index" class="container row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <h3 style="color: darkblue;">Registro creado en {{ reg.dateTreatmentDetail | date: 'MMM d, y' }}</h3>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="sistolica">PA. Sistólica</label>
+            <input type="number" class="form-control" [(ngModel)]="reg.sistolica" id="sistolica + {{reg.idTreatmentDetail}}" name="sistolica + {{reg.idTreatmentDetail}}" readonly>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="diastolica">PA. Diastólica</label>
+            <input type="number" class="form-control" [(ngModel)]="reg.diastolica" id="diastolica + {{reg.idTreatmentDetail}}" name="diastolica + {{reg.idTreatmentDetail}}" readonly>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="heartRate">Frecuencia Cardiaca</label>
+            <input type="number" class="form-control" [(ngModel)]="reg.heartRate" id="heartRate + {{reg.idTreatmentDetail}}" name="heartRate + {{reg.idTreatmentDetail}}" readonly>
+        </div>
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="evolutionRegister">Registro de Evolución</label>
+            <input type="text" class="form-control" [(ngModel)]="reg.evolutionRegister" id="evolutionRegister + {{reg.idTreatmentDetail}}" name="evolutionRegister + {{reg.idTreatmentDetail}}" readonly>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="periodicity">Periodicidad</label>
+            <input type="number" class="form-control" [(ngModel)]="reg.periodicity" id="periodicity + {{reg.idTreatmentDetail}}" name="periodicity + {{reg.idTreatmentDetail}}" readonly>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="diagnostic">Diagnostic</label>
+            <input type="text" class="form-control" [(ngModel)]="reg.diagnostic" id="diagnostic + {{reg.idTreatmentDetail}}" name="diagnostic + {{reg.idTreatmentDetail}}" readonly>
+        </div>
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="pending">Pendiente</label>
+            <input type="text" class="form-control" [(ngModel)]="reg.pending" id="pending + {{reg.idTreatmentDetail}}" name="pending + {{reg.idTreatmentDetail}}" readonly>
+        </div>
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="pending">Registrado por: <b>{{' ' + reg.fullNameUser}}</b> el <b>{{reg.dateTreatmentDetail | date}}</b></label>
+        </div>
+        <!-- <hr width="400"> -->
+        <hr width="600" color="darkblue">
+    </div>
+
+    <div class="row float-right mr-5">
+        <!-- <button type="submit" class="btn btn-success"><i class="fas fa-save"></i>Guardar Datos</button> -->
+        <button type="button " class="btn btn-danger ml-1 " (click)="regresar()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+
+</form>

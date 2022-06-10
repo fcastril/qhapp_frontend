@@ -1,0 +1,21 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" class="mt-2">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="far fa-sticky-note"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="note">Nota</label>
+            <textarea type="text" class="form-control " id="note" [(ngModel)]="reg.note" name="note" rows="8" placeholder="Digite el contenido de la nota que quiere dejar para este paciente..." autocomplete="off"></textarea>
+        </div>
+    </div>
+
+    <div class="row float-right mr-5 ">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " (click)="return()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

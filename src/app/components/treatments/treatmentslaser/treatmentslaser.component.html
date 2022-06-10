@@ -1,0 +1,51 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" autocomplete="off" id="content" class="mt-5">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-hand-holding-medical"></i> {{ title | uppercase}}</h3>
+        </div>
+        <hr>
+    </div>
+
+    <br>
+
+
+
+    <div *ngFor="let reg of regsDetail; let idx = index" class="container row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <h3 style="color: darkblue;">Registro creado el {{ reg.dateTreatmentLaser | date }}</h3>
+        </div>
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label for="skinType">Tipo de Piel</label>
+            <input type="number" class="form-control" [(ngModel)]="reg.skinType" id="skinType + {{reg.idTreatmentDetailLaser}}" name="skinType + {{reg.idTreatmentDetailLaser}}" readonly>
+        </div>
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label for="jcm">J/CM</label>
+            <input type="number" class="form-control" [(ngModel)]="reg.jcm" id="jcm + {{reg.idTreatmentDetailLaser}}" name="jcm + {{reg.idTreatmentDetailLaser}}" readonly>
+        </div>
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label for="pulseDuration">Duración Pulso</label>
+            <input type="number" class="form-control" [(ngModel)]="reg.pulseDuration" id="pulseDuration + {{reg.idTreatmentDetailLaser}}" name="pulseDuration + {{reg.idTreatmentDetailLaser}}" readonly>
+        </div>
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label for="pulseNumber">Número de Pulsos</label>
+            <input type="number" class="form-control" [(ngModel)]="reg.pulseNumber" id="pulseNumber + {{reg.idTreatmentDetailLaser}}" name="pulseNumber + {{reg.idTreatmentDetailLaser}}" readonly>
+        </div>
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="laserObservation">Observación</label>
+            <input type="text" class="form-control" [(ngModel)]="reg.laserObservation" id="laserObservation + {{reg.idTreatmentDetailLaser}}" name="laserObservation + {{reg.idTreatmentDetailLaser}}" readonly>
+        </div>
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="pending">Registrado por: <b>{{' ' + reg.fullNameUser}}</b> el <b>{{reg.dateTreatmentLaser | date}}</b></label>
+        </div>
+
+        <hr style="border: 20px; color: blue; width: 75%;">
+    </div>
+
+    <div class="row float-right mr-5">
+        <!-- <button type="submit" class="btn btn-success"><i class="fas fa-save"></i>Guardar Datos</button> -->
+        <button type="button " class="btn btn-danger ml-1 " (click)="regresar()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+
+</form>

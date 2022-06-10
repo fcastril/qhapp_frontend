@@ -1,0 +1,237 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="far fa-edit"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+    <div class="container mr-5 row col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12" *ngIf="reg.idMovement == 0">
+            <label>Tipo de Movimiento</label>
+            <select name="idTypeMovement" [(ngModel)]="reg.idTypeMovement" (change)="LoadConsecutive($event)">
+              <option *ngFor="let type of TypesMovements" [value]="type.idTypeMovement">
+                <span>{{ type.descriptionTypeMovement }}</span>
+              </option>
+            </select>
+            <small *ngIf="f.submitted && f.controls['idTypeMovement'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un tipo de movimiento</small>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12" *ngIf="reg.idMovement > 0">
+            <label>Tipo de Movimiento</label>
+            <select name="idTypeMovement" [(ngModel)]="reg.idTypeMovement" disabled>
+              <option *ngFor="let type of TypesMovements" [value]="type.idTypeMovement">
+                <span>{{ type.descriptionTypeMovement }}</span>
+              </option>
+            </select>
+            <small *ngIf="f.submitted && f.controls['idTypeMovement'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un tipo de movimiento</small>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12">
+            <label for="consecutive">Consecutivo</label>
+            <input type="number" class="form-control " id="consecutive" [(ngModel)]="reg.consecutive" name="consecutive" autocomplete="off" readonly="readonly" required>
+            <span *ngIf="f.submitted && f.controls['consecutive'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+    <div class="container mr-5 row col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12" hidden>
+            <label for="docReferen">Documento Referencia</label>
+            <input type="text" class="form-control " id="docReferen" [(ngModel)]="reg.docReferen" name="docReferen" autocomplete="off">
+            <span *ngIf="f.submitted && f.controls['docReferen'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12">
+            <label>Motivo de la Nota</label>
+            <select name="idReasonMovement" [(ngModel)]="reg.idReasonMovement">
+              <option *ngFor="let reg of ReasonsMovements" [value]="reg.idReasonMovement">
+                <span>{{ reg.reasonMovement }}</span>
+              </option>
+            </select>
+            <small *ngIf="f.submitted && f.controls['idTypeMovement'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un motivo de nota</small>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12">
+            <!-- <br> -->
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha Emisión</mat-label>
+                <br>
+                <input matInput [matDatepicker]="picker1" [(ngModel)]="reg.dateMovement" autocomplete="off" name="dateMovement" required #dateBegin="ngModel" [class.is-invalid]="dateBegin.invalid && dateBegin.touched">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <small class="form-text text-danger" *ngIf="dateBegin.invalid && dateBegin.touched">Obligatorio - Debe ingresar la fecha del movimiento</small>
+        </div>
+    </div>
+    <div class="container mr-5 row col-md-12 col-sm-12 col-xl-12 col-lg-12" hidden>
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12">
+            <!-- <br> -->
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha Vencimiento</mat-label>
+                <br>
+                <input matInput [matDatepicker]="picker2" [(ngModel)]="reg.expireMovemente" autocomplete="off" name="expireMovemente" #dateBegin="ngModel" [class.is-invalid]="dateBegin.invalid && dateBegin.touched">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <small class="form-text text-danger" *ngIf="dateBegin.invalid && dateBegin.touched">Obligatorio - Debe ingresar la fecha de Vencimiento</small>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12">
+            <label>Tipo de Pago</label>
+            <select name="idTypePayment" [(ngModel)]="reg.idTypePayment">
+            <option *ngFor="let type of TypesPayments" [value]="type.idTypePayment">
+              <span>{{ type.descriptionTypePayment }}</span>
+            </option>
+          </select>
+            <small *ngIf="f.submitted && f.controls['idTypePayment'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un tipo de movimiento</small>
+        </div>
+    </div>
+    <div class="container mr-5 row col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12">
+            <label>Cliente</label>
+            <select name="idCustomer" [(ngModel)]="reg.idCustomer">
+          <option *ngFor="let reg of Customers" [value]="reg.idPatient">
+            <span>{{ reg.fullName}}</span>
+          </option>
+        </select>
+            <small *ngIf="f.submitted && f.controls['idCustomer'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un Cliente</small>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12" hidden>
+            <label>Vendedor</label>
+            <select name="idTypePayment" [(ngModel)]="reg.idSeller">
+          <option *ngFor="let reg of Sellers" [value]="reg.idUser">
+            <span>{{ reg.firstNameUser +' '+ reg.lastFirstNameUser}}</span>
+          </option>
+        </select>
+            <small *ngIf="f.submitted && f.controls['idSeller'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un Vendedor</small>
+        </div>
+
+    </div>
+    <div class="container mr-5 row col-md-12 col-sm-12 col-xl-12 col-lg-12" hidden>
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12">
+            <label>Lista de Precios</label>
+            <select name="idListPrice" [(ngModel)]="reg.idTypePriceList">
+                <option *ngFor="let reg of TypeListPrices" [value]="reg.idTypePriceList">
+                    <span>{{ reg.typePriceList}}</span>
+                </option>
+            </select>
+            <small *ngIf="f.submitted && f.controls['idSeller'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un Vendedor</small>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12">
+            <label>Cancelada</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.canceled" (click)="reg.canceled = false" class="btn btn-outline-success w-25" type="button">
+                <i class="far fa-check-circle"></i>
+                Si
+            </button>
+            <button *ngIf="!reg.canceled" (click)="reg.canceled = true" class="btn btn-outline-danger w-25" type="button">
+                <i class="far fa-window-close"></i>
+                No
+            </button>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <div class="form-group col-md-12 col-sm-12 col-xl-12 col-lg-12">
+            <label for="notes">Observaciones</label>
+            <textarea type="text" class="form-control" id="notes" [(ngModel)]="reg.notes" name="notes" autocomplete="off"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group text-right mr-5 col-md-12 col-sm-12 col-xl-12 col-lg-12">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " [routerLink]="['/credit-notes']"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+    <br>
+    <br>
+</form>
+
+<div class="row animated fadeIn faster" *ngIf="reg.idMovement > 0">
+    <div class="col">
+        <hr>
+        <h3><i class="fas fa-bars"></i> {{titleDetail | uppercase }}</h3>
+
+        <form (ngSubmit)="SubmitDetail( c )" #c="ngForm">
+            <div class="container mr-5 row col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12">
+                    <label>Producto</label>
+                    <select name="idProduct" [(ngModel)]="regDetail.idProduct">
+                      <option *ngFor="let reg of Products" [value]="reg.idProduct" >
+                        <span>{{ reg.descriptionProduct}}</span>
+                      </option>
+                    </select>
+                    <small *ngIf="f.submitted && f.controls['idProduct'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un producto</small>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12">
+                    <label for="taxAdd">Impuesto</label>
+                    <input type="number" class="form-control" id="taxAdd" [(ngModel)]="regDetail.taxAdd" name="taxAdd" autocomplete="off" required>
+                    <span *ngIf="f.submitted && f.controls['taxAdd'].errors" class="text-danger">* Obligatorio</span>
+                </div>
+            </div>
+            <div class="container mr-5 row col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12" hidden>
+                    <label>Bodega</label>
+                    <select name="idWarehouse" [(ngModel)]="regDetail.idWarehouse">
+                      <option *ngFor="let reg of Warehouses" [value]="reg.idWarehouse">
+                        <span>{{ reg.descriptionWarehouse }}</span>
+                      </option>
+                    </select>
+                    <small *ngIf="f.submitted && f.controls['idWareHouse'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un bodega</small>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-xl-6 col-sm-12" hidden>
+                    <label>UEN</label>
+                    <select name="idUEN" [(ngModel)]="regDetail.idUen">
+                  <option *ngFor="let reg of UENs" [value]="reg.idUen">
+                    <span>{{ reg.uen1 }}</span>
+                  </option>
+                </select>
+                    <small *ngIf="f.submitted && f.controls['idWareHouse'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un UEN</small>
+                </div>
+            </div>
+            <div class="container mr-5 row col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                <div class="form-group col-lg-4 col-md-4 col-xl-4 col-sm-12">
+                    <label for="discount">Descuento</label>
+                    <input type="number" class="form-control" id="discount" [(ngModel)]="regDetail.discount" name="discount" autocomplete="off" required>
+                    <span *ngIf="f.submitted && f.controls['discount'].errors" class="text-danger">* Obligatorio</span>
+                </div>
+                <div class="form-group col-lg-4 col-md-4 col-xl-4 col-sm-12">
+                    <label for="value">Valor</label>
+                    <input type="number" class="form-control" id="value" [(ngModel)]="regDetail.value" name="value" autocomplete="off" required>
+                    <span *ngIf="f.submitted && f.controls['value'].errors" class="text-danger">* Obligatorio</span>
+                </div>
+                <div class="form-group col-lg-4 col-md-4 col-xl-4 col-sm-12">
+                    <label for="quantity">Cantidad</label>
+                    <input type="number" class="form-control" id="quantity" [(ngModel)]="regDetail.quantity" name="quantity" autocomplete="off" required>
+                    <span *ngIf="f.submitted && f.controls['quantity'].errors" class="text-danger">* Obligatorio</span>
+                </div>
+            </div>
+            <div class="form-group text-right mr-5 col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                <button type="submit " class="btn btn-primary "><i class="fas fa-save "></i> Agregar Detalle</button>
+                <button type="button" class="btn btn-danger ml-1" (click)="CleanDataDetail()"><i class="fa fa-ban"></i>Limpiar/Cancelar</button>
+            </div>
+            <br>
+            <div class="container mr-5 row col-md-12 col-sm-12 col-xl-12 col-lg-12">
+                <div class="form-group col-xl-12 col-lg-12 col-sm-12 col-md-12" style="height: 600px; overflow-y: auto;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="20%">Acciones</th>
+                                <th scope="col" width="20%">Producto</th>
+                                <th scope="col" width="20%">Cantidad</th>
+                                <th scope="col" width="20%">Valor</th>
+                                <th scope="col" width="20%">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let reg of regsDetail; let idx = index">
+                                <td>
+                                    <button type="button" class="btn btn-success fa fa-pencil rounded" (click)=LoadDataDetail(reg.idMovementDetail,idx) title="Actualizar Detalle"></button>
+                                    <button type="button" class="btn btn-danger fa fa-trash ml-1 rounded" (click)=delete(reg.idMovementDetail,idx) title="Eliminar Detalle"></button>
+                                </td>
+                                <td>{{reg.descriptionProduct}}</td>
+                                <td>{{reg.quantity}}</td>
+                                <td>{{reg.value | currency: 'COP'}}</td>
+                                <td>{{reg.valorBruto | currency: 'COP'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

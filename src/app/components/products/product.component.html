@@ -1,0 +1,154 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-boxes"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="codeProduct">Codigo de Producto</label>
+            <input type=" text " class="form-control " id="codeProduct" [(ngModel)]="reg.codeProduct" name="codeProduct" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['codeProduct'].errors" class="text-danger">* Obligatorio</span>
+            <small class="form-text text-muted">El codigo debe ser unico para cada registro</small>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="codeBarProduct">Codigo de Barras</label>
+            <input type=" text " class="form-control " id="codeBarProduct" [(ngModel)]="reg.codeBarProduct" name="codeBarProduct" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['codeBarProduct'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="descriptionProduct">Descripción del Producto</label>
+            <input type=" text " class="form-control " id="descriptionProduct" [(ngModel)]="reg.descriptionProduct" name="descriptionProduct" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['descriptionProduct'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-5 col-md-5 col-sm-12">
+            <label for="typeProperties">Tipo de Bien</label>
+            <select name="typeProperties" id="typeProperties" [(ngModel)]="reg.typeProperties">
+                <option *ngFor="let type of listTypeProperties" [value]="type.id">
+                  <span>{{ type.description }}</span>
+                </option>
+              </select>
+            <small *ngIf="f.submitted && f.controls['typeProperties'].errors" class="form-text text-danger">* Obligatorio</small>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idTypeProdct"> Producto</label>
+            <select name="idTypeProdct" id="idTypeProdct" [(ngModel)]="reg.idTypeProdct" [disabled]="listTypeProducts.length === 0" required #idTypeProdct="ngModel" [class.is-invalid]="idTypeProdct.invalid && idTypeProdct.touched">
+                <option *ngFor="let obj of listTypeProducts" [value]="obj.idTypeProduct">
+                <span>{{ obj.typeProduct }}</span>
+                </option>
+            </select>
+            <!-- <span *ngIf="f.submitted && f.controls['idTypeComponent'].errors" class="text-danger">* Obligatorio</span> -->
+            <span class="form-text text-danger" *ngIf="idTypeProdct.invalid && idTypeProdct.touched">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-1 col-md-1 col-sm-12">
+            <label>Inventariable</label>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="inventory" [(ngModel)]="reg.inventory" name="inventory">
+                <label class="custom-control-label" for="inventory">
+                    <span class="badge badge-success" *ngIf="reg.inventory">SI</span>
+                    <span class="badge badge-danger" *ngIf="!reg.inventory">NO</span>
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label for="stockMax">Stock Máximo</label>
+            <input type="number" class="form-control " id="stockMax" [(ngModel)]="reg.stockMax" name="stockMax" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['stockMax'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label for="stockMin">Stock Mínimo</label>
+            <input type="number" class="form-control " id="stockMin" [(ngModel)]="reg.stockMin" name="stockMin" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['stockMin'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idUen">UEN</label>
+            <select name="idUen" id="idUen" [(ngModel)]="reg.idUen" [disabled]="listUEMs.length === 0" required #idUen="ngModel" [class.is-invalid]="idUen.invalid && idUen.touched">
+                <option *ngFor="let obj of listUEMs" [value]="obj.idUen">
+                <span>{{ obj.uen1 }}</span>
+                </option>
+            </select>
+            <!-- <span *ngIf="f.submitted && f.controls['idTypeComponent'].errors" class="text-danger">* Obligatorio</span> -->
+            <span class="form-text text-danger" *ngIf="idUen.invalid && idUen.touched">* Obligatorio</span>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-5 col-md-5 col-sm-12">
+            <label for="productValue">Valor producto</label>
+            <input type="number" class="form-control " id="productValue" [(ngModel)]="reg.productValue" name="productValue" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['productValue'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="percentegeIva">Impuesto (%)</label>
+            <input type="number" class="form-control " id="percentegeIva" [(ngModel)]="reg.percentegeIva" name="percentegeIva" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['percentegeIva'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-1 col-md-6 col-sm-12">
+            <label>Con IVA</label>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isIva" [(ngModel)]="reg.isIva" name="isIva">
+                <label class="custom-control-label" for="isIva">
+                    <span class="badge badge-success" *ngIf="reg.isIva">SI</span>
+                    <span class="badge badge-danger" *ngIf="!reg.isIva">NO</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-1 col-md-6 col-sm-12">
+            <label>Excento</label>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isExempt" [(ngModel)]="reg.isExempt" name="isExempt">
+                <label class="custom-control-label" for="isExempt">
+                    <span class="badge badge-success" *ngIf="reg.isExempt">SI</span>
+                    <span class="badge badge-danger" *ngIf="!reg.isExempt">NO</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-1 col-md-6 col-sm-12">
+            <label>Excluido</label>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="isExcluded" [(ngModel)]="reg.isExcluded" name="isExcluded">
+                <label class="custom-control-label" for="isExcluded">
+                    <span class="badge badge-success" *ngIf="reg.isExcluded">SI</span>
+                    <span class="badge badge-danger" *ngIf="!reg.isExcluded">NO</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+
+    </div>
+
+
+
+    <div class="row float-right mr-5 ">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " [routerLink]="['/products']"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

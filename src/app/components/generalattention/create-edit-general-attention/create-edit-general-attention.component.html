@@ -1,0 +1,1726 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" style="width:90%!important;margin: auto;padding: 50px;">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-stethoscope"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+    <!-- Motivo de Consulta -->
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idDiscipline">Especialidad</label>
+            <select name="idDiscipline" id="idDiscipline" [(ngModel)]="reg.idDiscipline" [disabled]="listDisipline.length === 0" required #idDiscipline="ngModel" [class.is-invalid]="idDiscipline.invalid && idDiscipline.touched">
+                <option *ngFor="let obj of listDisipline" [value]="obj.idDiscipline">
+                <span>{{ obj.discipline1 }}</span>
+                </option>
+            </select>
+        </div>
+    </div>
+    <br>
+
+    <!-- Motivo de Consulta -->
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="MotivoConsulta">Motivo de Consulta</label>
+            <textarea type="text" class="form-control " id="answersMotivoConsulta" [(ngModel)]="answers.MotivoConsulta" name="answersMotivoConsulta" autocomplete="off"></textarea>
+            <!-- <span *ngIf="f.submitted && f.controls['answersMotivoConsulta'].errors" class="text-danger">* Obligatorio</span> -->
+        </div>
+    </div>
+    <br>
+
+    <!-- Sistema Digestivo-->
+    <span class="badge badge-pill badge-info">Sistema Digestivo</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2" *ngIf="true">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Hemorroides</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="digestivoHemorroides" [(ngModel)]="digestivo.Hemorroides" name="digestivoHemorroides">
+                    <label class="custom-control-label" for="digestivoHemorroides">
+                        <span class="badge badge-success" *ngIf="digestivo.Hemorroides">SI</span>
+                        <span class="badge badge-danger" *ngIf="!digestivo.Hemorroides">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Estreñimiento</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="digestivoEstrenimiento" [(ngModel)]="digestivo.Estrenimiento" name="digestivoEstrenimiento">
+                    <label class="custom-control-label" for="digestivoEstrenimiento">
+                        <span class="badge badge-success" *ngIf="digestivo.Estrenimiento">SI</span>
+                        <span class="badge badge-danger" *ngIf="!digestivo.Estrenimiento">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿De cúantos días?</label>
+                <input type=" text " class="form-control " id="digestivoCuantosDias" [(ngModel)]="digestivo.CuantosDias" name="digestivoCuantosDias" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['digestivoCuantosDias'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Gastritis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="digestivoGastritis" [(ngModel)]="digestivo.Gastritis" name="digestivoGastritis">
+                    <label class="custom-control-label" for="digestivoGastritis">
+                        <span class="badge badge-success" *ngIf="digestivo.Gastritis">SI</span>
+                        <span class="badge badge-danger" *ngIf="!digestivo.Gastritis">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Úlceras</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="digestivoUlceras" [(ngModel)]="digestivo.Ulceras" name="digestivoUlceras">
+                    <label class="custom-control-label" for="digestivoUlceras">
+                        <span class="badge badge-success" *ngIf="digestivo.Ulceras">SI</span>
+                        <span class="badge badge-danger" *ngIf="!digestivo.Ulceras">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Flatulencia</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="digestivoFlatulencia" [(ngModel)]="digestivo.Flatulencia" name="digestivoFlatulencia">
+                    <label class="custom-control-label" for="digestivoFlatulencia">
+                        <span class="badge badge-success" *ngIf="digestivo.Flatulencia">SI</span>
+                        <span class="badge badge-danger" *ngIf="!digestivo.Flatulencia">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Acidez</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="digestivoAcidez" [(ngModel)]="digestivo.Acidez" name="digestivoAcidez">
+                    <label class="custom-control-label" for="digestivoAcidez">
+                        <span class="badge badge-success" *ngIf="digestivo.Acidez">SI</span>
+                        <span class="badge badge-danger" *ngIf="!digestivo.Acidez">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Come rápido?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="digestivoComeRapido" [(ngModel)]="digestivo.ComeRapido" name="digestivoComeRapido">
+                    <label class="custom-control-label" for="digestivoComeRapido">
+                        <span class="badge badge-success" *ngIf="digestivo.ComeRapido">SI</span>
+                        <span class="badge badge-danger" *ngIf="!digestivo.ComeRapido">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="digestivoObservaciones" [(ngModel)]="digestivo.Observaciones" name="digestivoObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['digestivoObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema Respiratorio-->
+    <span class="badge badge-pill badge-info">Sistema Respiratorio</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Rinitis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="respiratorioRinitis" [(ngModel)]="respiratorio.Rinitis" name="respiratorioRinitis">
+                    <label class="custom-control-label" for="respiratorioRinitis">
+                        <span class="badge badge-success" *ngIf="respiratorio.Rinitis">SI</span>
+                        <span class="badge badge-danger" *ngIf="!respiratorio.Rinitis">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Alergias</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="respiratorioAlergias" [(ngModel)]="respiratorio.Alergias" name="respiratorioAlergias">
+                    <label class="custom-control-label" for="respiratorioAlergias">
+                        <span class="badge badge-success" *ngIf="respiratorio.Alergias">SI</span>
+                        <span class="badge badge-danger" *ngIf="!respiratorio.Alergias">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>A qué?</label>
+                <input type=" text " class="form-control " id="respiratorioQue" [(ngModel)]="respiratorio.Que" name="respiratorioQue" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['respiratorioQue'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Sinusitis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="respiratorioSinusitis" [(ngModel)]="respiratorio.Sinusitis" name="respiratorioSinusitis">
+                    <label class="custom-control-label" for="respiratorioSinusitis">
+                        <span class="badge badge-success" *ngIf="respiratorio.Sinusitis">SI</span>
+                        <span class="badge badge-danger" *ngIf="!respiratorio.Sinusitis">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Problemas de Garganta</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="respiratorioProblemasGarganta" [(ngModel)]="respiratorio.ProblemasGarganta" name="respiratorioProblemasGarganta">
+                    <label class="custom-control-label" for="respiratorioProblemasGarganta">
+                        <span class="badge badge-success" *ngIf="respiratorio.ProblemasGarganta">SI</span>
+                        <span class="badge badge-danger" *ngIf="!respiratorio.ProblemasGarganta">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Fuma</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="respiratorioFuma" [(ngModel)]="respiratorio.Fuma" name="respiratorioFuma">
+                    <label class="custom-control-label" for="respiratorioFuma">
+                        <span class="badge badge-success" *ngIf="respiratorio.Fuma">SI</span>
+                        <span class="badge badge-danger" *ngIf="!respiratorio.Fuma">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Cúantos cigarrillos?</label>
+                <input type=" text " class="form-control " id="respiratorioCuantos" [(ngModel)]="respiratorio.Cuantos" name="respiratorioCuantos" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['respiratorioCuantos'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Problemas pulmonares</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="respiratorioProblemasPulmonares" [(ngModel)]="respiratorio.ProblemasPulmonares" name="respiratorioProblemasPulmonares">
+                    <label class="custom-control-label" for="respiratorioProblemasPulmonares">
+                        <span class="badge badge-success" *ngIf="respiratorio.ProblemasPulmonares">SI</span>
+                        <span class="badge badge-danger" *ngIf="!respiratorio.ProblemasPulmonares">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Sensible a gripas y refriados</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="respiratorioSensibleGripaRefriados" [(ngModel)]="respiratorio.SensibleGripaRefriados" name="respiratorioSensibleGripaRefriados">
+                    <label class="custom-control-label" for="respiratorioSensibleGripaRefriados">
+                        <span class="badge badge-success" *ngIf="respiratorio.SensibleGripaRefriados">SI</span>
+                        <span class="badge badge-danger" *ngIf="!respiratorio.SensibleGripaRefriados">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Asma</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="respiratorioAsma" [(ngModel)]="respiratorio.Asma" name="respiratorioAsma">
+                    <label class="custom-control-label" for="respiratorioAsma">
+                        <span class="badge badge-success" *ngIf="respiratorio.Asma">SI</span>
+                        <span class="badge badge-danger" *ngIf="!respiratorio.Asma">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Tos frecuente</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="respiratorioTosFrecuente" [(ngModel)]="respiratorio.TosFrecuente" name="respiratorioTosFrecuente">
+                    <label class="custom-control-label" for="respiratorioTosFrecuente">
+                        <span class="badge badge-success" *ngIf="respiratorio.TosFrecuente">SI</span>
+                        <span class="badge badge-danger" *ngIf="!respiratorio.TosFrecuente">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Tratamiento</label>
+                <input type=" text " class="form-control " id="respiratorioTratamiento" [(ngModel)]="respiratorio.Tratamiento" name="respiratorioTratamiento" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['respiratorioTratamiento'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="respiratorioObservaciones">Observación</label>
+                <textarea type="text" class="form-control " id="respiratorioObservaciones" [(ngModel)]="respiratorio.Observaciones" name="respiratorioObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['respiratorioObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema Renal-->
+    <span class="badge badge-pill badge-info">Sistema Renal</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Infección renal</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="renalInfeccionRenal" [(ngModel)]="renal.InfeccionRenal" name="renalInfeccionRenal">
+                    <label class="custom-control-label" for="renalInfeccionRenal">
+                        <span class="badge badge-success" *ngIf="renal.InfeccionRenal">SI</span>
+                        <span class="badge badge-danger" *ngIf="!renal.InfeccionRenal">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Cistitis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="renalCistitis" [(ngModel)]="renal.Cistitis" name="renalCistitis">
+                    <label class="custom-control-label" for="renalCistitis">
+                        <span class="badge badge-success" *ngIf="renal.Cistitis">SI</span>
+                        <span class="badge badge-danger" *ngIf="!renal.Cistitis">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Retención de líquidos</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="renalRetencionLiquidos" [(ngModel)]="renal.RetencionLiquidos" name="renalRetencionLiquidos">
+                    <label class="custom-control-label" for="renalRetencionLiquidos">
+                        <span class="badge badge-success" *ngIf="renal.RetencionLiquidos">SI</span>
+                        <span class="badge badge-danger" *ngIf="!renal.RetencionLiquidos">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Cuántas veces orina al día?</label>
+                <input type=" text " class="form-control " id="renalCuantasVecesOrinaDia" [(ngModel)]="renal.CuantasVecesOrinaDia" name="renalCuantasVecesOrinaDia" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['renalCuantasVecesOrinaDia'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Toma agua</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="renalTomaAgua" [(ngModel)]="renal.TomaAgua" name="renalTomaAgua">
+                    <label class="custom-control-label" for="renalTomaAgua">
+                        <span class="badge badge-success" *ngIf="renal.TomaAgua">SI</span>
+                        <span class="badge badge-danger" *ngIf="!renal.TomaAgua">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Cuántos vasos?</label>
+                <input type=" text " class="form-control " id="renalCuantosVasos" [(ngModel)]="renal.CuantosVasos" name="renalCuantosVasos" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['renalCuantosVasos'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Incontinencia</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="renalIncontinencia" [(ngModel)]="renal.Incontinencia" name="renalIncontinencia">
+                    <label class="custom-control-label" for="renalIncontinencia">
+                        <span class="badge badge-success" *ngIf="renal.Incontinencia">SI</span>
+                        <span class="badge badge-danger" *ngIf="!renal.Incontinencia">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Cálculos renales</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="renalCalculosRenales" [(ngModel)]="renal.CalculosRenales" name="renalCalculosRenales">
+                    <label class="custom-control-label" for="renalCalculosRenales">
+                        <span class="badge badge-success" *ngIf="renal.CalculosRenales">SI</span>
+                        <span class="badge badge-danger" *ngIf="!renal.CalculosRenales">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Tratamiento">Tratamiento</label>
+                <textarea type="text" class="form-control " id="renalTratamiento" [(ngModel)]="renal.Tratamiento" name="renalTratamiento" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['renalTratamiento'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="renalObservaciones" [(ngModel)]="renal.Observaciones" name="renalObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['renalObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema Endocrino-->
+    <span class="badge badge-pill badge-info">Sistema Endocrino</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Sufre tiroides</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="endocrinoSufreTiroides" [(ngModel)]="endocrino.SufreTiroides" name="endocrinoSufreTiroides">
+                    <label class="custom-control-label" for="endocrinoSufreTiroides">
+                        <span class="badge badge-success" *ngIf="endocrino.SufreTiroides">SI</span>
+                        <span class="badge badge-danger" *ngIf="!endocrino.SufreTiroides">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>T3</label>
+                <input type=" text " class="form-control " id="endocrinoT3" [(ngModel)]="endocrino.T3" name="endocrinoT3" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['endocrinoT3'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>T4</label>
+                <input type=" text " class="form-control " id="endocrinoT4" [(ngModel)]="endocrino.T4" name="endocrinoT4" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['endocrinoT4'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>TSH</label>
+                <input type=" text " class="form-control " id="endocrinoTSH" [(ngModel)]="endocrino.TSH" name="endocrinoTSH" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['endocrinoTSH'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Hipoglicemia</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="endocrinoHipoglicemia" [(ngModel)]="endocrino.Hipoglicemia" name="endocrinoHipoglicemia">
+                    <label class="custom-control-label" for="endocrinoHipoglicemia">
+                        <span class="badge badge-success" *ngIf="endocrino.Hipoglicemia">SI</span>
+                        <span class="badge badge-danger" *ngIf="!endocrino.Hipoglicemia">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Diabetes</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="endocrinoDiabetes" [(ngModel)]="endocrino.Diabetes" name="endocrinoDiabetes">
+                    <label class="custom-control-label" for="endocrinoDiabetes">
+                        <span class="badge badge-success" *ngIf="endocrino.Diabetes">SI</span>
+                        <span class="badge badge-danger" *ngIf="!endocrino.Diabetes">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>E. Pancreas</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="endocrinoPancreas" [(ngModel)]="endocrino.Pancreas" name="endocrinoPancreas">
+                    <label class="custom-control-label" for="endocrinoPancreas">
+                        <span class="badge badge-success" *ngIf="endocrino.Pancreas">SI</span>
+                        <span class="badge badge-danger" *ngIf="!endocrino.Pancreas">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>E. Suprarenales</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="endocrinoSuprarenales" [(ngModel)]="endocrino.Suprarenales" name="endocrinoSuprarenales">
+                    <label class="custom-control-label" for="endocrinoSuprarenales">
+                        <span class="badge badge-success" *ngIf="endocrino.Suprarenales">SI</span>
+                        <span class="badge badge-danger" *ngIf="!endocrino.Suprarenales">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Ha consumido cortisona alguna vez?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="endocrinoCortisona" [(ngModel)]="endocrino.Cortisona" name="endocrinoCortisona">
+                    <label class="custom-control-label" for="endocrinoCortisona">
+                        <span class="badge badge-success" *ngIf="endocrino.Cortisona">SI</span>
+                        <span class="badge badge-danger" *ngIf="!endocrino.Cortisona">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Dislipidemias</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="endocrinoDislipidemias" [(ngModel)]="endocrino.Dislipidemias" name="endocrinoDislipidemias">
+                    <label class="custom-control-label" for="endocrinoDislipidemias">
+                        <span class="badge badge-success" *ngIf="endocrino.Dislipidemias">SI</span>
+                        <span class="badge badge-danger" *ngIf="!endocrino.Dislipidemias">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Corticoides</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="endocrinoCorticoides" [(ngModel)]="endocrino.Corticoides" name="endocrinoCorticoides">
+                    <label class="custom-control-label" for="endocrinoCorticoides">
+                        <span class="badge badge-success" *ngIf="endocrino.Corticoides">SI</span>
+                        <span class="badge badge-danger" *ngIf="!endocrino.Corticoides">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Glicemia</label>
+                <input type=" text " class="form-control " id="endocrinoGlicemia" [(ngModel)]="endocrino.Glicemia" name="endocrinoGlicemia" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['endocrinoGlicemia'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>PerfilLipidico</label>
+                <input type=" text " class="form-control " id="endocrinoPerfilLipidico" [(ngModel)]="endocrino.PerfilLipidico" name="endocrinoPerfilLipidico" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['endocrinoPerfilLipidico'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="endocrinoObservaciones" [(ngModel)]="endocrino.Observaciones" name="endocrinoObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['endocrinoObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema Circulatorio-->
+    <span class="badge badge-pill badge-info">Sistema Circulatorio</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Várices</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioVarices" [(ngModel)]="circulatorio.Varices" name="circulatorioVarices">
+                    <label class="custom-control-label" for="circulatorioVarices">
+                        <span class="badge badge-success" *ngIf="circulatorio.Varices">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Varices">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Flebitis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioFlebitis" [(ngModel)]="circulatorio.Flebitis" name="circulatorioFlebitis">
+                    <label class="custom-control-label" for="circulatorioFlebitis">
+                        <span class="badge badge-success" *ngIf="circulatorio.Flebitis">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Flebitis">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Edema</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioEdema" [(ngModel)]="circulatorio.Edema" name="circulatorioEdema">
+                    <label class="custom-control-label" for="circulatorioEdema">
+                        <span class="badge badge-success" *ngIf="circulatorio.Edema">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Edema">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Flagilidad capilar</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioFlagilidadCapilar" [(ngModel)]="circulatorio.FlagilidadCapilar" name="circulatorioFlagilidadCapilar">
+                    <label class="custom-control-label" for="circulatorioFlagilidadCapilar">
+                        <span class="badge badge-success" *ngIf="circulatorio.FlagilidadCapilar">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.FlagilidadCapilar">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Hace hemaotas con facilidad?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioHematomasFaciles" [(ngModel)]="circulatorio.HematomasFaciles" name="circulatorioHematomasFaciles">
+                    <label class="custom-control-label" for="circulatorioHematomasFaciles">
+                        <span class="badge badge-success" *ngIf="circulatorio.HematomasFaciles">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.HematomasFaciles">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Hipertensión</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioHipertension" [(ngModel)]="circulatorio.Hipertension" name="circulatorioHipertension">
+                    <label class="custom-control-label" for="circulatorioHipertension">
+                        <span class="badge badge-success" *ngIf="circulatorio.Hipertension">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Hipertension">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Hipotensión</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioHipotension" [(ngModel)]="circulatorio.Hipotension" name="circulatorioHipotension">
+                    <label class="custom-control-label" for="circulatorioHipotension">
+                        <span class="badge badge-success" *ngIf="circulatorio.Hipotension">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Hipotension">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Tensión arterial</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioTensionArterial" [(ngModel)]="circulatorio.TensionArterial" name="circulatorioTensionArterial">
+                    <label class="custom-control-label" for="circulatorioTensionArterial">
+                        <span class="badge badge-success" *ngIf="circulatorio.TensionArterial">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.TensionArterial">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Taquicardia</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioTaquicardia" [(ngModel)]="circulatorio.Taquicardia" name="circulatorioTaquicardia">
+                    <label class="custom-control-label" for="circulatorioTaquicardia">
+                        <span class="badge badge-success" *ngIf="circulatorio.Taquicardia">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Taquicardia">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Fatiga</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioFatiga" [(ngModel)]="circulatorio.Fatiga" name="circulatorioFatiga">
+                    <label class="custom-control-label" for="circulatorioFatiga">
+                        <span class="badge badge-success" *ngIf="circulatorio.Fatiga">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Fatiga">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Tiene algún problema cardíaco?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioProblemaCardiaco" [(ngModel)]="circulatorio.ProblemaCardiaco" name="circulatorioProblemaCardiaco">
+                    <label class="custom-control-label" for="circulatorioProblemaCardiaco">
+                        <span class="badge badge-success" *ngIf="circulatorio.ProblemaCardiaco">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.ProblemaCardiaco">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Teleangiectasias</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioTeleangiectasias" [(ngModel)]="circulatorio.Teleangiectasias" name="circulatorioTeleangiectasias">
+                    <label class="custom-control-label" for="circulatorioTeleangiectasias">
+                        <span class="badge badge-success" *ngIf="circulatorio.Teleangiectasias">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Teleangiectasias">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Arritmia</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioArritmia" [(ngModel)]="circulatorio.Arritmia" name="circulatorioArritmia">
+                    <label class="custom-control-label" for="circulatorioArritmia">
+                        <span class="badge badge-success" *ngIf="circulatorio.Arritmia">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Arritmia">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Arteriosclerosis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioArteriosclerosis" [(ngModel)]="circulatorio.Arteriosclerosis" name="circulatorioArteriosclerosis">
+                    <label class="custom-control-label" for="circulatorioArteriosclerosis">
+                        <span class="badge badge-success" *ngIf="circulatorio.Arteriosclerosis">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Arteriosclerosis">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Piernas cansadas</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioPiernasCansadas" [(ngModel)]="circulatorio.PiernasCansadas" name="circulatorioPiernasCansadas">
+                    <label class="custom-control-label" for="circulatorioPiernasCansadas">
+                        <span class="badge badge-success" *ngIf="circulatorio.PiernasCansadas">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.PiernasCansadas">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Color miembros inferiores</label>
+                <input type=" text " class="form-control " id="circulatorioColorMiembrosInferiores" [(ngModel)]="circulatorio.ColorMiembrosInferiores" name="circulatorioColorMiembrosInferiores" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['circulatorioColorMiembrosInferiores'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Dolor</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioDolor" [(ngModel)]="circulatorio.Dolor" name="circulatorioDolor">
+                    <label class="custom-control-label" for="circulatorioDolor">
+                        <span class="badge badge-success" *ngIf="circulatorio.Dolor">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Dolor">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Adormecimiento</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="circulatorioAdormecimiento" [(ngModel)]="circulatorio.Adormecimiento" name="circulatorioAdormecimiento">
+                    <label class="custom-control-label" for="circulatorioAdormecimiento">
+                        <span class="badge badge-success" *ngIf="circulatorio.Adormecimiento">SI</span>
+                        <span class="badge badge-danger" *ngIf="!circulatorio.Adormecimiento">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="circulatorioObservaciones" [(ngModel)]="circulatorio.Observaciones" name="circulatorioObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['circulatorioObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema Nervioso-->
+    <span class="badge badge-pill badge-info">Sistema Nervioso</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Stress</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="nerviosoStress" [(ngModel)]="nervioso.Stress" name="nerviosoStress">
+                    <label class="custom-control-label" for="nerviosoStress">
+                            <span class="badge badge-success" *ngIf="nervioso.Stress">SI</span>
+                            <span class="badge badge-danger" *ngIf="!nervioso.Stress">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Depresiones</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="nerviosoDepresiones" [(ngModel)]="nervioso.Depresiones" name="nerviosoDepresiones">
+                    <label class="custom-control-label" for="nerviosoDepresiones">
+                            <span class="badge badge-success" *ngIf="nervioso.Depresiones">SI</span>
+                            <span class="badge badge-danger" *ngIf="!nervioso.Depresiones">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Ansiedad</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="nerviosoAnsiedad" [(ngModel)]="nervioso.Ansiedad" name="nerviosoAnsiedad">
+                    <label class="custom-control-label" for="nerviosoAnsiedad">
+                            <span class="badge badge-success" *ngIf="nervioso.Ansiedad">SI</span>
+                            <span class="badge badge-danger" *ngIf="!nervioso.Ansiedad">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Tiene relación con la comida?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="nerviosoRelacionConComida" [(ngModel)]="nervioso.RelacionConComida" name="nerviosoRelacionConComida">
+                    <label class="custom-control-label" for="nerviosoRelacionConComida">
+                            <span class="badge badge-success" *ngIf="nervioso.RelacionConComida">SI</span>
+                            <span class="badge badge-danger" *ngIf="!nervioso.RelacionConComida">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Cuántas horas duerme?</label>
+                <input type=" text " class="form-control " id="nerviosoCuantasHorasDuerme" [(ngModel)]="nervioso.CuantasHorasDuerme" name="nerviosoCuantasHorasDuerme" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['nerviosoCuantasHorasDuerme'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Escala de ansiedad</label>
+                <select class="form-control" required [(ngModel)]="nervioso.EscalaAnsiedad" id="EscalaAnsiedad" name="EscalaAnsiedad" #EscalaAnsiedad="ngModel">
+                    <option> 1 </option>
+                    <option> 2 </option>
+                    <option> 3 </option>
+                    <option> 4 </option>
+                    <option> 5 </option>
+                    <option> 6 </option>
+                    <option> 7 </option>
+                    <option> 8 </option>
+                    <option> 9 </option>
+                    <option> 10 </option>
+                </select>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Cefáleas</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="nerviosoCefaleas" [(ngModel)]="nervioso.Cefaleas" name="nerviosoCefaleas">
+                    <label class="custom-control-label" for="nerviosoCefaleas">
+                            <span class="badge badge-success" *ngIf="nervioso.Cefaleas">SI</span>
+                            <span class="badge badge-danger" *ngIf="!nervioso.Cefaleas">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Epilepsia</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="nerviosoEpilepsia" [(ngModel)]="nervioso.Epilepsia" name="nerviosoEpilepsia">
+                    <label class="custom-control-label" for="nerviosoEpilepsia">
+                            <span class="badge badge-success" *ngIf="nervioso.Epilepsia">SI</span>
+                            <span class="badge badge-danger" *ngIf="!nervioso.Epilepsia">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Toma antidepresivos?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="nerviosoAntidepresivos" [(ngModel)]="nervioso.Antidepresivos" name="nerviosoAntidepresivos">
+                    <label class="custom-control-label" for="nerviosoAntidepresivos">
+                            <span class="badge badge-success" *ngIf="nervioso.Antidepresivos">SI</span>
+                            <span class="badge badge-danger" *ngIf="!nervioso.Antidepresivos">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Cuáles?</label>
+                <input type=" text " class="form-control " id="nerviosoCuales" [(ngModel)]="nervioso.Cuales" name="nerviosoCuales" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['nerviosoCuales'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Enfermedades mentales en la familia?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="nerviosoEnfermedadesMentales" [(ngModel)]="nervioso.EnfermedadesMentales" name="nerviosoEnfermedadesMentales">
+                    <label class="custom-control-label" for="nerviosoEnfermedadesMentales">
+                            <span class="badge badge-success" *ngIf="nervioso.EnfermedadesMentales">SI</span>
+                            <span class="badge badge-danger" *ngIf="!nervioso.EnfermedadesMentales">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Quién?</label>
+                <input type=" text " class="form-control " id="nerviosoQueFamiliar" [(ngModel)]="nervioso.QueFamiliar" name="nerviosoQueFamiliar" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['nerviosoQueFamiliar'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="nerviosoObservaciones" [(ngModel)]="nervioso.Observaciones" name="nerviosoObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['nerviosoObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema Muscular-->
+    <span class="badge badge-pill badge-info">Sistema Muscular y Osteoarticular</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Artritis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="muscularArtritis" [(ngModel)]="muscular.Artritis" name="muscularArtritis">
+                    <label class="custom-control-label" for="muscularArtritis">
+                            <span class="badge badge-success" *ngIf="muscular.Artritis">SI</span>
+                            <span class="badge badge-danger" *ngIf="!muscular.Artritis">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Artrosis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="muscularArtrosis" [(ngModel)]="muscular.Artrosis" name="muscularArtrosis">
+                    <label class="custom-control-label" for="muscularArtrosis">
+                            <span class="badge badge-success" *ngIf="muscular.Artrosis">SI</span>
+                            <span class="badge badge-danger" *ngIf="!muscular.Artrosis">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Osteoporosis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="muscularOsteoporosis" [(ngModel)]="muscular.Osteoporosis" name="muscularOsteoporosis">
+                    <label class="custom-control-label" for="muscularOsteoporosis">
+                            <span class="badge badge-success" *ngIf="muscular.Osteoporosis">SI</span>
+                            <span class="badge badge-danger" *ngIf="!muscular.Osteoporosis">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Artrofias musculares</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="muscularArtrofiasMusculares" [(ngModel)]="muscular.ArtrofiasMusculares" name="muscularArtrofiasMusculares">
+                    <label class="custom-control-label" for="muscularArtrofiasMusculares">
+                            <span class="badge badge-success" *ngIf="muscular.ArtrofiasMusculares">SI</span>
+                            <span class="badge badge-danger" *ngIf="!muscular.ArtrofiasMusculares">NO</span>
+                        </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Hiperlordosis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="muscularHiperlordosis" [(ngModel)]="muscular.Hiperlordosis" name="muscularHiperlordosis">
+                    <label class="custom-control-label" for="muscularHiperlordosis">
+                            <span class="badge badge-success" *ngIf="muscular.Hiperlordosis">SI</span>
+                            <span class="badge badge-danger" *ngIf="!muscular.Hiperlordosis">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Heridas</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="muscularHeridas" [(ngModel)]="muscular.Heridas" name="muscularHeridas">
+                    <label class="custom-control-label" for="muscularHeridas">
+                            <span class="badge badge-success" *ngIf="muscular.Heridas">SI</span>
+                            <span class="badge badge-danger" *ngIf="!muscular.Heridas">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Calambres</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="muscularCalambres" [(ngModel)]="muscular.Calambres" name="muscularCalambres">
+                    <label class="custom-control-label" for="muscularCalambres">
+                            <span class="badge badge-success" *ngIf="muscular.Calambres">SI</span>
+                            <span class="badge badge-danger" *ngIf="!muscular.Calambres">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Desviación en columna</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="muscularDesviacionColumna" [(ngModel)]="muscular.DesviacionColumna" name="muscularDesviacionColumna">
+                    <label class="custom-control-label" for="muscularDesviacionColumna">
+                            <span class="badge badge-success" *ngIf="muscular.DesviacionColumna">SI</span>
+                            <span class="badge badge-danger" *ngIf="!muscular.DesviacionColumna">NO</span>
+                        </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Pie plano</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="muscularPiePlano" [(ngModel)]="muscular.PiePlano" name="muscularPiePlano">
+                    <label class="custom-control-label" for="muscularPiePlano">
+                            <span class="badge badge-success" *ngIf="muscular.PiePlano">SI</span>
+                            <span class="badge badge-danger" *ngIf="!muscular.PiePlano">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Espasmos musculares</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="muscularEspasmosMusculares" [(ngModel)]="muscular.EspasmosMusculares" name="muscularEspasmosMusculares">
+                    <label class="custom-control-label" for="muscularEspasmosMusculares">
+                            <span class="badge badge-success" *ngIf="muscular.EspasmosMusculares">SI</span>
+                            <span class="badge badge-danger" *ngIf="!muscular.EspasmosMusculares">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Tratamiento</label>
+                <input type=" text " class="form-control " id="muscularTratamiento" [(ngModel)]="muscular.Tratamiento" name="muscularTratamiento" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['muscularTratamiento'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="muscularObservaciones" [(ngModel)]="muscular.Observaciones" name="muscularObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['muscularObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Antecedentes Quirurgicos -->
+    <span class="badge badge-pill badge-info">Antecedentes Quirurgicos</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Le han practicado alguna cirugia?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="quirurgicosTieneCirugias" [(ngModel)]="quirurgicos.TieneCirugias" name="quirurgicosTieneCirugias">
+                    <label class="custom-control-label" for="quirurgicosTieneCirugias">
+                            <span class="badge badge-success" *ngIf="quirurgicos.TieneCirugias">SI</span>
+                            <span class="badge badge-danger" *ngIf="!quirurgicos.TieneCirugias">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Cuál?</label>
+                <input type=" text " class="form-control " id="quirurgicosCualCirugia" [(ngModel)]="quirurgicos.CualCirugia" name="quirurgicosCualCirugia" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['quirurgicosCualCirugia'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Ha padecido alguna enfermedad?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="quirurgicosPadecidoEnfermedad" [(ngModel)]="quirurgicos.PadecidoEnfermedad" name="quirurgicosPadecidoEnfermedad">
+                    <label class="custom-control-label" for="quirurgicosPadecidoEnfermedad">
+                            <span class="badge badge-success" *ngIf="quirurgicos.PadecidoEnfermedad">SI</span>
+                            <span class="badge badge-danger" *ngIf="!quirurgicos.PadecidoEnfermedad">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Cuál?</label>
+                <input type=" text " class="form-control " id="quirurgicosCualEnfermedad" [(ngModel)]="quirurgicos.CualEnfermedad" name="quirurgicosCualEnfermedad" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['quirurgicosCualEnfermedad'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Consume algún medicamento o vitamina</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="quirurgicosConsumeMedicamentoVitamina" [(ngModel)]="quirurgicos.ConsumeMedicamentoVitamina" name="quirurgicosConsumeMedicamentoVitamina">
+                    <label class="custom-control-label" for="quirurgicosConsumeMedicamentoVitamina">
+                            <span class="badge badge-success" *ngIf="quirurgicos.ConsumeMedicamentoVitamina">SI</span>
+                            <span class="badge badge-danger" *ngIf="!quirurgicos.ConsumeMedicamentoVitamina">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Cuál?</label>
+                <input type=" text " class="form-control " id="quirurgicosCualMedicamentoVitamina" [(ngModel)]="quirurgicos.CualMedicamentoVitamina" name="quirurgicosCualMedicamentoVitamina" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['quirurgicosCualMedicamentoVitamina'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="quirurgicosObservaciones" [(ngModel)]="quirurgicos.Observaciones" name="quirurgicosObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['quirurgicosObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Antecedentes Alergicos -->
+    <span class="badge badge-pill badge-info">Antecedentes Alergicos</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Yodo</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="alergicosYodo" [(ngModel)]="alergicos.Yodo" name="alergicosYodo">
+                    <label class="custom-control-label" for="alergicosYodo">
+                            <span class="badge badge-success" *ngIf="alergicos.Yodo">SI</span>
+                            <span class="badge badge-danger" *ngIf="!alergicos.Yodo">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Alcachofa</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="alergicosAlcachofa" [(ngModel)]="alergicos.Alcachofa" name="alergicosAlcachofa">
+                    <label class="custom-control-label" for="alergicosAlcachofa">
+                            <span class="badge badge-success" *ngIf="alergicos.Alcachofa">SI</span>
+                            <span class="badge badge-danger" *ngIf="!alergicos.Alcachofa">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Anestésicos locales</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="alergicosAnestesicosLocales" [(ngModel)]="alergicos.AnestesicosLocales" name="alergicosAnestesicosLocales">
+                    <label class="custom-control-label" for="alergicosAnestesicosLocales">
+                            <span class="badge badge-success" *ngIf="alergicos.AnestesicosLocales">SI</span>
+                            <span class="badge badge-danger" *ngIf="!alergicos.AnestesicosLocales">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Medios de contrastes</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="alergicosMediosContrastes" [(ngModel)]="alergicos.MediosContrastes" name="alergicosMediosContrastes">
+                    <label class="custom-control-label" for="alergicosMediosContrastes">
+                            <span class="badge badge-success" *ngIf="alergicos.MediosContrastes">SI</span>
+                            <span class="badge badge-danger" *ngIf="!alergicos.MediosContrastes">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Otros</label>
+                <input type=" text " class="form-control " id="alergicosOtros" [(ngModel)]="alergicos.Otros" name="alergicosOtros" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['alergicosOtros'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="alergicosObservaciones" [(ngModel)]="alergicos.Observaciones" name="alergicosObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['alergicosObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Antecedentes Familiares -->
+    <span class="badge badge-pill badge-info">Antecedentes Familiares</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Obesidad</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="familiaresObesidad" [(ngModel)]="familiares.Obesidad" name="familiaresObesidad">
+                    <label class="custom-control-label" for="familiaresObesidad">
+                            <span class="badge badge-success" *ngIf="familiares.Obesidad">SI</span>
+                            <span class="badge badge-danger" *ngIf="!familiares.Obesidad">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Sobrepeso</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="familiaresSobrepeso" [(ngModel)]="familiares.Sobrepeso" name="familiaresSobrepeso">
+                    <label class="custom-control-label" for="familiaresSobrepeso">
+                            <span class="badge badge-success" *ngIf="familiares.Sobrepeso">SI</span>
+                            <span class="badge badge-danger" *ngIf="!familiares.Sobrepeso">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Celulitis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="familiaresCelulitis" [(ngModel)]="familiares.Celulitis" name="familiaresCelulitis">
+                    <label class="custom-control-label" for="familiaresCelulitis">
+                            <span class="badge badge-success" *ngIf="familiares.Celulitis">SI</span>
+                            <span class="badge badge-danger" *ngIf="!familiares.Celulitis">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Flacidez</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="familiaresFlacidez" [(ngModel)]="familiares.Flacidez" name="familiaresFlacidez">
+                    <label class="custom-control-label" for="familiaresFlacidez">
+                            <span class="badge badge-success" *ngIf="familiares.Flacidez">SI</span>
+                            <span class="badge badge-danger" *ngIf="!familiares.Flacidez">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Estrías</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="familiaresEstrias" [(ngModel)]="familiares.Estrias" name="familiaresEstrias">
+                    <label class="custom-control-label" for="familiaresEstrias">
+                            <span class="badge badge-success" *ngIf="familiares.Estrias">SI</span>
+                            <span class="badge badge-danger" *ngIf="!familiares.Estrias">NO</span>
+                        </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="familiaresObservaciones" [(ngModel)]="familiares.Observaciones" name="familiaresObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['familiaresObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Actividades -->
+    <span class="badge badge-pill badge-info">Actividades</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Practica algún deporte?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="actividadesPracticaDeporte" [(ngModel)]="actividades.PracticaDeporte" name="actividadesPracticaDeporte">
+                    <label class="custom-control-label" for="actividadesPracticaDeporte">
+                            <span class="badge badge-success" *ngIf="actividades.PracticaDeporte">SI</span>
+                            <span class="badge badge-danger" *ngIf="!actividades.PracticaDeporte">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Cuál?</label>
+                <input type=" text " class="form-control " id="actividadesCual" [(ngModel)]="actividades.Cual" name="actividadesCual" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['actividadesCual'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Frecuencia?</label>
+                <input type=" text " class="form-control " id="actividadesFrecuencia" [(ngModel)]="actividades.Frecuencia" name="actividadesFrecuencia" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['actividadesFrecuencia'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Cuanto tiempo?</label>
+                <input type=" text " class="form-control " id="actividadesCuantoTiempo" [(ngModel)]="actividades.CuantoTiempo" name="actividadesCuantoTiempo" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['actividadesCuantoTiempo'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Es sedentario(a)?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="actividadesEsSedentario" [(ngModel)]="actividades.EsSedentario" name="actividadesEsSedentario">
+                    <label class="custom-control-label" for="actividadesEsSedentario">
+                            <span class="badge badge-success" *ngIf="actividades.EsSedentario">SI</span>
+                            <span class="badge badge-danger" *ngIf="!actividades.EsSedentario">NO</span>
+                        </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="actividadesObservaciones" [(ngModel)]="actividades.Observaciones" name="actividadesObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['actividadesObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- AnalisisEstetico -->
+    <span class="badge badge-pill badge-info">AnalisisEstetico</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Picnico</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="analisisesteticoPicnico" [(ngModel)]="analisisestetico.Picnico" name="analisisesteticoPicnico">
+                    <label class="custom-control-label" for="analisisesteticoPicnico">
+                            <span class="badge badge-success" *ngIf="analisisestetico.Picnico">SI</span>
+                            <span class="badge badge-danger" *ngIf="!analisisestetico.Picnico">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Longilíneo</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="analisisesteticoLongilineo" [(ngModel)]="analisisestetico.Longilineo" name="analisisesteticoLongilineo">
+                    <label class="custom-control-label" for="analisisesteticoLongilineo">
+                            <span class="badge badge-success" *ngIf="analisisestetico.Longilineo">SI</span>
+                            <span class="badge badge-danger" *ngIf="!analisisestetico.Longilineo">NO</span>
+                        </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Normolíneo</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="analisisesteticoNormolineo" [(ngModel)]="analisisestetico.Normolineo" name="analisisesteticoNormolineo">
+                    <label class="custom-control-label" for="analisisesteticoNormolineo">
+                            <span class="badge badge-success" *ngIf="analisisestetico.Normolineo">SI</span>
+                            <span class="badge badge-danger" *ngIf="!analisisestetico.Normolineo">NO</span>
+                        </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Talla inicial</label>
+                <input type=" text " class="form-control " id="analisisesteticoTallaInicial" [(ngModel)]="analisisestetico.TallaInicial" name="analisisesteticoTallaInicial" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['analisisesteticoTallaInicial'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Peso actual (Kg)</label>
+                <input type=" text " class="form-control " id="analisisesteticoPesoActual" [(ngModel)]="analisisestetico.PesoActual" name="analisisesteticoPesoActual" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['analisisesteticoPesoActual'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Peso ideal (Kg)</label>
+                <input type=" text " class="form-control " id="analisisesteticoPesoIdeal" [(ngModel)]="analisisestetico.PesoIdeal" name="analisisesteticoPesoIdeal" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['analisisesteticoPesoIdeal'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Peso recomendado (Kg)</label>
+                <input type=" text " class="form-control " id="analisisesteticoPesoRecomendado" [(ngModel)]="analisisestetico.PesoRecomendado" name="analisisesteticoPesoRecomendado" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['analisisesteticoPesoRecomendado'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Peso deseado (Kg)</label>
+                <input type=" text " class="form-control " id="analisisesteticoPesoDeseado" [(ngModel)]="analisisestetico.PesoDeseado" name="analisisesteticoPesoDeseado" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['analisisesteticoPesoDeseado'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Estatura (m)</label>
+                <input type=" text " class="form-control " id="analisisesteticoEstatura" [(ngModel)]="analisisestetico.Estatura" name="analisisesteticoEstatura" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['analisisesteticoEstatura'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Biotipo</label>
+                <input type=" text " class="form-control " id="analisisesteticoBiotipo" [(ngModel)]="analisisestetico.Biotipo" name="analisisesteticoBiotipo" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['analisisesteticoBiotipo'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Talla al final del tratamiento</label>
+                <input type=" text " class="form-control " id="analisisesteticoTallaFinalTratamiento" [(ngModel)]="analisisestetico.TallaFinalTratamiento" name="analisisesteticoTallaFinalTratamiento" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['analisisesteticoTallaFinalTratamiento'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Peso final (Kg)</label>
+                <input type=" text " class="form-control " id="analisisesteticoPesoFinal" [(ngModel)]="analisisestetico.PesoFinal" name="analisisesteticoPesoFinal" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['analisisesteticoPesoFinal'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="Observaciones">Observación</label>
+            <textarea type="text" class="form-control " id="analisisesteticoObservaciones" [(ngModel)]="analisisestetico.Observaciones" name="analisisesteticoObservaciones" autocomplete="off"></textarea>
+            <!-- <span *ngIf="f.submitted && f.controls['analisisesteticoObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+        </div>
+    </div>
+
+    <!-- Obesidad -->
+    <span class="badge badge-pill badge-info">Obesidad o Sobrepeso</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Generalizada</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="obesidadGeneralizada" [(ngModel)]="obesidad.Generalizada" name="obesidadGeneralizada">
+                    <label class="custom-control-label" for="obesidadGeneralizada">
+                        <span class="badge badge-success" *ngIf="obesidad.Generalizada">SI</span>
+                        <span class="badge badge-danger" *ngIf="!obesidad.Generalizada">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Localizada</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="obesidadLocalizada" [(ngModel)]="obesidad.Localizada" name="obesidadLocalizada">
+                    <label class="custom-control-label" for="obesidadLocalizada">
+                        <span class="badge badge-success" *ngIf="obesidad.Localizada">SI</span>
+                        <span class="badge badge-danger" *ngIf="!obesidad.Localizada">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Ginoide</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="obesidadGinoide" [(ngModel)]="obesidad.Ginoide" name="obesidadGinoide">
+                    <label class="custom-control-label" for="obesidadGinoide">
+                        <span class="badge badge-success" *ngIf="obesidad.Ginoide">SI</span>
+                        <span class="badge badge-danger" *ngIf="!obesidad.Ginoide">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Androide</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="obesidadAndroide" [(ngModel)]="obesidad.Androide" name="obesidadAndroide">
+                    <label class="custom-control-label" for="obesidadAndroide">
+                        <span class="badge badge-success" *ngIf="obesidad.Androide">SI</span>
+                        <span class="badge badge-danger" *ngIf="!obesidad.Androide">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="obesidadObservaciones" [(ngModel)]="obesidad.Observaciones" name="obesidadObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['obesidadObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Adiposidades -->
+    <span class="badge badge-pill badge-info">Adiposidades</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Abdomen</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="adiposidadesAbdomen" [(ngModel)]="adiposidades.Abdomen" name="adiposidadesAbdomen">
+                    <label class="custom-control-label" for="adiposidadesAbdomen">
+                        <span class="badge badge-success" *ngIf="adiposidades.Abdomen">SI</span>
+                        <span class="badge badge-danger" *ngIf="!adiposidades.Abdomen">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Caderas</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="adiposidadesCaderas" [(ngModel)]="adiposidades.Caderas" name="adiposidadesCaderas">
+                    <label class="custom-control-label" for="adiposidadesCaderas">
+                        <span class="badge badge-success" *ngIf="adiposidades.Caderas">SI</span>
+                        <span class="badge badge-danger" *ngIf="!adiposidades.Caderas">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Otros</label>
+                <input type=" text " class="form-control " id="adiposidadesOtros" [(ngModel)]="adiposidades.Otros" name="adiposidadesOtros" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['adiposidadesOtros'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="adiposidadesObservaciones" [(ngModel)]="adiposidades.Observaciones" name="adiposidadesObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['adiposidadesObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Celulitis -->
+    <span class="badge badge-pill badge-info">Celulitis</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Estadio</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisEstadio" [(ngModel)]="celulitis.Estadio" name="celulitisEstadio">
+                    <label class="custom-control-label" for="celulitisEstadio">
+                        <span class="badge badge-success" *ngIf="celulitis.Estadio">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.Estadio">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>I</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisI" [(ngModel)]="celulitis.I" name="celulitisI">
+                    <label class="custom-control-label" for="celulitisI">
+                        <span class="badge badge-success" *ngIf="celulitis.I">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.I">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>II</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisII" [(ngModel)]="celulitis.II" name="celulitisII">
+                    <label class="custom-control-label" for="celulitisII">
+                        <span class="badge badge-success" *ngIf="celulitis.II">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.II">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>III</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisIII" [(ngModel)]="celulitis.III" name="celulitisIII">
+                    <label class="custom-control-label" for="celulitisIII">
+                        <span class="badge badge-success" *ngIf="celulitis.III">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.III">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>IV</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisIV" [(ngModel)]="celulitis.IV" name="celulitisIV">
+                    <label class="custom-control-label" for="celulitisIV">
+                        <span class="badge badge-success" *ngIf="celulitis.IV">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.IV">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Nódulos</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisNodulos" [(ngModel)]="celulitis.Nodulos" name="celulitisNodulos">
+                    <label class="custom-control-label" for="celulitisNodulos">
+                        <span class="badge badge-success" *ngIf="celulitis.Nodulos">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.Nodulos">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Dolor</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisDolor" [(ngModel)]="celulitis.Dolor" name="celulitisDolor">
+                    <label class="custom-control-label" for="celulitisDolor">
+                        <span class="badge badge-success" *ngIf="celulitis.Dolor">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.Dolor">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Movilidad</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisMovilidad" [(ngModel)]="celulitis.Movilidad" name="celulitisMovilidad">
+                    <label class="custom-control-label" for="celulitisMovilidad">
+                        <span class="badge badge-success" *ngIf="celulitis.Movilidad">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.Movilidad">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Dura</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisDura" [(ngModel)]="celulitis.Dura" name="celulitisDura">
+                    <label class="custom-control-label" for="celulitisDura">
+                        <span class="badge badge-success" *ngIf="celulitis.Dura">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.Dura">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Flácida</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisFlacida" [(ngModel)]="celulitis.Flacida" name="celulitisFlacida">
+                    <label class="custom-control-label" for="celulitisFlacida">
+                        <span class="badge badge-success" *ngIf="celulitis.Flacida">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.Flacida">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Esponjosa</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisEsponjosa" [(ngModel)]="celulitis.Esponjosa" name="celulitisEsponjosa">
+                    <label class="custom-control-label" for="celulitisEsponjosa">
+                        <span class="badge badge-success" *ngIf="celulitis.Esponjosa">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.Esponjosa">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Edematosa</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisEdematosa" [(ngModel)]="celulitis.Edematosa" name="celulitisEdematosa">
+                    <label class="custom-control-label" for="celulitisEdematosa">
+                        <span class="badge badge-success" *ngIf="celulitis.Edematosa">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.Edematosa">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Difusa</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisDifusa" [(ngModel)]="celulitis.Difusa" name="celulitisDifusa">
+                    <label class="custom-control-label" for="celulitisDifusa">
+                        <span class="badge badge-success" *ngIf="celulitis.Difusa">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.Difusa">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Piel de naranja</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisPielDeNaranja" [(ngModel)]="celulitis.PielDeNaranja" name="celulitisPielDeNaranja">
+                    <label class="custom-control-label" for="celulitisPielDeNaranja">
+                        <span class="badge badge-success" *ngIf="celulitis.PielDeNaranja">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.PielDeNaranja">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Cambios de temperatura</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisCambioTemperatura" [(ngModel)]="celulitis.CambioTemperatura" name="celulitisCambioTemperatura">
+                    <label class="custom-control-label" for="celulitisCambioTemperatura">
+                        <span class="badge badge-success" *ngIf="celulitis.CambioTemperatura">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.CambioTemperatura">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Color</label>
+                <input type=" text " class="form-control " id="celulitisColor" [(ngModel)]="celulitis.Color" name="celulitisColor" autocomplete="off">
+                <!-- <span *ngIf="f.submitted && f.controls['celulitisColor'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Pezantes</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="celulitisPezantes" [(ngModel)]="celulitis.Pezantes" name="celulitisPezantes">
+                    <label class="custom-control-label" for="celulitisPezantes">
+                        <span class="badge badge-success" *ngIf="celulitis.Pezantes">SI</span>
+                        <span class="badge badge-danger" *ngIf="!celulitis.Pezantes">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="celulitisObservaciones" [(ngModel)]="celulitis.Observaciones" name="celulitisObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['celulitisObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Estrias -->
+    <span class="badge badge-pill badge-info">Estrias</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Estrias</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="estriasEstado" [(ngModel)]="estrias.Estado" name="estriasEstado">
+                    <label class="custom-control-label" for="estriasEstado">
+                        <span class="badge badge-success" *ngIf="estrias.Estado">SI</span>
+                        <span class="badge badge-danger" *ngIf="!estrias.Estado">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Recientes</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="estriasRecientes" [(ngModel)]="estrias.Recientes" name="estriasRecientes">
+                    <label class="custom-control-label" for="estriasRecientes">
+                        <span class="badge badge-success" *ngIf="estrias.Recientes">SI</span>
+                        <span class="badge badge-danger" *ngIf="!estrias.Recientes">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Antiguas</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="estriasAntiguas" [(ngModel)]="estrias.Antiguas" name="estriasAntiguas">
+                    <label class="custom-control-label" for="estriasAntiguas">
+                        <span class="badge badge-success" *ngIf="estrias.Antiguas">SI</span>
+                        <span class="badge badge-danger" *ngIf="!estrias.Antiguas">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="estriasObservaciones" [(ngModel)]="estrias.Observaciones" name="estriasObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['estriasObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Venas -->
+    <span class="badge badge-pill badge-info">Venas</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Varices</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="venasVarices" [(ngModel)]="venas.Varices" name="venasVarices">
+                    <label class="custom-control-label" for="venasVarices">
+                        <span class="badge badge-success" *ngIf="venas.Varices">SI</span>
+                        <span class="badge badge-danger" *ngIf="!venas.Varices">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>I</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="venasI" [(ngModel)]="venas.I" name="venasI">
+                    <label class="custom-control-label" for="venasI">
+                        <span class="badge badge-success" *ngIf="venas.I">SI</span>
+                        <span class="badge badge-danger" *ngIf="!venas.I">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>II</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="venasII" [(ngModel)]="venas.II" name="venasII">
+                    <label class="custom-control-label" for="venasII">
+                        <span class="badge badge-success" *ngIf="venas.II">SI</span>
+                        <span class="badge badge-danger" *ngIf="!venas.II">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>III</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="venasIII" [(ngModel)]="venas.III" name="venasIII">
+                    <label class="custom-control-label" for="venasIII">
+                        <span class="badge badge-success" *ngIf="venas.III">SI</span>
+                        <span class="badge badge-danger" *ngIf="!venas.III">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>IV</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="venasIV" [(ngModel)]="venas.IV" name="venasIV">
+                    <label class="custom-control-label" for="venasIV">
+                        <span class="badge badge-success" *ngIf="venas.IV">SI</span>
+                        <span class="badge badge-danger" *ngIf="!venas.IV">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="venasObservaciones" [(ngModel)]="venas.Observaciones" name="venasObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['venasObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Senos -->
+    <span class="badge badge-pill badge-info">Senos</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Normales</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Normales" [(ngModel)]="senos.Normales" name="Normales">
+                    <label class="custom-control-label" for="Normales">
+                        <span class="badge badge-success" *ngIf="senos.Normales">SI</span>
+                        <span class="badge badge-danger" *ngIf="!senos.Normales">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Hipertróficos</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Hipertroficos" [(ngModel)]="senos.Hipertroficos" name="Hipertroficos">
+                    <label class="custom-control-label" for="Hipertroficos">
+                        <span class="badge badge-success" *ngIf="senos.Hipertroficos">SI</span>
+                        <span class="badge badge-danger" *ngIf="!senos.Hipertroficos">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Hipotróficos</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Hipotroficos" [(ngModel)]="senos.Hipotroficos" name="Hipotroficos">
+                    <label class="custom-control-label" for="Hipotroficos">
+                        <span class="badge badge-success" *ngIf="senos.Hipotroficos">SI</span>
+                        <span class="badge badge-danger" *ngIf="!senos.Hipotroficos">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Ptosis mamaria</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="PtosisMamaria" [(ngModel)]="senos.PtosisMamaria" name="PtosisMamaria">
+                    <label class="custom-control-label" for="PtosisMamaria">
+                        <span class="badge badge-success" *ngIf="senos.PtosisMamaria">SI</span>
+                        <span class="badge badge-danger" *ngIf="!senos.PtosisMamaria">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Prótesis</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Protesis" [(ngModel)]="senos.Protesis" name="Protesis">
+                    <label class="custom-control-label" for="Protesis">
+                        <span class="badge badge-success" *ngIf="senos.Protesis">SI</span>
+                        <span class="badge badge-danger" *ngIf="!senos.Protesis">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>Estrías</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="senosEstrias" [(ngModel)]="senos.Estrias" name="senosEstrias">
+                    <label class="custom-control-label" for="senosEstrias">
+                        <span class="badge badge-success" *ngIf="senos.Estrias">SI</span>
+                        <span class="badge badge-danger" *ngIf="!senos.Estrias">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="senosObservaciones" [(ngModel)]="senos.Observaciones" name="senosObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['senosObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Flacidez -->
+    <span class="badge badge-pill badge-info">Flacidez</span>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                <label>¿Flacidez?</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="flacidezEstado" [(ngModel)]="flacidez.Estado" name="flacidezEstado">
+                    <label class="custom-control-label" for="flacidezEstado">
+                        <span class="badge badge-success" *ngIf="flacidez.Estado">SI</span>
+                        <span class="badge badge-danger" *ngIf="!flacidez.Estado">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                <label for="Observaciones">Observación</label>
+                <textarea type="text" class="form-control " id="flacidezObservaciones" [(ngModel)]="flacidez.Observaciones" name="flacidezObservaciones" autocomplete="off"></textarea>
+                <!-- <span *ngIf="f.submitted && f.controls['flacidezObservaciones'].errors" class="text-danger">* Obligatorio</span> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row float-right mr-5 ">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " (click)="return()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

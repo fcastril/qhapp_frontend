@@ -1,0 +1,19 @@
+:host {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor {
+    input {
+        border-radius: 40px;
+    }
+    button {
+        border-radius: 40px;
+    }
+    label {
+        margin-left: 15px;
+        font-weight: bold;
+    }
+}

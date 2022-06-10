@@ -1,0 +1,207 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-users"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+
+    <h3 style="color: darkblue;"> {{ titleusersData | uppercase }}</h3>
+    <br>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idTypeDocument">Tipo de Documento</label>
+            <select name="idTypeDocument" id="idTypeDocument" [(ngModel)]="reg.idTypeDocument" [disabled]="listTypeDocuments.length === 0" required #idTypeDocument="ngModel" [class.is-invalid]="idTypeDocument.invalid && idTypeDocument.touched">
+                <option *ngFor="let obj of listTypeDocuments" [value]="obj.idTypeDocument">
+                <span>{{ obj.typeDocument }}</span>
+                </option>
+            </select>
+            <!-- <span *ngIf="f.submitted && f.controls['idTypeComponent'].errors" class="text-danger">* Obligatorio</span> -->
+            <span class="form-text text-danger" *ngIf="idTypeDocument.invalid && idTypeDocument.touched">Obligatorio - Debe seleccionar un tipo de documento</span>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="documenUser">Documento Usuario</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="documenUser" [(ngModel)]="reg.documenUser" name="documenUser" autocomplete="off" required>
+            </div>
+            <span *ngIf="f.submitted && f.controls['documenUser'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="firstNameUser">Primer nombre</label>
+            <input type="text" class="form-control" id="firstNameUser" [(ngModel)]="reg.firstNameUser" name="firstNameUser" (blur)="OnBlurName()" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['firstNameUser'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+            <label for="secondNameUser">Segundo nombre</label>
+            <input type="text" class="form-control" id="secondNameUser" [(ngModel)]="reg.secondNameUser" name="secondNameUser" (blur)="OnBlurName()" autocomplete="off">
+            <span *ngIf="f.submitted && f.controls['secondNameUser'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="lastFirstNameUser">Primer apellido</label>
+            <input type="text" class="form-control" id="lastFirstNameUser" [(ngModel)]="reg.lastFirstNameUser" name="lastFirstNameUser" (blur)="OnBlurName()" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['lastFirstNameUser'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+            <label for="lastSecondNameUser">Segundo apellido</label>
+            <input type="text" class="form-control" id="lastSecondNameUser" [(ngModel)]="reg.lastSecondNameUser" name="lastSecondNameUser" (blur)="OnBlurName()" autocomplete="off">
+            <span *ngIf="f.submitted && f.controls['lastSecondNameUser'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <!-- <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="fullName">Nombre Completo</label>
+            <input type="text" class="form-control" id="fullName" [(ngModel)]="reg.fullName" name="fullName" autocomplete="off" required readonly="readonly">
+            <span *ngIf="f.submitted && f.controls['fullName'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div> -->
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idGender">Género</label>
+            <select name="idGender" id="idGender" [(ngModel)]="reg.idGender" [disabled]="listGenders.length === 0" required #idGender="ngModel" [class.is-invalid]="idGender.invalid && idGender.touched">
+                <option *ngFor="let obj of listGenders" [value]="obj.idGender">
+                <span>{{ obj.gender1 }}</span>
+                </option>
+            </select>
+            <!-- <span *ngIf="f.submitted && f.controls['idTypeComponent'].errors" class="text-danger">* Obligatorio</span> -->
+            <span class="form-text text-danger" *ngIf="idGender.invalid && idGender.touched">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-md-4 col-lg-4 col-sm-12">
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha de Nacimiento</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="reg.dateBirth" autocomplete="off" name="dateBirth" required #dateBirth="ngModel" [class.is-invalid]="dateBirth.invalid && dateBirth.touched">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="dateBirth.invalid && dateBirth.touched">* Obligatorio</small>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="emailUser">Email</label>
+            <input type="text" class="form-control" id="emailUser" [(ngModel)]="reg.emailUser" name="emailUser" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['emailUser'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label for="idCity">Ciudad</label>
+            <select name="idCity" id="idCity" [(ngModel)]="reg.idCity" [disabled]="listCities.length === 0" required #idCity="ngModel" [class.is-invalid]="idCity.invalid && idCity.touched">
+                <option *ngFor="let obj of listCities" [value]="obj.idCity">
+                <span>{{ obj.nameCity }}</span>
+                </option>
+            </select>
+            <!-- <span *ngIf="f.submitted && f.controls['idTypeComponent'].errors" class="text-danger">* Obligatorio</span> -->
+            <span class="form-text text-danger" *ngIf="idCity.invalid && idCity.touched">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="addressUser">Dirección</label>
+            <input type="text" class="form-control" id="addressUser" [(ngModel)]="reg.addressUser" name="addressUser" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['addressUser'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-5 col-md-5 col-sm-6">
+            <label for="cellphoneUser">Celular</label>
+            <input type="text" class="form-control" id="cellphoneUser" [(ngModel)]="reg.cellPhoneUser" name="cellphoneUser" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['cellphoneUser'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-6">
+            <label for="medicalRegistry">Número de registro medico</label>
+            <input type="text" class="form-control" id="medicalRegistry" [(ngModel)]="reg.medicalRegistry" name="medicalRegistry" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['medicalRegistry'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-6">
+            <label for="idProfile">Perfil</label>
+            <select name="idProfile" id="idProfile" [(ngModel)]="reg.idProfile" [disabled]="listProfiles.length === 0" required #idProfile="ngModel" [class.is-invalid]="idProfile.invalid && idProfile.touched">
+                <option *ngFor="let obj of listProfiles" [value]="obj.idProfile">
+                <span>{{ obj.nameProfile }}</span>
+                </option>
+            </select>
+            <!-- <span *ngIf="f.submitted && f.controls['idTypeComponent'].errors" class="text-danger">* Obligatorio</span> -->
+            <span class="form-text text-danger" *ngIf="idProfile.invalid && idProfile.touched">* Obligatorio</span>
+        </div>
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+          <label for="username">Usuario</label>
+          <input type="text" class="form-control" id="username" [(ngModel)]="reg.username" name="username" autocomplete="off" required>
+          <span *ngIf="f.submitted && f.controls['username'].errors" class="text-danger">* Obligatorio</span>
+      </div>
+
+      <div class="form-group col-lg-3 col-md-3 col-sm-12">
+          <label for="password">Contraseña</label>
+          <input type="password" class="form-control" id="password" [(ngModel)]="reg.password" name="password" autocomplete="off" required>
+          <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger">* Obligatorio</span>
+      </div>
+    </div>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+      <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <label for="pictureUser">Foto Usuario</label><br>
+        <input type="file" (change)="fileChangeEventPicture($event)" class="fileInputProfile">
+        <img class="photo"  *ngIf="reg.pictureUser!=''"
+          [src]="reg.pictureUser" width="50%" />
+      </div>
+      <div class="form-group col-lg-6 col-md-6 col-sm-12">
+        <label for="signature">Firma</label><br>
+        <input type="file" (change)="fileChangeEventSignature($event)" class="fileInputProfile">
+        <img class="signature"  *ngIf="reg.signature"
+          [src]="reg.signature" width="50%"  />
+    </div>
+
+    </div>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+
+
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label>Usuario Activo</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.active" (click)="reg.active = false" class="btn btn-success w-25" type="button">
+                <i class="far fa-check-circle"></i>
+                Si
+            </button>
+            <button *ngIf="!reg.active" (click)="isActive($event)" class="btn btn-outline-danger w-25" type="button">
+                <i class="fas fa-ban"></i>
+                No
+            </button>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label>Atiende Pacientes</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.attendPatients" (click)="reg.attendPatients = false" class="btn btn-success w-25" type="button">
+                <i class="far fa-check-circle"></i>
+                Si
+            </button>
+            <button *ngIf="!reg.attendPatients" (click)="isattendPatients($event)" class="btn btn-outline-danger w-25" type="button">
+                <i class="fas fa-ban"></i>
+                No
+            </button>
+        </div>
+    </div>
+
+    <div class="row float-right mr-5 ">
+        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+        <button type="button" class="btn btn-danger ml-1" [routerLink]="['/users']"><i class="fa fa-ban" aria-hidden="true"></i> Regresar</button>
+    </div>
+</form>

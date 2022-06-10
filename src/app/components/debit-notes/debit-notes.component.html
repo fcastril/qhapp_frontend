@@ -1,0 +1,49 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-pen-square"></i> {{ title | uppercase}}</h3>
+        </div>
+        <div class="col-2"><button type="button" class="btn btn-primary float-right rounded" (click)="register(0)" title="Agregar registros"><i class="fa fa-plus-circle" area-hidden="true"></i></button></div>
+        <hr>
+    </div>
+    <div class="search-form mt-1">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="btn-icon-prepend">
+                    <button class="btn">
+                        <i class="feather icon-search" (click)="buscar()"></i>
+                    </button>
+                </div>
+            </div>
+            <input type="text" class="form-control" id="search" placeholder="Buscar aqui..." (keyup)='keyupSearch($event)' autocomplete="off" [(ngModel)]="search" name="search">
+        </div>
+    </div>
+    <br>
+    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xl-12" style="height: 500px; overflow-y: auto;">
+        <table class="table" *ngIf="regs.length > 0">
+            <thead>
+                <tr>
+                    <th scope="col" width="10%">Acciones</th>
+                    <th scope="col" width="10%">Tipo de Movimiento</th>
+                    <th scope="col" width="10%">Consecutivo</th>
+                    <th scope="col" width="10%">Fecha</th>
+                    <th scope="col" width="10%">Cantidad</th>
+                    <th scope="col" width="10%">Valor Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reg of regs; let idx = index">
+                    <td>
+                        <button class="btn btn-success fa fa-pencil rounded" [routerLink]="['/debit-notes', reg.idMovement]" title="Actualizar Registro"></button>
+                        <button class="btn btn-danger fa fa-trash ml-1 rounded" (click)=delete(reg.idMovement,idx) title="Eliminar Registro"></button>
+                    </td>
+                    <td>{{reg.codeTypeMovement}}</td>
+                    <td>{{reg.consecutive}}</td>
+                    <td>{{reg.dateMovement | date:'dd/MM/yyyy'}}</td>
+                    <td>{{reg.quantity}}</td>
+                    <td>{{reg.valorTotal | currency: 'COP'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

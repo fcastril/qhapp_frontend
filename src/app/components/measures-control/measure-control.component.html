@@ -1,0 +1,316 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" class="mt-5">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-ruler-combined"></i> {{ title | uppercase}}</h3>
+        </div>
+        <hr>
+    </div>
+
+    <br>
+
+    <div class="col-lg-12 col-md-12 col-sm-12" >
+        <table class="table-measure">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th *ngFor="let reg of regs; let idx = index" scope="col">
+                        <button type="button" class="btn btn-success fas fa-hand-point-down ml-1 rounded" (click)=activateRegister(reg.idDetailMeasureControl,idx) title="Editar Registros"></button>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="col" class="title"></th>
+                    <th *ngFor="let reg of regs; let idx = index" scope="col">
+                        <mat-form-field appearance="fill" class="form-group col-7">
+                            <input class="form-control input-measure" matInput [matDatepicker]="picker" [(ngModel)]="reg.dateRegistry" id="dateRegistry + {{reg.idDetailMeasureControl}}" name="dateRegistry + {{reg.idDetailMeasureControl}}" autocomplete="off" [disabled]="reg.isBlock">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker startView="year"></mat-datepicker>
+                        </mat-form-field>
+                    </th>
+                    <th scope="col">
+                        <mat-form-field appearance="fill" class="form-group col-8">
+                            <input class="form-control input-measure" matInput [matDatepicker]="picker" [(ngModel)]="reg1.dateRegistry" id="dateRegistrynew" name="dateRegistrynew" autocomplete="off" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="tr-measure">
+                    <td class="title"><b>Peso Actual(Kg)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.currentWeight" id="currentWeight + {{reg.idDetailMeasureControl}}" name="currentWeight + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.currentWeight" id="currentWeightnew" name="currentWeightnew" (blur)="OnBlurGrease()" autocomplete="off" required>
+                    </td>
+
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>SupraPectoral(cm)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.supraPectoral" id="supraPectoral + {{reg.idDetailMeasureControl}}" name="supraPectoral + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.supraPectoral" id="supraPectoralnew" name="supraPectoralnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>SubPectoral(cm)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.subPectoral" id="subPectoral + {{reg.idDetailMeasureControl}}" name="subPectoralvv + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.subPectoral" id="subPectoralnew" name="subPectoralnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Abdomen alto(cm)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.highAbdomen" id="highAbdomen + {{reg.idDetailMeasureControl}}" name="highAbdomen + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.highAbdomen" id="highAbdomennew" name="highAbdomennew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Cintura(cm)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.waist" id="waist + {{reg.idDetailMeasureControl}}" name="waist + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.waist" id="waistnew" name="waistnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Abdomen bajo(cm)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.lowerAbdomen" id="lowerAbdomen + {{reg.idDetailMeasureControl}}" name="lowerAbdomen + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.lowerAbdomen" id="lowerAbdomennew" name="lowerAbdomennew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Cadera(cm)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.hip" id="hip + {{reg.idDetailMeasureControl}}" name="hip + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.hip" id="hipnew" name="hipnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Muslo(cm)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.thingMeasure" id="thingMeasure + {{reg.idDetailMeasureControl}}" name="thingMeasure + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.thingMeasure" id="thingMeasurenew" name="thingMeasurenew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Brazo(cm)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.arm" id="arm + {{reg.idDetailMeasureControl}}" name="arm + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.arm" id="armnew" name="armnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Triceps(%)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.triceps" id="triceps + {{reg.idDetailMeasureControl}}" name="triceps + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.triceps" id="tricepsnew" name="tricepsnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>SubEscapular(%)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.subEscapular" id="subEscapular + {{reg.idDetailMeasureControl}}" name="subEscapular + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.subEscapular" id="subEscapularnew" name="subEscapularnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Suprailíaco(%)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.suprailiac" id="suprailiac + {{reg.idDetailMeasureControl}}" name="suprailiac + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="title">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.suprailiac" id="suprailiacnew" name="suprailiacnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Abdominal(%)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.abdominal" id="abdominal + {{reg.idDetailMeasureControl}}" name="abdominal + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.abdominal" id="abdominalnew" name="abdominalnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Supraespinoso(%)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.supraspinatus" id="supraspinatus + {{reg.idDetailMeasureControl}}" name="supraspinatus + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.supraspinatus" id="supraspinatusnew" name="supraspinatusnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Muslo(%)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.thighPercentage" id="thighPercentage + {{reg.idDetailMeasureControl}}" name="thighPercentage + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.thighPercentage" id="thighPercentagenew" name="thighPercentagenew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Pantorrilla(%)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.calf" id="calf + {{reg.idDetailMeasureControl}}" name="calf + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input type="number" class="form-control input-measure" [(ngModel)]="reg1.calf" id="calfnew" name="calfnew" autocomplete="off" required (blur)="OnBlurGrease()">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Grasa(%)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.grease" id="grease + {{reg.idDetailMeasureControl}}" name="grease + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="true">
+                    </td>
+                    <td class="td-measure">
+                        <input  type="number" class="form-control input-measure" [(ngModel)]="reg1.grease" id="greasenew" name="greasenew" autocomplete="off" required [readonly]="true">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>IMC(Kg/cm)</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.imc" id="imc + {{reg.idDetailMeasureControl}}" name="imc + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input  type="number" class="form-control input-measure" [(ngModel)]="reg1.imc" id="imcnew" name="imcnew" autocomplete="off" required [readonly]="true">
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Sistolica</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.sistolica" id="sistolica + {{reg.idDetailMeasureControl}}" name="sistolica + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input  type="number" class="form-control input-measure" [(ngModel)]="reg1.sistolica" id="sistolicanew" name="sistolicanew" autocomplete="off" required>
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>Diastolica</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.diastolica" id="diastolica + {{reg.idDetailMeasureControl}}" name="diastolica + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input  type="number" class="form-control input-measure" [(ngModel)]="reg1.diastolica" id="diastolicanew" name="diastolicanew" autocomplete="off" required>
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"><b>F. Cardiaca</b></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <input tabindex='-1' type="number" class="form-control input-measure" [(ngModel)]="reg.heartRate" id="heartRate + {{reg.idDetailMeasureControl}}" name="heartRate + {{reg.idDetailMeasureControl}}" autocomplete="off" [readonly]="reg.isBlock">
+                    </td>
+                    <td class="td-measure">
+                        <input  type="number" class="form-control input-measure" [(ngModel)]="reg1.heartRate" id="heartRatenew" name="heartRatenew" autocomplete="off" required>
+                    </td>
+                </tr>
+                <tr class="tr-measure">
+                    <td class="title"></td>
+                    <td *ngFor="let reg of regs; let idx = index">
+                        <button *ngIf="!reg.isBlock" button="button" class="btn btn-success fa fa-save ml-1 rounded" (click)=saveRegister(reg.idDetailMeasureControl,idx) title="Guardar Cambios"></button>
+                    </td>
+                    <td class="td-measure">
+                        <button button="submit" class="btn btn-success fa fa-save ml-1 rounded" title="Guardar Registros"></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--termina fabian-->
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-5">
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="desiredWeight">P Deseado(Kg)</label>
+            <input type="number" class="form-control" id="desiredWeight" [(ngModel)]="reg1.desiredWeight" name="desiredWeight" autocomplete="off" required #desiredWeight="ngModel" [class.is-invalid]="desiredWeight.invalid && desiredWeight.touched" (blur)="OnBlurGrease()">
+            <span *ngIf="desiredWeight.invalid && desiredWeight.touched" class="text-danger">* Obligatorio</span>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="size">Talla(m)</label>
+            <input type="number" class="form-control" id="size" [(ngModel)]="reg1.size" name="size" autocomplete="off" required #size="ngModel" [class.is-invalid]="size.invalid && size.touched" (blur)="OnBlurIMC()">
+            <span *ngIf="size.invalid && size.touched" class="text-danger">* Obligatorio</span>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="size">Edad</label>
+            <input type="number" class="form-control" id="ageInput" [(ngModel)]="age" name="ageInput" autocomplete="off" #ageInput="ngModel" readonly>
+        </div>
+    </div>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idealWeight">P Ideal(Kg)</label>
+            <input type="number" class="form-control" id="idealWeight" [(ngModel)]="reg1.idealWeight" name="idealWeight" autocomplete="off" required #idealWeight="ngModel" [class.is-invalid]="idealWeight.invalid && idealWeight.touched" (blur)="OnBlurGrease()">
+            <span *ngIf="idealWeight.invalid && idealWeight.touched" class="text-danger">* Obligatorio</span>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="minWeight">Mínimo(Kg)</label>
+            <input type="number" class="form-control" id="minWeight" [(ngModel)]="reg1.minWeight" name="minWeight" autocomplete="off" required #minWeight="ngModel" [class.is-invalid]="minWeight.invalid && minWeight.touched" (blur)="OnBlurGrease()">
+            <span *ngIf="minWeight.invalid && minWeight.touched" class="text-danger">* Obligatorio</span>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="maxWeight">Máximo(Kg)</label>
+            <input type="number" class="form-control" id="maxWeight" [(ngModel)]="reg1.maxWeight" name="maxWeight" autocomplete="off" required #maxWeight="ngModel" [class.is-invalid]="maxWeight.invalid && maxWeight.touched" (blur)="OnBlurGrease()">
+            <span *ngIf="maxWeight.invalid && maxWeight.touched" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idGender">Seleccione una nota para agregar en Observaciones</label>
+            <select class="form-control" name="valueNotes" id="valueNotes" [disabled]="listAddNotes.length === 0" (change)="selectList($event)">
+                <option *ngFor="let obj of listAddNotes" [value]="obj.idAddNote">
+                    <span>{{ obj.nameNote }}</span>
+                </option>
+            </select>
+        </div>
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="observation">Observaciones</label>
+            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <textarea type="text" class="form-control notes" id="observation" [(ngModel)]="reg1.observation" name="observation" autocomplete="off"></textarea>
+        </div>
+    </div>
+
+    <div class="row float-right mr-5">
+        <button type="button" class="btn btn-success" (click)="saveDetail()"><i class="fas fa-save"></i> Guardar Datos</button>
+        <button type="button " class="btn btn-danger ml-1 " (click)="regresar()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-5">
+        <table class="table table-striped table-responsive w-auto">
+            <thead>
+                <tr>
+                    <th scope="col" width="20%">Fecha</th>
+                    <th scope="col" width="80%">Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reg of regs; let idx=index">
+                    <td>{{reg.dateRegistry | date}}</td>
+                    <td style="word-wrap:break-word">
+                        <p>{{reg.observation}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</form>

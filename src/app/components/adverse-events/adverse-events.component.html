@@ -1,0 +1,27 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" class="mt-5">
+    <div class="row">
+        <div class="col-6">
+            <h3><i class="far fa-calendar-plus"></i> {{ title | uppercase}}</h3>
+        </div>
+        <div class="col-6"><button type="button" class="btn btn-primary float-right rounded" (click)="register(0)" title="Agregar registros"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Evento Adverso</button></div>
+        <hr>
+    </div>
+    <br>
+    <table class="table" *ngIf="regs.length > 0">
+        <thead>
+            <tr>
+                <th scope="col" width="30%">Fecha</th>
+                <th scope="col" width="10%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reg of regs; let idx = index">
+                <td>{{reg.dateRegistration | date}}</td>
+                <td>
+                    <button class="btn btn-success fa fa-pencil rounded" (click)=edit(reg.idAdverseEvent) title="Actualizar Registro"></button>
+                    <button class="btn btn-danger fa fa-trash ml-1 rounded" (click)=delete(reg.idAdverseEvent,idx) title="Eliminar Registro"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

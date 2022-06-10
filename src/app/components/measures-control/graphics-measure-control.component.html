@@ -1,0 +1,227 @@
+<form (ngSubmit)="Submit( g )" #g="ngForm" class="mt-5">
+    <div class="row">
+        <div class="col-10">
+
+            <h3><i class="fas fa-ruler-combined"></i> {{ title | uppercase}}</h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleIMC | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataIMC" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleGRASE | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataGRASE" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleCWEIGHT | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataCWEIGHT" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleSUPRA | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataSUPRA" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleSUBPEC | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataSUBPEC" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleHABDO | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataHABDO" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleWAIST | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataWAIST" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleLOABDO | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataLOABDO" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleHIP | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataHIP" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleTHINGM | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataTHINGM" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleARM | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataARM" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleTRIC | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataTRIC" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleSUBES | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataSUBES" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleSUPRAIL | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataSUPRAIL" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleABDOM | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataABDOM" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleSUPRAES | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataSUPRAES" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleTHINGP | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataTHINGP" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{ titleCALF | uppercase}}</h6>
+                    <canvas baseChart [datasets]="lineChartDataCALF" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row float-right mr-5">
+        <button type="button " class="btn btn-danger ml-1 " (click)="regresar()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+
+</form>
+<!-- <div class="row">
+    <div class="col-xl-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Line chart</h6>
+
+                <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins">
+        </canvas>
+
+            </div>
+        </div>
+    </div>
+</div> -->

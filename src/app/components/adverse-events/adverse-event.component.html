@@ -1,0 +1,227 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" class="mt-5">
+    <div class="row">
+        <div class="col-10">
+
+            <h3><i class="far fa-calendar-plus"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-md-4 col-lg-4 col-xl-4 col-sm-12">
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha de Evento</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="reg.dateRegistration" id="dateRegistration" name="dateRegistration" autocomplete="off" required #dateRegistration="ngModel" [class.is-invalid]="dateRegistration.invalid && dateRegistration.touched">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="dateRegistration.invalid && dateRegistration.touched">* Obligatorio</small>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="eventDescription">Decripción del Suceso</label>
+            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <textarea type="text" class="form-control" [(ngModel)]="reg.eventDescription" id="eventDescription" name="eventDescription" autocomplete="off" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="correction">Corrección</label>
+            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <textarea type="text" class="form-control" [(ngModel)]="reg.correction" id="correction" name="correction" autocomplete="off" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="physicalExamination">Exámen físico posterior al evento</label>
+            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <textarea type="text" class="form-control" [(ngModel)]="reg.physicalExamination" id="physicalExamination" name="physicalExamination" autocomplete="off" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group col-12">
+                <h3 style="color: darkblue;"> Acciones Inseguras: </h3>
+            </div>
+            <div class="form-group col-12">
+                <label>Fisicas</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Fisicas" [(ngModel)]="regAns.Fisicas" name="Fisicas">
+                    <label class="custom-control-label" for="Fisicas">
+                        <span class="badge badge-success" *ngIf="regAns.Fisicas">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Fisicas">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>Administrativas</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Administrativas" [(ngModel)]="regAns.Administrativas" name="Administrativas">
+                    <label class="custom-control-label" for="Administrativas">
+                        <span class="badge badge-success" *ngIf="regAns.Administrativas">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Administrativas">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>Humanas</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Humanas" [(ngModel)]="regAns.Humanas" name="Humanas">
+                    <label class="custom-control-label" for="Humanas">
+                        <span class="badge badge-success" *ngIf="regAns.Humanas">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Humanas">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>Naturales</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Naturales" [(ngModel)]="regAns.Naturales" name="Naturales">
+                    <label class="custom-control-label" for="Naturales">
+                        <span class="badge badge-success" *ngIf="regAns.Naturales">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Naturales">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>Otras</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Otras" [(ngModel)]="regAns.Otras" name="Otras">
+                    <label class="custom-control-label" for="Otras">
+                        <span class="badge badge-success" *ngIf="regAns.Otras">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Otras">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group col-12">
+                <h3 style="color: darkblue;">Factores Contributivos:</h3>
+            </div>
+            <div class="form-group col-12">
+                <label>TareasTecnologia</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="TareasTecnologia" [(ngModel)]="regAns.TareasTecnologia" name="TareasTecnologia">
+                    <label class="custom-control-label" for="TareasTecnologia">
+                        <span class="badge badge-success" *ngIf="regAns.TareasTecnologia">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.TareasTecnologia">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>Individuo</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Individuo" [(ngModel)]="regAns.Individuo" name="Individuo">
+                    <label class="custom-control-label" for="Individuo">
+                        <span class="badge badge-success" *ngIf="regAns.Individuo">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Individuo">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>Colectivo</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Colectivo" [(ngModel)]="regAns.Colectivo" name="Colectivo">
+                    <label class="custom-control-label" for="Colectivo">
+                        <span class="badge badge-success" *ngIf="regAns.Colectivo">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Colectivo">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>Paciente</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Paciente" [(ngModel)]="regAns.Paciente" name="Paciente">
+                    <label class="custom-control-label" for="Paciente">
+                        <span class="badge badge-success" *ngIf="regAns.Paciente">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Paciente">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>Medio Ambiente</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="MedioAmbiente" [(ngModel)]="regAns.MedioAmbiente" name="MedioAmbiente">
+                    <label class="custom-control-label" for="MedioAmbiente">
+                        <span class="badge badge-success" *ngIf="regAns.MedioAmbiente">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.MedioAmbiente">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>Organizacional</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Organizacional" [(ngModel)]="regAns.Organizacional" name="Organizacional">
+                    <label class="custom-control-label" for="Organizacional">
+                        <span class="badge badge-success" *ngIf="regAns.Organizacional">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Organizacional">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group col-12">
+                <h3 style="color: darkblue;">El evento se clasifica como:</h3>
+            </div>
+            <div class="form-group col-12">
+                <label>Prevenible</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Prevenible" [(ngModel)]="regAns.Prevenible" name="Prevenible">
+                    <label class="custom-control-label" for="Prevenible">
+                        <span class="badge badge-success" *ngIf="regAns.Prevenible">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Prevenible">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>No Prevenible</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="NoPrevenible" [(ngModel)]="regAns.NoPrevenible" name="NoPrevenible">
+                    <label class="custom-control-label" for="NoPrevenible">
+                        <span class="badge badge-success" *ngIf="regAns.NoPrevenible">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.NoPrevenible">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>Incidente</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="Incidente" [(ngModel)]="regAns.Incidente" name="Incidente">
+                    <label class="custom-control-label" for="Incidente">
+                        <span class="badge badge-success" *ngIf="regAns.Incidente">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.Incidente">NO</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-12">
+                <label>No Clasificado</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="NoClasificado" [(ngModel)]="regAns.NoClasificado" name="NoClasificado">
+                    <label class="custom-control-label" for="NoClasificado">
+                        <span class="badge badge-success" *ngIf="regAns.NoClasificado">SI</span>
+                        <span class="badge badge-danger" *ngIf="!regAns.NoClasificado">NO</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="definition">Definición del plan de acción para las causas encontradas: (Causas identificadas, que hacer, quien, como, cuando)</label>
+            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <textarea type="text" class="form-control" [(ngModel)]="reg.definition" id="definition" name="definition" autocomplete="off" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="row float-right mr-5 ">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save"></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " (click)="regresar()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

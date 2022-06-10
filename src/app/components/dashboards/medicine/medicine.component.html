@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-10">
+        <!-- <h3><i class="fas fa-user-friends"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3> -->
+        <label><h2 style="color: darkblue;"><i class="fas fa-chart-pie"></i> {{ title | uppercase}}</h2></label>
+        <label><h3> {{' - ' + subTitle | uppercase }}</h3></label>
+    </div>
+    <hr>
+</div>
+
+<div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-1">
+
+    <div class="col-3 text-white">
+        <mat-card class="medicine-card-1">
+            <mat-card-header>
+                <div class="small-box-icon"><i class="fas fa-stethoscope"></i></div>
+                <mat-card-title class="text-white">{{citasAtt}}</mat-card-title>
+                <mat-card-subtitle class="text-white">Pacientes Atendidos En El Último Mes</mat-card-subtitle>
+            </mat-card-header>
+            <br>
+            <mat-card-actions>
+                <a href="" class="small-box-footer"> Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <div class="col-3 text-white">
+        <mat-card class="medicine-card-2">
+            <mat-card-header>
+                <div class="small-box-icon"><i class="fas fa-ambulance"></i></div>
+                <mat-card-title class="text-white">{{end}}/{{process}}</mat-card-title>
+                <mat-card-subtitle class="text-white">Tratamientos </mat-card-subtitle>
+                <mat-card-subtitle class="text-white"> Finalizados / Totales</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+                <a href="" class="small-box-footer text-white"> Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <div class="col-3 text-white">
+        <mat-card class="medicine-card-3">
+            <mat-card-header>
+                <div class="small-box-icon"><i class="fas fa-calendar-check"></i></div>
+                <mat-card-title class="text-white">{{citasAtt}}/{{citasAll}}</mat-card-title>
+                <mat-card-subtitle class="text-white">Atendidas vs Registradas</mat-card-subtitle>
+            </mat-card-header>
+            <br>
+            <mat-card-actions>
+                <a href="" class="small-box-footer"> Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <div class="col-3 text-white">
+        <mat-card class="medicine-card-4">
+            <mat-card-header>
+                <div class="small-box-icon"><i class="fas fa-calendar-plus"></i></div>
+                <mat-card-title class="text-white">{{citasDay}}</mat-card-title>
+                <mat-card-subtitle class="text-white">Citas del día</mat-card-subtitle>
+            </mat-card-header>
+            <br>
+            <mat-card-actions>
+                <a href="" class="small-box-footer"> Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+
+<div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-3">
+    <div class="col-xl-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">procedimientos más Frecuentes</h6>
+
+                <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" [colors]="chartColors">
+            </canvas>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Indicador de ¿Como se Entero?</h6>
+
+                <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [colors]="chartColors">
+            </canvas>
+
+            </div>
+        </div>
+    </div>
+</div>

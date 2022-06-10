@@ -1,0 +1,22 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <!-- <div class="col-3">
+            <label><h2 style="color: darkblue;"><i class="fas fa-archive"></i> {{ title | uppercase}}</h2></label>
+            <label><h3> {{' - ' + titlePatientsData | uppercase }}</h3></label>
+        </div> -->
+        <div class="btn-group row col-12" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary" routerLinkActive="active" [routerLink]="['notes']">Notas</button>
+            <button type="button" class="btn btn-primary" routerLinkActive="active" [routerLink]="['photographic-evolution']">Evolución Fotográfica</button>
+            <button type="button" class="btn btn-primary" routerLinkActive="active" [routerLink]="['attached-document']">Documentos Adjuntos</button>
+            <!-- <button type="button" class="btn btn-primary" routerLinkActive="active" [routerLink]="['']">Historia Escaneada</button> -->
+            <button type="button" class="btn btn-primary" routerLinkActive="active" [routerLink]="['adverse-events']">Eventos Adversos</button>
+            <button type="button" class="btn btn-primary" routerLinkActive="active" [routerLink]="['invoices-medical-history']">Facturas</button>
+            <button type="button" class="btn btn-primary" routerLinkActive="active" [routerLink]="['consents-medical']">Consentimientos</button>
+        </div>
+        <div class="form-group col-12 ">
+
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+</form>
