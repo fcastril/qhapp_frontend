@@ -1,0 +1,444 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" autocomplete="off" id="content" style="width:90%!important;margin: auto;padding: 50px;">
+
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-user-friends"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+
+    <h3 style="color: darkblue;"> {{ titlePatientsData | uppercase }}</h3>
+    <br>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idTypeDocument" style="color: darkorange;">Tipo de Documento</label>
+            <select class="form-control" name="idTypeDocument" id="idTypeDocument" [(ngModel)]="reg.idTypeDocument" [disabled]="listTypeDocuments.length === 0" required #idTypeDocument="ngModel" [class.is-invalid]="idTypeDocument.invalid && idTypeDocument.touched"
+                (change)="SearchDcto($event)">
+                <option *ngFor="let obj of listTypeDocuments" [value]="obj.idTypeDocument">
+                <span>{{ obj.typeDocument }}</span>
+                </option>
+            </select>
+            <!-- <select2 [data]="listTypeDocuments" [value]="reg.idTypeDocument" customSearchEnabled="true" displaySearchStatus="always" minCountForSearch=5 placeholder="Seleccione una opción..." [(ngModel)]="reg.idTypeDocument" id="idTypeDocument" name="idTypeDocument"
+                search (update)="SearchDcto($event)">
+            </select2> -->
+            <span class="form-text text-danger" *ngIf="f.getControl(idTypeDocument).invalid && f.getControl(idTypeDocument).touched">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="documentPatient" style="color: darkorange;">Documento Paciente</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="documentPatient" [(ngModel)]="reg.documentPatient" name="documentPatient" autocomplete="off" (blur)="DVGenerator($event)" #documentPatient="ngModel" [class.is-invalid]="documentPatient.invalid && documentPatient.touched">
+                <input type="text" class="input-group-addon" id="dvpatient" [(ngModel)]="reg.dvpatient" name="dvpatient" readonly>
+            </div>
+            <span *ngIf="documentPatient.invalid && documentPatient.touched" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div *ngIf="!isNit" class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="firstName" style="color: darkorange;">Primer nombre</label>
+            <input type="text" class="form-control" id="firstName" [(ngModel)]="reg.firstName" name="firstName" (blur)="OnBlurName()" autocomplete="off" required #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched">
+            <span *ngIf="firstName.invalid && firstName.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+            <label for="secondName">Segundo nombre</label>
+            <input type="text" class="form-control" id="secondName" [(ngModel)]="reg.secondName" name="secondName" (blur)="OnBlurName()" autocomplete="off">
+        </div>
+    </div>
+
+    <div *ngIf="!isNit" class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="lastName" style="color: darkorange;">Primer apellido</label>
+            <input type="text" class="form-control" id="lastName" [(ngModel)]="reg.lastName" name="lastName" (blur)="OnBlurName()" autocomplete="off" required #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched">
+            <span *ngIf="lastName.invalid && lastName.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+            <label for="lastSecondName">Segundo apellido</label>
+            <input type="text" class="form-control" id="lastSecondName" [(ngModel)]="reg.lastSecondName" name="lastSecondName" (blur)="OnBlurName()" autocomplete="off">
+        </div>
+    </div>
+
+    <div *ngIf="isNit" class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="firstName" style="color: darkorange;">Razón Social</label>
+            <input type="text" class="form-control" id="firstName" [(ngModel)]="reg.firstName" name="firstName" (blur)="OnBlurName()" autocomplete="off" required #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched">
+            <span *ngIf="firstName.invalid && firstName.touched" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="fullName">Nombre Completo</label>
+            <input type="text" class="form-control" id="fullName" [(ngModel)]="reg.fullName" name="fullName" autocomplete="off" readonly="readonly">
+        </div>
+    </div>
+
+    <div *ngIf="!isNit" class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idGender" style="color: darkorange;">Género</label>
+            <select class="form-control" name="idGender" id="idGender" [(ngModel)]="reg.idGender" [disabled]="listGenders.length === 0" required #idGender="ngModel" [class.is-invalid]="idGender.invalid && idGender.touched" (change)="SearchList($event)">
+                <option *ngFor="let obj of listGenders" [value]="obj.idGender">
+                <span>{{ obj.gender1 }}</span>
+                </option>
+            </select>
+            <span class="form-text text-danger" *ngIf="f.getControl(idGender).invalid && f.getControl(idGender).touched">* Obligatorio</span>
+        </div>
+
+        <div *ngIf="!isNit" class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idCivilStatus" style="color: darkorange;">Estado Civil</label>
+            <select class="form-control" name="idCivilStatus" id="idCivilStatus" [(ngModel)]="reg.idCivilStatus" [disabled]="listCivilStatus.length === 0" required #idCivilStatus="ngModel" [class.is-invalid]="idCivilStatus.invalid && idCivilStatus.touched" (change)="SearchList($event)">
+                <option *ngFor="let obj of listCivilStatus" [value]="obj.idCivilStatus">
+                <span>{{ obj.civilStatus1 }}</span>
+                </option>
+            </select>
+            <span class="form-text text-danger" *ngIf="f.getControl(idCivilStatus).invalid && f.getControl(idCivilStatus).touched">* Obligatorio</span>
+        </div>
+
+
+        <div *ngIf="!isNit" class="form-group col-md-4 col-lg-4 col-xl-4 col-sm-12">
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label style="color: darkorange;">Fecha de Nacimiento</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="reg.dateBirth" autocomplete="off" name="dateBirth" required #dateBirth="ngModel" [class.is-invalid]="dateBirth.invalid && dateBirth.touched">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="dateBirth.invalid && dateBirth.touched">* Obligatorio</small>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="addressPatient" style="color: darkorange;">Dirección</label>
+            <input type="text" class="form-control" id="addressPatient" [(ngModel)]="reg.addressPatient" name="addressPatient" autocomplete="off" required #addressPatient="ngModel" [class.is-invalid]="addressPatient.invalid && addressPatient.touched">
+            <span *ngIf="addressPatient.invalid && addressPatient.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-2 col-md-2 col-sm-6">
+            <label for="codePostal">Codigo Postal</label>
+            <input type="text" class="form-control" id="codePostal" [(ngModel)]="reg.codePostal" name="codePostal" autocomplete="off">
+        </div>
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-6">
+            <label for="neighborhoodPatient" style="color: darkorange;">Barrio</label>
+            <input type="text" class="form-control" id="neighborhoodPatient" [(ngModel)]="reg.neighborhoodPatient" name="neighborhoodPatient" autocomplete="off" required #neighborhoodPatient="ngModel" [class.is-invalid]="neighborhoodPatient.invalid && neighborhoodPatient.touched">
+            <span *ngIf="neighborhoodPatient.invalid && neighborhoodPatient.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label for="idCity" style="color: darkorange;">Ciudad</label>
+            <select class="form-control" name="idCity" id="idCity" [(ngModel)]="reg.idCity" [disabled]="listCities.length === 0" required #idCity="ngModel" [class.is-invalid]="idCity.invalid && idCity.touched" (change)="SearchList($event)">
+                <option *ngFor="let obj of listCities" [value]="obj.idCity">
+                <span>{{ obj.nameCity }}</span>
+                </option>
+            </select>
+            <span class="form-text text-danger" *ngIf="f.getControl(idCity).invalid && f.getControl(idCity).touched">* Obligatorio</span>
+        </div>
+
+    </div>
+
+    <div *ngIf="!isNit" class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-2">
+            <label>Estrato</label>
+            <select name="economicLevel" [(ngModel)]="reg.economicLevel">
+                <option *ngFor="let type of listEconomicLevel" [value]="type.id">
+                <span>{{ type.description }}</span>
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group col-lg-5 col-md-5 col-sm-6">
+            <label for="telephonePatient" style="color: darkorange;">Teléfono</label>
+            <input type="text" class="form-control" id="telephonePatient" [(ngModel)]="reg.telephonePatient" name="telephonePatient" autocomplete="off" minlength="7" required #telephonePatient="ngModel" [class.is-invalid]="telephonePatient.invalid && telephonePatient.touched">
+            <span *ngIf="telephonePatient.invalid && telephonePatient.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-5 col-md-5 col-sm-6">
+            <label for="cellphonePatient" style="color: darkorange;">Celular</label>
+            <input type="text" class="form-control" id="cellphonePatient" [(ngModel)]="reg.cellphonePatient" name="cellphonePatient" autocomplete="off" minlength="10" required #cellphonePatient="ngModel" [class.is-invalid]="cellphonePatient.invalid && cellphonePatient.touched">
+            <span *ngIf="cellphonePatient.invalid && cellphonePatient.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-6">
+            <label for="emailPatient" style="color: darkorange;">Email</label>
+            <input type="email" class="form-control" id="emailPatient" [(ngModel)]="reg.emailPatient" name="emailPatient" autocomplete="off" email required #emailPatient="ngModel" [class.is-invalid]="emailPatient.invalid && emailPatient.touched">
+            <span *ngIf="emailPatient.invalid && emailPatient.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div *ngIf="!isNit" class="form-group col-lg-4 col-md-4 col-sm-6">
+            <label for="occupationPatient" style="color: darkorange;">Ocupación</label>
+            <input type="text" class="form-control" id="occupationPatient" [(ngModel)]="reg.occupationPatient" name="occupationPatient" autocomplete="off" required #occupationPatient="ngModel" [class.is-invalid]="occupationPatient.invalid && occupationPatient.touched">
+            <span *ngIf="occupationPatient.invalid && occupationPatient.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idInsuranceCompany" style="color: darkorange;">Aseguradora</label>
+            <select class="form-control" name="idInsuranceCompany" id="idInsuranceCompany" [(ngModel)]="reg.idInsuranceCompany" [disabled]="listInsuranceCompanies.length === 0" required #idInsuranceCompany="ngModel" [class.is-invalid]="idInsuranceCompany.invalid && idInsuranceCompany.touched">
+                <option *ngFor="let obj of listInsuranceCompanies" [value]="obj.idInsuranceCompany">
+                <span>{{ obj.nameInsuranceCompany }}</span>
+                </option>
+            </select>
+            <span class="form-text text-danger" *ngIf="f.getControl(idInsuranceCompany).invalid && f.getControl(idInsuranceCompany).touched">* Obligatorio</span>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idTypeConnection" style="color: darkorange;">Tipo de Vinculación</label>
+            <select class="form-control" name="idTypeConnection" id="idTypeConnection" [(ngModel)]="reg.idTypeConnection" [disabled]="listTypesConnection.length === 0" required #idTypeConnection="ngModel" [class.is-invalid]="idTypeConnection.invalid && idTypeConnection.touched">
+                <option *ngFor="let obj of listTypesConnection" [value]="obj.idTypeConnection">
+                <span>{{ obj.typeConnection }}</span>
+                </option>
+            </select>
+            <span class="form-text text-danger" *ngIf="f.getControl(idTypeConnection).invalid && f.getControl(idTypeConnection).touched">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-6">
+            <label for="chaperone">Nombre del acompañante</label>
+            <input type="text" class="form-control" id="chaperone" [(ngModel)]="reg.chaperone" name="chaperone" autocomplete="off" #chaperone="ngModel">
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-6">
+            <label for="telephoneChaperone">Telefono Acompañante</label>
+            <input type="text" class="form-control" id="telephoneChaperone" [(ngModel)]="reg.telephoneChaperone" name="telephoneChaperone" autocomplete="off" minlength="10" #telephoneChaperone="ngModel">
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-4 col-md-4 col-sm-6">
+            <label for="inCharge" style="color: darkorange;">Responsable/CONTACTO DE EMERGENCIA</label>
+            <input type="text" class="form-control" id="inCharge" [(ngModel)]="reg.inCharge" name="inCharge" autocomplete="off" required #inCharge="ngModel" [class.is-invalid]="inCharge.invalid && inCharge.touched">
+            <span *ngIf="inCharge.invalid && inCharge.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idTypeDocumenInCharge">Tipo Documento Responsable</label>
+            <select class="form-control" name="idTypeDocumenInCharge" id="idTypeDocumenInCharge" [(ngModel)]="reg.idTypeDocumenInCharge" [disabled]="listTypesConnection.length === 0" required #idTypeDocumenInCharge="ngModel" [class.is-invalid]="idTypeDocumenInCharge.invalid && idTypeDocumenInCharge.touched">
+                <option *ngFor="let obj of listTypeDocuments" [value]="obj.idTypeDocument">
+                    <span>{{ obj.typeDocument }}</span>
+                </option>
+            </select>
+            <span class="form-text text-danger" *ngIf="f.getControl(idTypeDocumenInCharge).invalid && f.getControl(idTypeDocumenInCharge).touched">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-6">
+            <label for="documentInCharge">Documento Responsable</label>
+            <input type="text" class="form-control" id="documentInCharge" [(ngModel)]="reg.documentInCharge" name="documentInCharge" autocomplete="off">
+            <!-- <span *ngIf="f.submitted && f.controls['documentInCharge'].errors" class="text-danger">* Obligatorio</span> -->
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idRelationShipInCharge" style="color: darkorange;">Parentesco Responsable/CONTACTO DE EMERGENCIA</label>
+            <!-- <select2 [data]="listRelationShip" [value]="reg.idRelationShipInCharge" customSearchEnabled="true" minCharForSearch=0 displaySearchStatus placeholder="Seleccione una opción..." [(ngModel)]="reg.idRelationShipInCharge" id="idRelationShipInCharge" name="idRelationShipInCharge">
+            </select2> -->
+            <select class="form-control" name="idRelationShipInCharge" id="idRelationShipInCharge" [(ngModel)]="reg.idRelationShipInCharge" [disabled]="listRelationShip.length === 0" required #idRelationShipInCharge="ngModel" [class.is-invalid]="idRelationShipInCharge.invalid && idRelationShipInCharge.touched">
+                <option *ngFor="let obj of listRelationShip" [value]="obj.idRelationShip">
+                    <span>{{ obj.relationShip1 }}</span>
+                </option>
+            </select>
+            <span class="form-text text-danger" *ngIf="f.getControl(idRelationShipInCharge).invalid && f.getControl(idRelationShipInCharge).touched">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-6">
+            <label for="telephoneInCharge" style="color: darkorange;">Teléfono Responsable/CONTACTO DE MERGENCIA</label>
+            <input type="text" class="form-control" id="telephoneInCharge" [(ngModel)]="reg.telephoneInCharge" name="telephoneInCharge" minlength="10" autocomplete="off" required #telephoneInCharge="ngModel" [class.is-invalid]="telephoneInCharge.invalid && telephoneInCharge.touched">
+            <span *ngIf="telephoneInCharge.invalid && telephoneInCharge.touched" class="text-danger">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-6">
+            <label for="residentialZone">Zona Residencial</label>
+            <select name="residentialZone" [(ngModel)]="reg.residentialZone">
+                <option *ngFor="let type of listResidentialZone" [value]="type.id">
+                <span>{{ type.description }}</span>
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idTypeHearAbout" style="color: darkorange;">¿Como se entero?</label>
+            <select class="form-control" name="idTypeHearAbout" id="idTypeHearAbout" [(ngModel)]="reg.idTypeHearAbout" [disabled]="listTypeHearAbout.length === 0" required #idTypeHearAbout="ngModel" [class.is-invalid]="idTypeHearAbout.invalid && idTypeHearAbout.touched">
+                <option *ngFor="let obj of listTypeHearAbout" [value]="obj.idTypeHearAbout">
+                    <span>{{ obj.typeHearAbout }}</span>
+                </option>
+            </select>
+            <span class="form-text text-danger" *ngIf="f.getControl(idTypeHearAbout).invalid && f.getControl(idTypeHearAbout).touched">* Obligatorio</span>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+
+            <label>Foto Paciente</label> {{imageError}}
+            <div class="custom-file fileInputProfileWrap">
+                <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
+                <div class="img-space">
+
+                    <!-- <ng-container *ngIf="isImageSaved; else elseTemplate">
+                        <img [src]="cardImageBase64" width="40%" height="40%" />
+                    </ng-container> -->
+                    <ng-template #elseTemplate>
+                        <webcam [height]="400" [width]="400" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam" [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions" [imageQuality]="1" (cameraSwitched)="cameraWasSwitched($event)"
+                            (initError)="handleInitError($event)"></webcam>
+                        <button type="button" class="btn btn-success btn-block btn-photo" (click)="triggerSnapshot()">Tomar Fotografía</button>
+                    </ng-template>
+
+                </div>
+
+            </div>
+            <button type="button" class="btn btn-primary" (click)="onCamara()"><i class="fas fa-camera"></i></button>
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-12 ">
+            <ng-container *ngIf="isImageSaved && !isCamaraVisible else elseTemplate">
+                <img class="photo" [src]="cardImageBase64" width="60%" height="100%" />
+            </ng-container>
+        </div>
+        <div *ngIf="isImageSaved && !isCamaraVisible " class="row float-right mr-5 ">
+            <a class="btn btn-danger" (click)="removeImage()">Eliminar Imagen</a>
+        </div>
+    </div>
+
+
+    <br>
+
+    <h3 style="color: darkblue;"> {{ titleElectronicBilling | uppercase }}</h3>
+    <br>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-6">
+            <label for="typePerson">Tipo de Persona</label>
+            <!-- <select2 [data]="dataListTypePerson" [value]="reg.typePerson" customSearchEnabled="true" minCharForSearch=0 displaySearchStatus placeholder="Seleccione una opción..." [(ngModel)]="reg.typePerson" id="typePerson" name="typePerson">
+            </select2> -->
+            <select name="typePerson" [(ngModel)]="reg.typePerson">
+                <option *ngFor="let type of listTypePerson" [value]="type.id" (change)="BillingFields()">
+                <span>{{ type.description }}</span>
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label>¿Es Contribuyente al Impuesto de Renta?</label>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.isIncomeTax" (click)="reg.isIncomeTax = false" class="btn btn-success w-50" type="button">
+                <i class="far fa-check-circle"></i>
+                Si
+            </button>
+            <button *ngIf="!reg.isIncomeTax" (click)="isIncomeTaxButton($event)" class="btn btn-outline-danger w-50" type="button">
+                <i class="fas fa-ban"></i>
+                No
+            </button>
+        </div>
+
+        <div *ngIf="isLegalPerson" class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idTypeAccounting">Regimen Contable</label>
+            <!-- <select2 [data]="listTypeAccounting" [value]="reg.idTypeAccounting" customSearchEnabled="true" minCharForSearch=0 displaySearchStatus placeholder="Seleccione una opción..." [(ngModel)]="reg.idTypeAccounting" id="idTypeAccounting" name="idTypeAccounting">
+            </select2> -->
+            <select class="form-control" name="idTypeAccounting" id="idTypeAccounting" [(ngModel)]="reg.idTypeAccounting" [disabled]="listTypeAccounting.length === 0" required #idTypeAccounting="ngModel" [class.is-invalid]="idTypeAccounting.invalid && idTypeAccounting.touched">
+                <option *ngFor="let obj of listTypeAccounting" [value]="obj.idTypeAccounting">
+                    <span>{{ obj.typeAccounting1 }}</span>
+                </option>
+            </select>
+            <span class="form-text text-danger" *ngIf="f.getControl(idTypeAccounting).invalid && f.getControl(idTypeAccounting).touched">* Obligatorio</span>
+        </div>
+
+        <!-- se ponen los botones seguidos por los espacios que se quitan al selecionar una u otra opción -->
+
+        <div *ngIf="isLegalPerson" class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label>Agente Reteica</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.isTaxIca" (click)="reg.isTaxIca = false" class="btn btn-success w-50" type="button">
+                <i class="far fa-check-circle"></i>
+                Si
+            </button>
+            <button *ngIf="!reg.isTaxIca" (click)="reg.isTaxIca = true" class="btn btn-outline-danger w-50" type="button">
+                <i class="fas fa-ban"></i>
+                No
+            </button>
+        </div>
+
+        <div *ngIf="isLegalPerson" class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label>Responsable Industria y Comercio</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.isTaxInduCommerce" (click)="reg.isTaxInduCommerce = false" class="btn btn-success w-50" type="button">
+                <i class="far fa-check-circle"></i>
+                Si
+            </button>
+            <button *ngIf="!reg.isTaxInduCommerce" (click)="reg.isTaxInduCommerce = true" class="btn btn-outline-danger w-50" type="button">
+                <i class="fas fa-ban"></i>
+                No
+            </button>
+        </div>
+
+        <div *ngIf="isLegalPerson" class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label>¿Es Autorretenedor?</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.isSelftRetention" (click)="reg.isSelftRetention = false" class="btn btn-success w-50" type="button">
+                <i class="far fa-check-circle"></i>
+                Si
+            </button>
+            <button *ngIf="!reg.isSelftRetention" (click)="reg.isSelftRetention = true" class="btn btn-outline-danger w-50" type="button">
+                <i class="fas fa-ban"></i>
+                No
+            </button>
+        </div>
+
+        <div *ngIf="isLegalPerson" class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label>¿Es Gran Contribuyente?</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.isLargeTaxpayer" (click)="reg.isLargeTaxpayer = false" class="btn btn-success w-50" type="button">
+                <i class="far fa-check-circle"></i>
+                Si
+            </button>
+            <button *ngIf="!reg.isLargeTaxpayer" (click)="reg.isLargeTaxpayer = true" class="btn btn-outline-danger w-50" type="button">
+                <i class="fas fa-ban"></i>
+                No
+            </button>
+        </div>
+
+        <div *ngIf="isLegalPerson" class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label>¿Es Entidad sin animo de lucro?</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.isNonProfitEntity" (click)="reg.isNonProfitEntity = false" class="btn btn-success w-50" type="button">
+                <i class="far fa-check-circle"></i>
+                Si
+            </button>
+            <button *ngIf="!reg.isNonProfitEntity" (click)="reg.isNonProfitEntity = true" class="btn btn-outline-danger w-50" type="button">
+                <i class="fas fa-ban"></i>
+                No
+            </button>
+        </div>
+
+    </div>
+
+    <div class="row float-right mr-5 ">
+        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+        <button type="button" class="btn btn-danger ml-1" (click)="back()"><i class="fa fa-ban" aria-hidden="true"></i> Regresar</button>
+    </div>
+</form>

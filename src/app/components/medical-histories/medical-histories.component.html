@@ -1,0 +1,87 @@
+<!-- <form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-archive"></i> {{ title | uppercase}}</h3>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-4 col-md-4 col-sm-12"></div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idPatient">Seleccione un Paciente</label>
+            <select class="form-control" name="idPatient" id="idPatient" [(ngModel)]="reg.idPatient" [disabled]="listPatients.length === 0">
+                <option *ngFor="let obj of listPatients" [value]="obj.idPatient">
+                <span>{{obj.documentPatient}} - {{ obj.fullName }}</span>
+                </option>
+            </select>
+            <br>
+            <button type="button" class="btn btn-primary" (click)="SearchButton()"><i class="fas fa-search "></i> Buscar</button>
+        </div>
+    </div>
+
+    <div class="row float-right mr-5 ">
+    </div>
+</form> -->
+
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-6">
+            <h3><i class="far fa-heart"></i> {{ title | uppercase}}</h3>
+        </div>
+        <div class="col-6"><button type="button" class="btn btn-primary float-right rounded" (click)="register(0)" title="Agregar Nuevo Paciente"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar paciente</button></div>
+        <hr>
+    </div>
+    <div class="search-form mt-1">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="btn-icon-prepend">
+                    <button class="btn">
+                    <i class="feather icon-search" (click)="search()"></i>
+                </button>
+                </div>
+            </div>
+            <input type="text" class="form-control" id="searchText" placeholder="Buscar aquí..." (keyup)='keyupSearch($event)' autocomplete="off" [(ngModel)]="searchText" name="searchText">
+        </div>
+    </div>
+
+    <br>
+    <table class="table" *ngIf="regs.length > 0">
+        <thead>
+            <tr>
+                <th scope="col" width="10%">Acciones</th>
+                <th scope="col" width="15%">Documento</th>
+                <th scope="col" width="20%">Nombre</th>
+                <th scope="col" width="15%">Teléfono</th>
+                <th scope="col" width="20%">Correo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reg of regs; let idx = index">
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="SearchButton(reg.idPatient)" title="Buscar"><i class="fas fa-search "></i></button>
+                </td>
+                <td>{{reg.documentPatient}}</td>
+                <td>{{reg.fullName}}</td>
+                <td>{{reg.telephonePatient}}</td>
+                <td>{{reg.emailPatient}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div class="row" *ngIf="regs.length>0">
+        <div class="col-2">
+
+            <button class="btn btn-success float-left" (click)="back()">Anterior</button>
+        </div>
+        <div class="col-8">
+
+        </div>
+        <div class="col-2">
+
+            <button class="btn btn-success float-right" (click)="next()">Siguiente</button>
+        </div>
+    </div>
+
+</form>

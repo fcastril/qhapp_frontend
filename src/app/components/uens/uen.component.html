@@ -1,0 +1,21 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+
+            <h3><i class="fas fa-university"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+    <div class="container mr-5 row">
+        <div class="form-group col-9">
+            <label for="nameUen">UEN</label>
+            <input type=" text " class="form-control " id="uen1" [(ngModel)]="reg.uen1" name="uen1" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['uen1'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+    <div class="row float-right mr-5 ">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " [routerLink]="['/uens']"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

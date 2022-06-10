@@ -1,0 +1,133 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" class="mt-5">
+    <div class="row">
+        <div class="col-6">
+            <h3><i class="fas fa-hand-holding-medical"></i> {{ title | uppercase}}</h3>
+        </div>
+        <div class="col-6"><button type="button" class="btn btn-primary float-right rounded" (click)="CreateRegister(content)" title="Agregar registros"><i class="fa fa-plus-circle" aria-hidden="true"></i> Agregar Tratamiento</button></div>
+        <hr>
+    </div>
+    <!-- <div class="search-form mt-1">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="btn-icon-prepend">
+                    <button class="btn">
+                    <i class="feather icon-search" (click)="search()"></i>
+                </button>
+                </div>
+            </div>
+            <input type="text" class="form-control" id="searchText" placeholder="Buscar aquí..." (keyup)='keyupSearch($event)' autocomplete="off" [(ngModel)]="searchText" name="searchText">
+        </div>
+    </div> -->
+
+    <br>
+    <table class="table" *ngIf="regs.length > 0">
+        <thead>
+            <tr>
+                <th scope="col" width="30%">Tratamiento</th>
+                <th scope="col" width="10%">Sesiones</th>
+                <th scope="col" width="10%">Ingreso</th>
+                <th scope="col" width="10%">Última Visita</th>
+                <th scope="col" width="10%">Estado</th>
+                <th scope="col" width="10%">Evolucionar</th>
+                <th scope="col" width="10%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reg of regs; let idx = index">
+                <td>{{reg.reasonAppointment}}</td>
+                <td>
+                    {{reg.numberSessionsAttended + '/' + reg.numberSessionsAssigned}}
+                    <button *ngIf="reg.attentionStatus" class="btn btn-success fas fa-edit rounded " (click)="editRegister(session,reg.idTreatmentHeader, idx) " title="Registrar Control Otros "></button>
+                </td>
+                <td>{{reg.dateStartAttention | date}}</td>
+                <td>{{reg.dateLastAttention | date}}</td>
+                <td>{{reg.attentionStatus && 'ABIERTO' || 'CERRADO'}}</td>
+                <!-- user.IsActive && 'Active' || 'Block' -->
+                <td>
+                    <button *ngIf="!reg.isLaser && reg.attentionStatus " class="btn btn-warning fas fa-first-aid rounded " (click)="evolucion(reg.idTreatmentHeader, idx) " title="Registrar Control Otros "></button>
+                    <button *ngIf="reg.isLaser && reg.attentionStatus " class="btn btn-warning fas fa-cogs rounded " (click)="evolucionlaser(reg.idTreatmentHeader) " title="Registrar Control Laser "></button>
+                </td>
+                <td>
+                    <button *ngIf="!reg.isLaser " class="btn btn-warning fas fa-eye rounded " (click)="verEvolucion(reg.idTreatmentHeader) " title="Ver Evoluciones "></button>
+                    <button *ngIf="reg.isLaser " class="btn btn-warning fas fa-list-alt rounded " (click)="verEvolucionLaser(reg.idTreatmentHeader) " title="Ver Evoluciones "></button>
+                    <button *ngIf="reg.attentionStatus" class="btn btn-danger fas fa-cut ml-1 rounded " (click)="cerrarAtencion(reg.idTreatmentHeader, idx) " title="Interrumpir Tratamiento "></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<!-- Modal para generar Encabezado de Tratamientos -->
+<ng-template #content let-modal>
+    <div class="modal-header " style="background-color: blue; color: white; ">
+        <h2 class="modal-title " id="modal-basic-title " style="text-align: center; ">REGISTRAR NUEVO TRATAMIENTO</h2>
+    </div>
+    <div class="modal-body ">
+        <form (ngSubmit)="Submit( g ) " #g="ngForm">
+            <div class="form-group ">
+                <label for="idReasonAppointment ">Tratamiento</label>
+                <select name="idReasonAppointment " id="idReasonAppointment " [disabled]="listReasonAppointment.length===0 " [(ngModel)]="reg.idReasonAppointment ">
+                    <option *ngFor="let obj of listReasonAppointment " [value]="obj.idReasonAppointment ">
+                    <span>{{ obj.reasonAppointment }}</span>
+                    </option>
+                </select>
+            </div>
+            <div class="form-group ">
+                <label for="idUser ">Profesional que Atiende</label>
+                <select name="idUser " id="idUser " [disabled]="listUsers.length===0 " [(ngModel)]="reg.idUser ">
+                    <option *ngFor="let obj of listUsers " [value]="obj.idUser ">
+                    <span>{{ obj.firstNameUser }}</span>
+                    </option>
+                </select>
+            </div>
+            <div class="form-group ">
+                <label for="numberSessionsAssigned ">Número de sesiones</label>
+                <input type="number " class="form-control " id="numberSessionsAssigned " [(ngModel)]="reg.numberSessionsAssigned " name="numberSessionsAssigned " autocomplete="off ">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer ">
+        <button type="button " class="btn btn-outline-dark " (click)="modal.close(f) ">Registrar</button>
+    </div>
+</ng-template>
+
+<!-- Modal para modificar cantidad de citas programadas -->
+<ng-template #session let-modal>
+    <div class="modal-header " style="background-color: blue; color: white; ">
+        <h2 class="modal-title " id="modal-basic-title " style="text-align: center; ">ADMINSTRACIÓN DE SESIONES</h2>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="Submit( g )" #g="ngForm">
+            <div class="form-group">
+                <label for="seleccion">Acción</label>
+                <select name="seleccion" id="seleccion" [(ngModel)]="seleccion" (change)="action($event)">
+                    <option *ngFor="let type of listActionSession" [value]="type.id ">
+                    <span>{{ type.description }}</span>
+                    </option>
+                </select>
+            </div>
+            <div *ngIf="agregar" class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                    <h3 style="color: darkblue;">Este tratamiento cuenta con {{ totalSessions }} sesiones en total</h3>
+                </div>
+                <div class="form-group">
+                    <label for="newSessions">Número de sesiones que desea adicionar</label>
+                    <input type="number " class="form-control " id="newSessions" [(ngModel)]="newSessions" name="newSessions" autocomplete="off ">
+                </div>
+            </div>
+
+            <div *ngIf="restar" class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                    <h3 style="color: darkblue;">Restan {{ diferencia }} sesión de {{totalSessions}} totales</h3>
+                </div>
+                <div class="form-group">
+                    <label for="newSessions">Número de sesiones que desea consumir</label>
+                    <input type="number " class="form-control " id="newSessions" [(ngModel)]="newSessions" name="newSessions" autocomplete="off ">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close(f) ">Registrar</button>
+    </div>
+</ng-template>

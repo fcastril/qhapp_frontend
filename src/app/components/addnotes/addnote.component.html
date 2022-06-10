@@ -1,0 +1,29 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+
+            <h3><i class="far fa-sticky-note"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+    <div class="container mr-5 row">
+        <div class="form-group col-9">
+            <label for="nameNote">Titulo nota</label>
+            <input type="text" class="form-control" [(ngModel)]="reg.nameNote" id="nameNote" name="nameNote" autocomplete="off" required #nameNote="ngModel" [class.is-invalid]="nameNote.invalid && nameNote.touched">
+            <span *ngIf="nameNote.invalid && nameNote.touched" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="descriptionNote">Descripción de la nota</label>
+            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <textarea type="text" class="form-control" overflow="scroll" resize="vertical" [(ngModel)]="reg.descriptionNote" id="descriptionNote" name="descriptionNote" autocomplete="off" cols="30" rows="5" required #descriptionNote="ngModel" [class.is-invalid]="descriptionNote.invalid && descriptionNote.touched"></textarea>
+            <span *ngIf="descriptionNote.invalid && descriptionNote.touched" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+    <div class="row float-right mr-5 ">
+        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+        <button type="button" class="btn btn-danger ml-1" [routerLink]="['/addnotes']"><i class="fa fa-ban" aria-hidden="true"></i> Regresar</button>
+    </div>
+</form>

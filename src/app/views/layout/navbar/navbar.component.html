@@ -1,0 +1,42 @@
+<nav class="navbar">
+    <a href="" class="sidebar-toggler" (click)="toggleSidebar($event)">
+        <i class="feather icon-menu"></i>
+    </a>
+    <div class="navbar-content">
+        <ul class="navbar-nav navbar-agenda">
+            <li class="nav-item navbar-agenda-item" *ngFor="let subitem of calendars">
+                <a class="nav-link side-nav-link-a-ref" href="javascript:void(0);" [routerLink]="subitem.link">
+                    <i class="link-icon" [attr.data-feather]="subitem.icon" appFeatherIcon *ngIf="subitem.icon"></i>
+                    <!-- <span class="link-arrow" data-feather="chevron-down" appFeatherIcon></span> -->
+                    <span class="link-title"> {{ subitem.label }}</span>
+                </a>
+
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item nav-profile" ngbDropdown>
+                <a class="nav-link" ngbDropdownToggle id="profileDropdown">
+                    <i class="fas fa-user-friends"></i>
+                </a>
+                <div ngbDropdownMenu aria-labelledby="profileDropdown">
+                    <div class="dropdown-header d-flex flex-column align-items-center">
+                        <div class="info text-center">
+                            <p class="name font-weight-bold mb-0">{{ Username }}</p>
+                            <p class="email text-muted mb-3">{{ Email }}</p>
+                        </div>
+                    </div>
+                    <div class="dropdown-body">
+                        <ul class="profile-nav p-0 pt-3">
+                            <li class="nav-item">
+                                <a href="" (click)="onLogout($event)" class="nav-link">
+                                    <i class="feather icon-log-out"></i>
+                                    <span>Cerrar Sesión</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

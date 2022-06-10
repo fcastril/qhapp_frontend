@@ -1,0 +1,117 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-address-card"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+    <!-- <button type="button" (click)="click()">clic</button> -->
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idTypeAgenda">Tipo de Agenda</label>
+            <select name="idTypeAgenda" id="idTypeAgenda" [(ngModel)]="reg.idTypeAgenda" [disabled]="listTypesAgenda.length === 0" required #idTypeAgenda="ngModel" [class.is-invalid]="idTypeAgenda.invalid && idTypeAgenda.touched">
+                <option *ngFor="let obj of listTypesAgenda" [value]="obj.idTypeAgenda">
+                <span>{{ obj.typeAgenda }}</span>
+                </option>
+            </select>
+            <!-- <span *ngIf="f.submitted && f.controls['idTypeComponent'].errors" class="text-danger">* Obligatorio</span> -->
+            <span class="form-text text-danger" *ngIf="idTypeAgenda.invalid && idTypeAgenda.touched">* Obligatorio</span>
+        </div>
+    </div>
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-md-6 col-lg-6 col-xl-6 col-sm-12">
+            <br>
+            <mat-form-field class="form-group col-md-12 col-lg-12 col-xl-12 col-sm-12">
+                <mat-label>Fecha Inicial</mat-label>
+                <input matInput type="datetime-local" placeholder="start date" [(ngModel)]="reg.dateTimeInitial_" autocomplete="off" name="dateTimeInitial" required #dateTimeInitial="ngModel" [class.is-invalid]="dateTimeInitial.invalid && dateTimeInitial.touched">
+                <mat-datepicker #picker startView="month"></mat-datepicker>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="dateTimeInitial.invalid && dateTimeInitial.touched">* Obligatorio</small>
+        </div>
+
+        <div class="form-group col-md-6 col-lg-6 col-xl-6 col-sm-12">
+            <br>
+            <mat-form-field class="form-group col-md-12 col-lg-12 col-xl-12 col-sm-12">
+                <mat-label>Fecha Final</mat-label>
+                <input matInput type="datetime-local" placeholder="start date" [(ngModel)]="reg.dateTimeFinal_" autocomplete="off" name="dateTimeFinal" required #dateTimeFinal="ngModel" [class.is-invalid]="dateTimeFinal.invalid && dateTimeFinal.touched">
+                <mat-datepicker #picker startView="month"></mat-datepicker>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="dateTimeFinal.invalid && dateTimeFinal.touched">* Obligatorio</small>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idReasonAppointment">Motivo de Consulta</label>
+            <select name="idReasonAppointment" id="idReasonAppointment" [(ngModel)]="reg.idReasonAppointment" [disabled]="listReasonAppointment.length === 0" required #idReasonAppointment="ngModel" [class.is-invalid]="idReasonAppointment.invalid && idReasonAppointment.touched">
+                <option *ngFor="let obj of listReasonAppointment" [value]="obj.idReasonAppointment">
+                <span>{{ obj.reasonAppointment }}</span>
+                </option>
+            </select>
+            <!-- <span *ngIf="f.submitted && f.controls['idTypeComponent'].errors" class="text-danger">* Obligatorio</span> -->
+            <span class="form-text text-danger" *ngIf="idReasonAppointment.invalid && idReasonAppointment.touched">* Obligatorio</span>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idUser">Seleccione el profesional</label>
+            <select name="idUser" id="idUser" [(ngModel)]="reg.idUser" [disabled]="listUsers.length === 0" required #idUser="ngModel" [class.is-invalid]="idUser.invalid && idUser.touched">
+                <option *ngFor="let obj of listUsers" [value]="obj.idUser">
+                <span>{{ obj.firstNameUser }}</span>
+                </option>
+            </select>
+            <span class="form-text text-danger" *ngIf="idUser.invalid && idUser.touched">* Obligatorio</span>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-2 col-md-2 col-xl-2 col-sm-4">
+            <label>Cliente</label>
+            <input type="text" class="form-control " id="documentPatient" [(ngModel)]="reg.documentPatient" name="documentPatient" autocomplete="off" (blur)="onBlurPatient()">
+            <small *ngIf="f.submitted && f.controls['documentPatient'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un Cliente</small>
+        </div>
+        <div class="form-group col-lg-10 col-md-10 col-xl-10 col-sm-8">
+            <label>Nombre del Cliente</label>
+            <input type="text" class="form-control " id="fullName" [(ngModel)]="reg.fullName" name="fullName" autocomplete="off" readonly="readonly">
+            <small *ngIf="f.submitted && f.controls['documentPatient'].errors" class="form-text text-danger">Obligatorio - Debe seleccionar un Cliente</small>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-12">
+            <label>Observaciones</label>
+            <!-- <input type="text" class="form-control" placeholder="Ingrese las Observaciones" [(ngModel)]="tercero.observaciones" maxlength="200" name="observaciones"> -->
+            <textarea cols="30" rows="3" type="text" class="form-control" placeholder="Ingrese las Observaciones" [(ngModel)]="reg.observation" maxlength="200" name="observation"></textarea>
+            <small class="form-text text-muted">Solo se permite un maximo de 200 caracteres</small>
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idStatusAppointment">Estado Cita</label>
+            <select name="idStatusAppointment" id="idStatusAppointment" [(ngModel)]="reg.idStatusAppointment" [disabled]="listStatusAppointments.length === 0" required #idStatusAppointment="ngModel" [class.is-invalid]="idStatusAppointment.invalid && idStatusAppointment.touched">
+                <option *ngFor="let obj of listStatusAppointments" [value]="obj.idStatusAppointment">
+                <span>{{ obj.statusAppointment1 }}</span>
+                </option>
+            </select>
+            <!-- <span *ngIf="f.submitted && f.controls['idTypeComponent'].errors" class="text-danger">* Obligatorio</span> -->
+            <span class="form-text text-danger" *ngIf="idStatusAppointment.invalid && idStatusAppointment.touched">* Obligatorio</span>
+        </div>
+
+
+
+    </div>
+
+    <div class="row float-right mr-5 ">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " [routerLink]="['/appointment-records']"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

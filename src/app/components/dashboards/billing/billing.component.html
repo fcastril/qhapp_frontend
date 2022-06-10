@@ -1,0 +1,238 @@
+<div class="row">
+    <div class="col-10">
+        <!-- <h3><i class="fas fa-user-friends"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3> -->
+        <label><h2 style="color: darkblue;"><i class="fas fa-chart-pie"></i> {{ title | uppercase}}</h2></label>
+        <label><h3> {{' - ' + subTitle | uppercase }}</h3></label>
+    </div>
+    <hr>
+</div>
+
+<div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-1">
+
+    <div class="col-6 text-white">
+        <mat-card class="billing-card-1">
+            <mat-card-header>
+                <div class="small-box-icon"><i class="fas fa-chart-line"></i></div>
+                <mat-card-title class="text-white"><b>{{valueBilling1 | currency: 'COP'}}</b></mat-card-title>
+                <mat-card-subtitle class="text-white">Ventas del Mes de {{nameBilling1}}</mat-card-subtitle>
+            </mat-card-header>
+            <br>
+            <mat-card-actions>
+                <a href="" class="small-box-footer"> Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <div class="col-6 text-white">
+        <mat-card class="billing-card-2">
+            <mat-card-header>
+                <div class="small-box-icon"><i class="fas fa-chart-line"></i></div>
+                <mat-card-title class="text-white"><b>{{valueBilling2 | currency: 'COP'}}</b></mat-card-title>
+                <mat-card-subtitle class="text-white">Ventas del Mes de {{nameBilling2}}</mat-card-subtitle>
+            </mat-card-header>
+            <br>
+            <mat-card-actions>
+                <a href="" class="small-box-footer text-white"> Mas Información <i class="fa fa-arrow-circle-right"></i></a>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+</div>
+
+<!-- Graficos -->
+<div class="container mr-5 row col-lg-12 col-md-12 col-sm-12 mt-3">
+    <div class="col-xl-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">procedimientos más Frecuentes</h6>
+                <div class="col-lg-12">
+                    <mat-form-field appearance="fill" class="col-lg-4">
+                        <mat-label>Fecha Inicial</mat-label>
+                        <input matInput [matDatepicker]="pickerInGr1" [(ngModel)]="dateInitialGr1" autocomplete="off" name="dateInitialGr1">
+                        <mat-datepicker-toggle matSuffix [for]="pickerInGr1"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerInGr1 startView="multi-year"></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="col-lg-4">
+                        <mat-label>Fecha Final</mat-label>
+                        <input matInput [matDatepicker]="pickerFnGr1" [(ngModel)]="dateFinalGr1" autocomplete="off" name="dateFinalGr1">
+                        <mat-datepicker-toggle matSuffix [for]="pickerFnGr1"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerFnGr1 startView="multi-year"></mat-datepicker>
+                    </mat-form-field>
+                    <button class="btn btn-warning fa fa-search rounded" (click)="dataGraphicPatients(dateInitialGr1, dateFinalGr1)" title="Buscar Registro"></button>
+                </div>
+                <apx-chart [series]="donutChartOptions.nonAxisSeries" [chart]="donutChartOptions.chart" [labels]="donutChartOptions.labels" [grid]="donutChartOptions.grid" [markers]="donutChartOptions.markers" [stroke]="donutChartOptions.stroke" [legend]="donutChartOptions.legend"
+                    [dataLabels]="donutChartOptions.dataLabels"></apx-chart>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Indicador de ¿Como se Entero?</h6>
+                <div class="col-xl-12">
+                    <mat-form-field appearance="fill" class="col-xl-5">
+                        <mat-label>Fecha Inicial</mat-label>
+                        <input matInput [matDatepicker]="pickerInGr2" [(ngModel)]="dateInitialGr2" autocomplete="off" name="dateInitialGr2">
+                        <mat-datepicker-toggle matSuffix [for]="pickerInGr2"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerInGr2 startView="multi-year"></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="col-xl-5">
+                        <mat-label>Fecha Final</mat-label>
+                        <input matInput [matDatepicker]="pickerFnGr2" [(ngModel)]="dateFinalGr2" autocomplete="off" name="dateFinalGr2">
+                        <mat-datepicker-toggle matSuffix [for]="pickerFnGr2"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerFnGr2 startView="multi-year"></mat-datepicker>
+                    </mat-form-field>
+                    <button class="btn btn-warning fa fa-search rounded" (click)="dataGraphicMoney(dateInitialGr2, dateFinalGr2)" title="Buscar Registro"></button>
+                </div>
+                <apx-chart [series]="pieChartOptions.nonAxisSeries" [chart]="pieChartOptions.chart" [labels]="pieChartOptions.labels" [grid]="donutChartOptions.grid" [markers]="donutChartOptions.markers" [stroke]="pieChartOptions.stroke" [legend]="pieChartOptions.legend"
+                    [dataLabels]="pieChartOptions.dataLabels"></apx-chart>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-xl-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Pacientes nuevos por mes</h6>
+                <!-- <div class="form-group col-lg-4 col-md-4 col-sm-6">
+                    <label for="typePerson">Seleccione el año</label>
+                    <select2 [data]="dataListYears" [value]="yearSelect" customSearchEnabled="true" minCharForSearch=0 displaySearchStatus placeholder="Seleccione una opción..." [(ngModel)]="yearSelect" id="yearSelect" name="yearSelect" (update)="searchPatientsMonth($event)">
+                    </select2>
+                </div> -->
+                <div class="form-group col-lg-4 col-md-4 col-sm-6">
+                    <label>Seleccione el año</label>
+                    <select name="yearSelect" [(ngModel)]="yearSelect" (change)="searchPatientsMonth($event)">
+                        <option *ngFor="let type of dataListYears" [value]="type.id">
+                        <span>{{ type.description }}</span>
+                        </option>
+                    </select>
+                </div>
+                <apx-chart [series]="barChartOptionsPatients.series" [colors]="barChartOptionsPatients.colors" [grid]="barChartOptionsPatients.grid" [chart]="barChartOptionsPatients.chart" [xaxis]="barChartOptionsPatients.xaxis" [markers]="barChartOptionsPatients.markers"
+                    [stroke]="barChartOptionsPatients.stroke" [legend]="barChartOptionsPatients.legend"></apx-chart>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-xl-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Facturación por mes</h6>
+                <!-- <div class="form-group col-lg-4 col-md-4 col-sm-6">
+                    <label for="typePerson">Seleccione el año</label>
+                    <select2 [data]="dataListYears" [value]="yearSelectMoney" customSearchEnabled="true" minCharForSearch=0 displaySearchStatus placeholder="Seleccione una opción..." [(ngModel)]="yearSelectMoney" id="yearSelectMoney" name="yearSelectMoney" (update)="searchMoneyMonth($event)">
+                    </select2>
+                </div> -->
+                <div class="form-group col-lg-4 col-md-4 col-sm-6">
+                    <label>Seleccione el año</label>
+                    <select name="yearSelectMoney" [(ngModel)]="yearSelectMoney" (change)="searchMoneyMonth($event)">
+                        <option *ngFor="let type of dataListYears" [value]="type.id">
+                        <span>{{ type.description }}</span>
+                        </option>
+                    </select>
+                </div>
+                <apx-chart [series]="barChartOptionsMoney.series" [colors]="barChartOptionsMoney.colors" [grid]="barChartOptionsMoney.grid" [chart]="barChartOptionsMoney.chart" [xaxis]="barChartOptionsMoney.xaxis" [markers]="barChartOptionsMoney.markers" [stroke]="barChartOptionsMoney.stroke"
+                    [legend]="barChartOptionsMoney.legend"></apx-chart>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-xl-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Centros de costos</h6>
+                <!-- <div class="form-group col-lg-4 col-md-4 col-sm-6">
+                    <label for="typePerson">Seleccione el año</label>
+                    <select2 [data]="dataListYears" [value]="yearSelectMoneyUEN" customSearchEnabled="true" minCharForSearch=0 displaySearchStatus placeholder="Seleccione una opción..." [(ngModel)]="yearSelectMoneyUEN" id="yearSelectMoneyUEN" name="yearSelectMoneyUEN" (update)="searchMoneyMonthUEN($event)">
+                    </select2>
+                </div> -->
+                <div class="form-group col-lg-4 col-md-4 col-sm-6">
+                    <label>Seleccione el año</label>
+                    <select name="yearSelectMoneyUEN" [(ngModel)]="yearSelectMoneyUEN" (change)="searchMoneyMonthUEN($event)">
+                        <option *ngFor="let type of dataListYears" [value]="type.id">
+                        <span>{{ type.description }}</span>
+                        </option>
+                    </select>
+                </div>
+                <apx-chart [series]="lineChartOptionsUEN.series" [colors]="lineChartOptionsUEN.colors" [grid]="lineChartOptionsUEN.grid" [chart]="lineChartOptionsUEN.chart" [xaxis]="lineChartOptionsUEN.xaxis" [markers]="lineChartOptionsUEN.markers" [stroke]="lineChartOptionsUEN.stroke"
+                    [legend]="lineChartOptionsUEN.legend" [plotOptions]="lineChartOptionsUEN.plotOptions" [dataLabels]="lineChartOptionsUEN.dataLabels" [yaxis]="lineChartOptionsUEN.yaxis" [tooltip]="lineChartOptionsUEN.tooltip"></apx-chart>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-xl-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Estado de Citas</h6>
+                <!-- <div class="form-group col-lg-4 col-md-4 col-sm-6">
+                    <label for="typePerson">Seleccione el año</label>
+                    <select2 [data]="dataListYears" [value]="yearSelectAppointment" customSearchEnabled="true" minCharForSearch=0 displaySearchStatus placeholder="Seleccione una opción..." [(ngModel)]="yearSelectAppointment" id="yearSelectAppointment" name="yearSelectAppointment"
+                        (update)="searchAppointment($event)">
+                    </select2>
+                </div> -->
+                <div class="form-group col-lg-4 col-md-4 col-sm-6">
+                    <label>Seleccione el año</label>
+                    <select name="yearSelectAppointment" [(ngModel)]="yearSelectAppointment" (change)="searchAppointment($event)">
+                        <option *ngFor="let type of dataListYears" [value]="type.id">
+                        <span>{{ type.description }}</span>
+                        </option>
+                    </select>
+                </div>
+                <apx-chart [series]="lineChartOptionsAppo.series" [colors]="lineChartOptionsAppo.colors" [grid]="lineChartOptionsAppo.grid" [chart]="lineChartOptionsAppo.chart" [xaxis]="lineChartOptionsAppo.xaxis" [markers]="lineChartOptionsAppo.markers" [stroke]="lineChartOptionsAppo.stroke"
+                    [legend]="lineChartOptionsAppo.legend" [plotOptions]="lineChartOptionsAppo.plotOptions" [dataLabels]="lineChartOptionsAppo.dataLabels" [yaxis]="lineChartOptionsAppo.yaxis" [tooltip]="lineChartOptionsAppo.tooltip"></apx-chart>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="mr-5 col-lg-12 col-md-12 col-sm-12 mt-3">
+    <div class="col-xl-6">
+        <apx-chart [series]="lineChartOptions.series" [colors]="lineChartOptions.colors" [grid]="lineChartOptions.grid" [chart]="lineChartOptions.chart" [xaxis]="lineChartOptions.xaxis" [markers]="lineChartOptions.markers" [stroke]="lineChartOptions.stroke" [legend]="lineChartOptions.legend"
+            [title]="lineChartOptions.title"></apx-chart>
+    </div>
+
+</div> -->
+
+<!-- <div class="row">
+    <div class="col-xl-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Donut chart</h6>
+
+                <apx-chart [series]="donutChartOptions.nonAxisSeries" [chart]="donutChartOptions.chart" [labels]="donutChartOptions.labels" [grid]="donutChartOptions.grid" [colors]="donutChartOptions.colors" [markers]="donutChartOptions.markers" [stroke]="donutChartOptions.stroke"
+                    [legend]="donutChartOptions.legend" [dataLabels]="donutChartOptions.dataLabels"></apx-chart>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Pie chart</h6>
+
+                <apx-chart [series]="pieChartOptions.nonAxisSeries" [chart]="pieChartOptions.chart" [colors]="pieChartOptions.colors" [stroke]="pieChartOptions.stroke" [legend]="pieChartOptions.legend" [dataLabels]="pieChartOptions.dataLabels"></apx-chart>
+
+            </div>
+        </div>
+    </div>
+</div> -->

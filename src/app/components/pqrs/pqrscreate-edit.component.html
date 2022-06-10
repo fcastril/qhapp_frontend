@@ -1,0 +1,57 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" class="mt-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                <h3><i class="fas fa-question-circle"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <label for="typePqr">Tipo de PQRS</label>
+                <select class="form-select" aria-label="Seleccione el tipo de PQRS" id="typePqr" [(ngModel)]="reg.typePqr" name="typePqr" required>
+                    <option selected hidden value="0">Seleccione el tipo de PQRS</option>
+                    <option value="1">Petición</option>
+                    <option value="2">Queja</option>
+                    <option value="3">Reclamo</option>
+                    <option value="4">Sugerencia</option>
+                    <option value="5">Felicitaciones</option>
+
+                  </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <label for="contactPqr">Nombres y Apellidos</label>
+                <input type="text" class="form-control" id="contactPqr" [(ngModel)]="reg.contactPqr" name="contactPqr" placeholder="Digite el nombre del contacto" autocomplete="off" required/>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <label for="emailPqr">Correo Electrónico</label>
+                <input type="email" class="form-control" id="emailPqr" [(ngModel)]="reg.emailPqr" name="emailPqr" placeholder="Digite el correo electrónico" autocomplete="off" required/>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <label for="cellPhonePqr">Celular</label>
+                <input type="text" class="form-control" id="cellPhonePqr" [(ngModel)]="reg.cellPhonePqr" name="cellPhonePqr" placeholder="Digite el número de celular" autocomplete="off" required/>
+            </div>
+        </div>
+        <div class="row mt-1">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label for="subject">Descripción</label>
+                <input type="subject" class="form-control" id="subject" [(ngModel)]="reg.subject" name="subject" placeholder="Digite la descripción" autocomplete="off" required />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label for="body">Información</label>
+                <textarea type="text" class="form-control" id="body" rows="8" [(ngModel)]="reg.body" name="body" placeholder="Digite la información explicativa para la PqrS" autocomplete="off" required></textarea>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row float-right mr-5 mt-5">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " (click)="return()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

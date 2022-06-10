@@ -1,0 +1,54 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-file-export"></i> {{ title | uppercase}}</h3>
+        </div>
+        <hr>
+    </div>
+    <!-- <div class="row mr-5 ">
+        <div class="form-group col-6">
+            <label for="product">Código o Descripción</label>
+            <input type=" text " class="form-control " id="product" [(ngModel)]="product" name="product" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['product'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+        <div class="button-group col-6">
+            <br>
+            <button type="button " class="btn btn-danger " (click)=buscar()><i class="fa fa-search " title="Buscar Datos " aria-hidden="true "></i> Consultar</button>
+        </div>
+    </div> -->
+    <div class="search-form mt-1 col-6">
+        <label for="product">Código o Descripción</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="searchText" placeholder="Buscar aquí..." (keyup)='keyupSearch($event)' autocomplete="off" [(ngModel)]="product" name="searchText">
+            <div class="input-group-prepend">
+                <div class="btn-icon-prepend">
+                    <button class="btn">
+                        <i class="feather icon-search" (click)="search()"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <table class="table " *ngIf="regs.length> 0">
+        <thead>
+            <tr>
+                <th scope="col" width="20%">Código</th>
+                <th scope="col" width="20%">Descripcción</th>
+                <th scope="col" width="20%">Bodega</th>
+                <th style="text-align: right;" scope="col" width="20%">Existencias</th>
+                <th style="text-align: right;" scope="col" width="20%">Precio</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let reg of regs; let idx = index">
+            <tr>
+                <td>{{reg.codeProduct}}</td>
+                <td>{{reg.descriptionProduct}}</td>
+                <td>{{reg.descriptionWarehouse}}</td>
+                <td style="text-align: right;">{{(reg.quantity)}}</td>
+                <td style="text-align: right;">{{(reg.productValue) | currency: 'COP'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</form>

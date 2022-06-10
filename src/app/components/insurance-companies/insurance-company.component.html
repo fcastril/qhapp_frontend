@@ -1,0 +1,171 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fab fa-amazon-pay"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+
+    <h3 style="color: darkblue;"> {{ titleInsuranceData | uppercase }}</h3>
+    <br>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="nameInsuranceCompany">Razón Social</label>
+            <input type="text" class="form-control" id="nameInsuranceCompany" [(ngModel)]="reg.nameInsuranceCompany" name="nameInsuranceCompany" autocomplete="off" required>
+            <span *ngIf="f.submitted && f.controls['nameInsuranceCompany'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idTypeDocument">Tipo de Documento</label>
+            <select name="idTypeDocument" id="idTypeDocument" [(ngModel)]="reg.idTypeDocument" [disabled]="listTypeDocuments.length === 0" required #idTypeDocument="ngModel" [class.is-invalid]="idTypeDocument.invalid && idTypeDocument.touched">
+                <option *ngFor="let obj of listTypeDocuments" [value]="obj.idTypeDocument">
+                <span>{{ obj.typeDocument }}</span>
+                </option>
+            </select>
+            <!-- <span *ngIf="f.submitted && f.controls['idTypeComponent'].errors" class="text-danger">* Obligatorio</span> -->
+            <span class="form-text text-danger" *ngIf="idTypeDocument.invalid && idTypeDocument.touched">Obligatorio - Debe seleccionar un tipo de documento</span>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="documentInsuranceCompany">Documento</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="documentInsuranceCompany" [(ngModel)]="reg.documentInsuranceCompany" name="documentInsuranceCompany" autocomplete="off" (blur)="DVGenerator($event)" required>
+                <input type="text" class="input-group-addon" id="dvinsuranceCompany" [(ngModel)]="reg.dvinsuranceCompany" name="dvinsuranceCompany" readonly>
+            </div>
+            <span *ngIf="f.submitted && f.controls['documentInsuranceCompany'].errors" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idTypeTaxpayer">Tipo de Contribuyente</label>
+            <select name="idTypeTaxpayer" id="idTypeTaxpayer" [(ngModel)]="reg.idTypeTaxpayer" [disabled]="listTypeTaxpayers.length === 0" #idTypeTaxpayer="ngModel">
+                <option *ngFor="let obj of listTypeTaxpayers" [value]="obj.idTypeTaxpayer">
+                <span>{{ obj.typeTaxpayer }}</span>
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="codeInsuranceCompany">Codigo Aseguradora</label>
+            <input type="text" class="form-control" id="codeInsuranceCompany" [(ngModel)]="reg.codeInsuranceCompany" name="codeInsuranceCompany" autocomplete="off">
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="codeContract">Codigo Contrato</label>
+            <input type="text" class="form-control" id="codeContract" [(ngModel)]="reg.codeContract" name="codeContract" autocomplete="off">
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idCity">Ciudad</label>
+            <select name="idCity" id="idCity" [(ngModel)]="reg.idCity" [disabled]="listCities.length === 0" #idCity="ngModel">
+                <option *ngFor="let obj of listCities" [value]="obj.idCity">
+                <span>{{ obj.nameCity }}</span>
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="addressInsuranceCompany">Dirección</label>
+            <input type="text" class="form-control" id="addressInsuranceCompany" [(ngModel)]="reg.addressInsuranceCompany" name="addressInsuranceCompany" autocomplete="off">
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="contactInsuranceCompany">Nombre Contacto</label>
+            <input type="text" class="form-control" id="contactInsuranceCompany" [(ngModel)]="reg.contactInsuranceCompany" name="contactInsuranceCompany" autocomplete="off">
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label for="telephoneContact">Telefono Contacto</label>
+            <input type="text" class="form-control" id="telephoneContact" [(ngModel)]="reg.telephoneContact" name="telephoneContact" autocomplete="off">
+        </div>
+
+        <div class="form-group col-lg-3 col-md-3 col-sm-12">
+            <label for="cellPhoneContact">Celular Contacto</label>
+            <input type="text" class="form-control" id="cellPhoneContact" [(ngModel)]="reg.cellPhoneContact" name="cellPhoneContact" autocomplete="off">
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="emailContact">Correo</label>
+            <input type="text" class="form-control" id="emailContact" [(ngModel)]="reg.emailContact" name="emailContact" autocomplete="off">
+        </div>
+
+        <div class="form-group col-lg-2 col-md-2 col-sm-12">
+            <label>Activo</label>
+            <br>
+            <!--si quiero que muestre el boton mas grande, luego del succes agrego w-50 -->
+            <button *ngIf="reg.active" (click)="reg.active = false" class="btn btn-success w-50" type="button">
+                <i class="far fa-check-circle"></i>
+                Si
+            </button>
+            <button *ngIf="!reg.active" (click)="reg.active = true" class="btn btn-outline-danger w-50" type="button">
+                <i class="fas fa-ban"></i>
+                No
+            </button>
+        </div>
+
+    </div>
+
+    <br>
+    <h3 style="color: darkblue;"> {{ titleBillingData | uppercase }}</h3>
+    <br>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idTypePayment">Condiciones de Pago</label>
+            <select name="idTypePayment" id="idTypePayment" [(ngModel)]="reg.idTypePayment" [disabled]="listTypePayments.length === 0" #idTypePayment="ngModel">
+                <option *ngFor="let obj of listTypePayments" [value]="obj.idTypePayment">
+                <span>{{ obj.descriptionTypePayment }}</span>
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="contactBilling">Nombre Contacto</label>
+            <input type="text" class="form-control" id="contactBilling" [(ngModel)]="reg.contactBilling" name="contactBilling" autocomplete="off">
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="addressBilling">Dirección</label>
+            <input type="text" class="form-control" id="addressBilling" [(ngModel)]="reg.addressBilling" name="addressBilling" autocomplete="off">
+        </div>
+
+    </div>
+
+    <div class="container mr-5 row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="emailBilling">Email Contacto</label>
+            <input type="text" class="form-control" id="emailBilling" [(ngModel)]="reg.emailBilling" name="emailBilling" autocomplete="off">
+        </div>
+
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="idCityBilling">Ciudad</label>
+            <select name="idCityBilling" id="idCityBilling" [(ngModel)]="reg.idCityBilling" [disabled]="listCities.length === 0" #idCityBilling="ngModel">
+                <option *ngFor="let obj of listCities" [value]="obj.idCity">
+                <span>{{ obj.nameCity }}</span>
+                </option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row float-right mr-5 ">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " [routerLink]="['/insurance-companies']"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

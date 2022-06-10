@@ -1,0 +1,34 @@
+<form (ngSubmit)="submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-question-circle"></i> {{ title | uppercase}}</h3>
+        </div>
+        <div class="col-2"><button type="button" class="btn btn-primary float-right rounded" (click)="register(0)" title="Agregar registros"><i class="fa fa-plus-circle" aria-hidden="true"></i></button></div>
+        <hr>
+    </div>
+    <br>
+    <table class="row-border hover" *ngIf="regs.length > 0">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>Fecha Registro</th>
+                <th>Nombre</th>
+                <th>Celular</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reg of regs; let idx = index">
+                <td>
+                    <button class="btn btn-success fa fa-pencil rounded" [routerLink]="['/survey',reg.idSurvey]" title="Actualizar Registro"></button>
+                    <button class="btn btn-danger fa fa-trash ml-1 rounded" (click)=delete(reg.idSurvey,idx) title="Eliminar Registro"></button>
+                </td>
+                <td>{{reg.register | date: 'medium':'-0500'}}</td>
+                <td>{{reg.name}}</td>
+                <td>{{reg.cellPhone}}</td>
+                <td>{{reg.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</form>

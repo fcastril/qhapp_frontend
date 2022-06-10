@@ -1,0 +1,45 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-6">
+            <h3><i class="fas fa-stethoscope"></i> {{ title | uppercase}}</h3>
+        </div>
+        <div class="col-6"><button type="button" class="btn btn-primary float-right rounded" (click)="register(0)" title="Agregar registros"><i class="fa fa-plus-circle" aria-hidden="true"></i>  Agregar Atención General</button></div>
+        <hr>
+    </div>
+    <div class="search-form mt-1">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="btn-icon-prepend">
+                    <button class="btn">
+                    <i class="feather icon-search" (click)="search()"></i>
+                </button>
+                </div>
+            </div>
+            <input type="text" class="form-control" id="searchText" placeholder="Buscar aquí..." (keyup)='keyupSearch($event)' autocomplete="off" [(ngModel)]="searchText" name="searchText">
+        </div>
+    </div>
+
+    <br>
+    <table class="table" *ngIf="regs.length > 0">
+        <thead>
+            <tr>
+                <th scope="col" width="25%">Fecha Registro</th>
+                <th scope="col" width="25%">Ultima Modificación</th>
+                <th scope="col" width="25%">Tipo Cita</th>
+                <th scope="col" width="25%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reg of regs; let idx = index">
+                <td>{{reg.registrationDate | date}}</td>
+                <td>{{reg.lastUpdate | date}}</td>
+                <td>{{reg.discipline1}}</td>
+                <td>
+                    <button class="btn btn-warning fa fa-eye rounded" (click)="viewGeneralAttention(reg.idGeneralAttention)" title="Actualizar Registro"></button>
+                    <button class="btn btn-success fa fa-pencil ml-1 rounded" (click)="edit(reg.idGeneralAttention)" title="Actualizar Registro"></button>
+                    <button class="btn btn-danger fa fa-trash ml-1 rounded" (click)=delete(reg.idGeneralAttention,idx) title="Eliminar Registro"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

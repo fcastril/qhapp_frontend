@@ -1,0 +1,235 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm">
+    <div class="row">
+        <div class="col-10">
+
+            <h3><i class="fas fa-calendar-alt"></i> {{ title | uppercase}} <b><small *ngIf="id==='0'" style="color: green;">CREANDO</small><small *ngIf="id!=='0'" style="color: blue;">EDITANDO</small></b></h3>
+        </div>
+        <hr>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="form-group col-4">
+                <label for="name">Nombres y Apellidos</label>
+                <input type=" text " class="form-control " id="name" [(ngModel)]="reg.name" name="name" autocomplete="off" required>
+                <span *ngIf="f.submitted && f.controls['name'].errors" class="text-danger">* Obligatorio</span>
+            </div>
+            <div class="form-group col-4">
+                <label for="cellPhone">Celular</label>
+                <input type=" text " class="form-control " id="cellPhone" [(ngModel)]="reg.cellPhone" name="cellPhone" autocomplete="off" required>
+                <span *ngIf="f.submitted && f.controls['cellPhone'].errors" class="text-danger">* Obligatorio</span>
+            </div>
+            <div class="form-group col-4">
+                <label for="email">Correo Electrónico</label>
+                <input type=" email " class="form-control " id="email" [(ngModel)]="reg.email" name="email" autocomplete="off" required>
+                <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger">* Obligatorio</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-4">
+                <strong>1. ¿Cómo evalúa la atención al cliente?</strong>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion01" id="valueQuestion01_1" [(ngModel)]="reg.valueQuestion01" value="Mala">
+                    <label class="form-check-label" for="valueQuestion01_1">
+                      Mala
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion01" id="valueQuestion01_2" [(ngModel)]="reg.valueQuestion01" value="Regular">
+                    <label class="form-check-label" for="valueQuestion01_2">
+                      Regular
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion01" id="valueQuestion01_3" [(ngModel)]="reg.valueQuestion01" value="Buena">
+                    <label class="form-check-label" for="valueQuestion01_3">
+                      Buena 
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion01" id="valueQuestion01_4" [(ngModel)]="reg.valueQuestion01" value="Muy Buena">
+                    <label class="form-check-label" for="valueQuestion01_4">
+                      Muy Buena 
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion01" id="valueQuestion01_5" [(ngModel)]="reg.valueQuestion01" value="Excelente">
+                    <label class="form-check-label" for="valueQuestion01_5">
+                      Excelente 
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <strong>2. En promedio, ¿Cuanto tiempo esperó para ser atendido?</strong>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion02" id="valueQuestion02_1" [(ngModel)]="reg.valueQuestion02" value="01-10">
+                    <label class="form-check-label" for="valueQuestion02_1">
+                      Entre 1 y 10 minutos
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion02" id="valueQuestion02_2" [(ngModel)]="reg.valueQuestion02" value="10-20">
+                    <label class="form-check-label" for="valueQuestion02_2">
+                      Entre 10 y 20 minutos
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion02" id="valueQuestion02_3" [(ngModel)]="reg.valueQuestion02" value="20-30">
+                    <label class="form-check-label" for="valueQuestion02_3">
+                      Entre 20 y 30 minutos 
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion02" id="valueQuestion02_4" [(ngModel)]="reg.valueQuestion02" value="+30">
+                    <label class="form-check-label" for="valueQuestion02_4">
+                      Más de 30 minutos
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <label for="valueQuestion03"><strong>3. ¿Cómo cree ud. que podemos mejorar nuestra atención?</strong></label>
+                <textarea class="form-control" id="valueQuestion03" name="valueQuestion03" [(ngModel)]="reg.valueQuestion03" rows="6"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-4">
+                <strong>4. ¿Qué tan cómodos fueron el Lobby y/o la Sala de espera?</strong>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion04" id="valueQuestion04_1" [(ngModel)]="reg.valueQuestion04" value="Incómodos">
+                    <label class="form-check-label" for="valueQuestion04_1">
+                      Incómodos
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion04" id="valueQuestion04_2" [(ngModel)]="reg.valueQuestion04" value="Cómodos">
+                    <label class="form-check-label" for="valueQuestion04_2">
+                      Cómodos
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion04" id="valueQuestion04_3" [(ngModel)]="reg.valueQuestion04" value="Muy cómodos">
+                    <label class="form-check-label" for="valueQuestion04_3">
+                      Muy cómodos 
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <strong>5. ¿Cómo evalua la atención por medio de nuestros canales de comunicación?</strong>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion05" id="valueQuestion05_1" [(ngModel)]="reg.valueQuestion05" value="Mala">
+                    <label class="form-check-label" for="valueQuestion05_1">
+                      Mala
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion05" id="valueQuestion05_2" [(ngModel)]="reg.valueQuestion05" value="Regular">
+                    <label class="form-check-label" for="valueQuestion05_2">
+                      Regular
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion05" id="valueQuestion05_3" [(ngModel)]="reg.valueQuestion05" value="Buena">
+                    <label class="form-check-label" for="valueQuestion05_3">
+                      Buena 
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion05" id="valueQuestion05_4" [(ngModel)]="reg.valueQuestion05" value="Muy Buena">
+                    <label class="form-check-label" for="valueQuestion05_4">
+                      Muy Buena 
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion05" id="valueQuestion05_5" [(ngModel)]="reg.valueQuestion05" value="Excelente">
+                    <label class="form-check-label" for="valueQuestion05_5">
+                      Excelente 
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <strong>6. En general, ¿qué tan probable es que vuelvas a utilizar nuestros servicios?</strong>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion06" id="valueQuestion06_1" [(ngModel)]="reg.valueQuestion06" value="Improbable">
+                    <label class="form-check-label" for="valueQuestion06_1">
+                      Improbable
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion06" id="valueQuestion06_2" [(ngModel)]="reg.valueQuestion06" value="Poco probable">
+                    <label class="form-check-label" for="valueQuestion06_2">
+                      Poco probable
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion06" id="valueQuestion06_3" [(ngModel)]="reg.valueQuestion06" value="Probable">
+                    <label class="form-check-label" for="valueQuestion06_3">
+                      Probable 
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion06" id="valueQuestion06_4" [(ngModel)]="reg.valueQuestion06" value="Muy Probable">
+                    <label class="form-check-label" for="valueQuestion06_4">
+                      Muy probable 
+                    </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion06" id="valueQuestion06_5" [(ngModel)]="reg.valueQuestion06" value="Extremadamente probable">
+                    <label class="form-check-label" for="valueQuestion06_5">
+                      Extremadamente probable 
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-4">
+                <strong>7. En general, ¿qué tan satisfecho(a) estás con la atención de nuestro personal?</strong>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion07" id="valueQuestion07_1" [(ngModel)]="reg.valueQuestion07" value="Insatisfecho">
+                    <label class="form-check-label" for="valueQuestion07_1">
+                  Insatisfecho
+                </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion07" id="valueQuestion07_2" [(ngModel)]="reg.valueQuestion07" value="Poco satifescho">
+                    <label class="form-check-label" for="valueQuestion07_2">
+                  Poco satisfecho
+                </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion07" id="valueQuestion07_3" [(ngModel)]="reg.valueQuestion07" value="Satisfecho">
+                    <label class="form-check-label" for="valueQuestion07_3">
+                  Satisfecho
+                </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion07" id="valueQuestion07_3" [(ngModel)]="reg.valueQuestion07" value="Muy satisfecho">
+                    <label class="form-check-label" for="valueQuestion07_3">
+                  Muy Satisfecho
+                </label>
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <strong>8. ¿Deseas que te demos respuestas sobre tus inquietudes?</strong>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion08" id="valueQuestion08_1" [(ngModel)]="reg.valueQuestion08" value="SI">
+                    <label class="form-check-label" for="valueQuestion08_1">
+                  SI
+                </label>
+                </div>
+                <div class="form-check ml-5">
+                    <input class="form-check-input" type="radio" name="valueQuestion08" id="valueQuestion08_2" [(ngModel)]="reg.valueQuestion08" value="NO">
+                    <label class="form-check-label" for="valueQuestion08_2">
+                  NO
+                </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row float-right mr-5 ">
+        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+        <button type="button " class="btn btn-danger ml-1 " (click)='return()'><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+</form>

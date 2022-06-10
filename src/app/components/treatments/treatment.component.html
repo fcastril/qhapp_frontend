@@ -1,0 +1,118 @@
+<form (ngSubmit)="Submit( f )" #f="ngForm" autocomplete="off" id="content" class="mt-5">
+    <div class="row">
+        <div class="col-10">
+            <h3><i class="fas fa-hand-holding-medical"></i> {{ title | uppercase}}</h3>
+        </div>
+        <hr>
+    </div>
+
+    <br>
+
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-md-4 col-lg-4 col-xl-4 col-sm-12">
+            <br>
+            <mat-form-field appearance="fill">
+                <mat-label style="color: darkorange;">Fecha de Nota</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="reg.dateTreatmentDetail" autocomplete="off" name="dateTreatmentDetail" required #dateTreatmentDetail="ngModel" [class.is-invalid]="dateTreatmentDetail.invalid && dateTreatmentDetail.touched">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+            </mat-form-field>
+            <small class="text-danger" *ngIf="dateTreatmentDetail.invalid && dateTreatmentDetail.touched">* Obligatorio</small>
+        </div>
+
+    </div>
+
+    <h3 style="color: darkblue;"> {{ titleVitalSigns | uppercase }}</h3>
+    <br>
+
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="sistolica">PA. Sistólica</label>
+            <input type="number" class="form-control" id="sistolica" [(ngModel)]="reg.sistolica" name="sistolica" autocomplete="off" required #sistolica="ngModel" [class.is-invalid]="sistolica.invalid && sistolica.touched">
+            <span *ngIf="sistolica.invalid && sistolica.touched" class="text-danger">* Obligatorio</span>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="diastolica">PA. Diastólica</label>
+            <input type="number" class="form-control" id="diastolica" [(ngModel)]="reg.diastolica" name="diastolica" autocomplete="off" required #diastolica="ngModel" [class.is-invalid]="diastolica.invalid && diastolica.touched">
+            <span *ngIf="diastolica.invalid && diastolica.touched" class="text-danger">* Obligatorio</span>
+        </div>
+        <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <label for="heartRate">Frecuencia Cardiaca (FC)</label>
+            <input type="number" class="form-control" id="heartRate" [(ngModel)]="reg.heartRate" name="heartRate" autocomplete="off" required #heartRate="ngModel" [class.is-invalid]="heartRate.invalid && heartRate.touched">
+            <span *ngIf="heartRate.invalid && heartRate.touched" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <h3 style="color: darkblue;"> {{ titlePatientReview | uppercase }}</h3>
+    <br>
+
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="observation">Registro de Evolución</label>
+            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <textarea type="text" class="form-control" id="evolutionRegister" [(ngModel)]="reg.evolutionRegister" name="evolutionRegister" autocomplete="off" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="observation">Pendientes</label>
+            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <textarea type="text" class="form-control" id="pending" [(ngModel)]="reg.pending" name="pending" autocomplete="off" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idDiagnostic">Diagnóstico</label>
+            <!-- <select2 [data]="listDiagnostics" [value]="listDiagnostics[0]" customSearchEnabled="true" minCharForSearch=0 displaySearchStatus placeholder="Seleccione una opción..." [(ngModel)]="reg.idDiagnostic" id="idDiagnostic" name="idDiagnostic">
+            </select2> -->
+            <select class="form-control" name="idDiagnostic" id="idDiagnostic" [(ngModel)]="reg.idDiagnostic" [disabled]="listDiagnostics.length === 0">
+                <option *ngFor="let obj of listDiagnostics" [value]="obj.idDiagnostic">
+                    <span>{{ obj.diagnostic }}</span>
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idGender">Seleccione una nota para agregar en Comentarios Diagnóstico</label>
+            <!-- <select2 [data]="listAddNotes" [value]="valueNotes" customSearchEnabled="true" (update)="selectList($event)" minCharForSearch="3" placeholder="Seleccione una opción..." id="Notes" name="Notes">
+            </select2> -->
+            <select class="form-control" name="valueNotes" id="valueNotes" [disabled]="listAddNotes.length === 0" (change)="selectList($event)">
+                <option *ngFor="let obj of listAddNotes" [value]="obj.idAddNote">
+                    <span>{{ obj.nameNote }}</span>
+                </option>
+            </select>
+        </div>
+        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+            <label for="observation">Comentarios Diagnósticos</label>
+            <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+            <textarea type="text" class="form-control" overflow="scroll" resize="vertical" id="diagnosticComments" [(ngModel)]="reg.diagnosticComments" name="diagnosticComments" autocomplete="off" cols="30" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="container row col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="idTypeMeasure">Pnt</label>
+            <select class="form-control" [(ngModel)]="reg.idTypeMeasure" id="idTypeMeasure" name="idTypeMeasure" [disabled]="listTypesMeasures.length === 0">
+                <option *ngFor="let obj of listTypesMeasures" [value]="obj.idTypeMeasure">
+                <span>{{ obj.typeMeasure }}</span>
+                </option>
+            </select>
+            <!-- <small class="text-danger" *ngIf="idTypeMeasure.invalid && idTypeMeasure.touched">* Obligatorio</small> -->
+        </div>
+        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+            <label for="periodicity">Periodicidad (días)</label>
+            <input type="number" class="form-control" id="periodicity" [(ngModel)]="reg.periodicity" name="periodicity" autocomplete="off" required #periodicity="ngModel" [class.is-invalid]="periodicity.invalid && periodicity.touched">
+            <span *ngIf="periodicity.invalid && periodicity.touched" class="text-danger">* Obligatorio</span>
+        </div>
+    </div>
+
+    <div class="row float-right mr-5">
+        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i>Guardar Datos</button>
+        <button type="button " class="btn btn-danger ml-1 " (click)="regresar()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
+    </div>
+
+</form>

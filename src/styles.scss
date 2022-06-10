@@ -1,0 +1,138 @@
+/* You can add global styles to this file, and also import other style files */
+
+mat-form-field {
+    margin-right: 12px;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+select.form-control,
+select,
+.ng-select select.ng-select-container,
+.dataTable-wrapper .dataTable-top .dataTable-search select.dataTable-input {
+    // padding: 0 .75rem;
+    // border: 1px solid #e8ebf1;
+    // border-radius: 0;
+    // outline: none;
+    color: #464444 !important;
+}
+
+.mat-form-field {
+    /* display: inline-block; */
+    position: relative;
+    text-align: left;
+}
+
+@import '~bootstrap/scss/bootstrap';
+.example-card {
+    max-width: 400px;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.medicine-card-1 {
+    background-color: #00c0ef;
+    max-width: 400px;
+}
+
+.medicine-card-2 {
+    background-color: #00a65a;
+    max-width: 400px;
+}
+
+.medicine-card-3 {
+    background-color: #f39c12;
+    max-width: 500px;
+}
+
+.medicine-card-4 {
+    background-color: #dd4b39;
+    max-width: 500px;
+}
+
+.billing-card-1 {
+    background-color: #00c0ef;
+    max-width: 1000px;
+}
+
+.billing-card-2 {
+    background-color: #00a65a;
+    max-width: 1000px;
+}
+
+.medcine-header-bg-1 {
+    background-color: aqua;
+    background-size: cover;
+}
+
+.small-box-inner {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.small-box-icon {
+    transition: all .3s linear;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    z-index: 0;
+    font-size: 90px;
+    color: rgba(0, 0, 0, 0.15);
+}
+
+.small-box-footer {
+    position: relative;
+    text-align: center;
+    padding: 3px 0;
+    color: rgba(255, 255, 255, 0.8);
+    display: block;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.table-measure {
+    th,
+    td {
+        overflow: hidden;
+        max-width: 200px!important;
+        padding: 5px;
+    }
+    .title {
+        width: 200px!important;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .input-measure {
+        width: 100%!important;
+        text-align: center;
+    }
+    .mat-form-field {
+        max-width: 100%;
+        display: inline-block;
+        position: relative;
+        text-align: left;
+    }
+}
+
+.picture {
+    border-radius: 15%!important;
+    box-shadow: 0 20px 20px -15px rgba(0, 0, 0, .8);
+}
+
+.notes {
+    word-wrap: break-word;
+    word-break: break-all;
+}

@@ -1,0 +1,27 @@
+<div *ngIf="invoices.length==0" class="center">
+    <br>
+    <br>
+    <h3 class="text-center text-danger">No se encontró información</h3>
+</div>
+<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xl-12" style="height: 500px; overflow-y: auto;">
+    <table class="table" *ngIf="invoices.length > 0">
+        <thead>
+            <tr>
+                <th scope="col" width="10%">Tipo de Movimiento</th>
+                <th scope="col" width="10%">Consecutivo</th>
+                <th scope="col" width="10%">Fecha</th>
+                <th scope="col" width="10%">Cantidad</th>
+                <th scope="col" width="10%">Valor Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reg of invoices; let idx = index">
+                <td>{{reg.codeTypeMovement}}</td>
+                <td>{{reg.consecutive}}</td>
+                <td>{{reg.dateMovement | date:'dd/MM/yyyy'}}</td>
+                <td>{{reg.quantity}}</td>
+                <td>{{reg.valorTotal | currency: 'COP'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

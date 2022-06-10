@@ -1,0 +1,23 @@
+export class ProductModel {
+    constructor(public idProduct: number = 0,
+                public codeProduct: string = '',
+                public codeBarProduct: string = '',
+                public descriptionProduct: string = '',
+                public idTypeProdct: number = 0,
+                public inventory: boolean = false,
+                public stockMax: number = 0,
+                public stockMin: number = 0,
+                public reorder: number = 0,
+                public idUen: number = 0,
+                public isIva: boolean = false,
+                public isExempt: boolean = false,
+                public isExcluded: boolean = false,
+                public percentegeIva: number = 0,
+                public IdUserNew: number = 0,
+                public idUserNew: number = 0,
+                public dateTimeNew: Date = new Date(),
+                public idUserUpdated: number = 0,
+                public dateTimeUpdated: Date = new Date('1753-01-01'),
+                public typeProperties: string = '',
+                public productValue: number = 0){}
+}
