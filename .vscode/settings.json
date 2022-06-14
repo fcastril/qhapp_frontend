@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/6595e86b-cf9c-4ff3-b6e3-7a21e678cfef/microsoft.web/sites/subscriptions/6595e86b-cf9c-4ff3-b6e3-7a21e678cfef/resourceGroups/QHApp/providers/Microsoft.Web/sites/QHApp",
+  "appService.deploySubpath": "dist\\nobleui"
+}
