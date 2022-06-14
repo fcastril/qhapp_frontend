@@ -8,30 +8,33 @@
       </p>
     </div>
   </div>
-  <div class="name">
-    <span class="text">Nombre: </span> FABIAN MAURICIO CASTRILLON FRANCO
-    <span class="date">Fecha: </span> 08/06/2022 10:40 am
+  <div class="name mt-2">
+    <p>
+      <span class="text">Nombre: </span> {{ reg.firstName }} {{reg.secondName }} {{ reg.lastName}} {{ reg.lastSecondName}}<br>
+      <span class="date">Fecha: </span> {{ reg.dateRecipe | date:'short'}}
+    </p>
   </div>
-  <div class="recipe">
-
-    DIGESTAR FORTE CPS
-
-    TOMAR 1 CPS ENTRE 3A 5 PM TODOS LOS DIAS
-
-    # 2 CAJAS
+  <div class="recipe mt-5">
+    <p id="recipe-body" [innerHTML]="reg.descriptionRecipe">
+      {{ reg.descriptionRecipe }}
+    </p>
   </div>
   <div class="signature">
-    <img src="">
+    <img [src]="regUser.signature">
   </div>
   <div class="footer">
-    texto footer
+    <p>
+      <span>{{ regUser.firstNameUser }} {{ regUser.secondNameUser }} {{ regUser.lastFirstNameUser }} {{ regUser.lastSecondNameUser }}</span><br>
+      <small>Registro: {{ regUser.medicalRegistry }}</small>
+    </p>
   </div>
-  <p>recipe-patient-print works!</p>
-  id: {{ id }} <br>
-  idParent: {{ idParent }} <br>
+<div>
+<br>
+<br>
+<div class="spinner-border text-primary" role="status" *ngIf="!isExportPDF">
+  <span class="visually-hidden">Exportando archivo...</span>
 </div>
-
-<div class="row float-right mr-5 ">
+<div class="row float-right mr-5 " *ngIf="isExportPDF">
   <button type="button" class="btn btn-success" (click)="exportPDF()"><i class="fas fa-save"></i> Guardar PDF</button>
   <button type="button" class="btn btn-danger ml-1" (click)="return()"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
 </div>
