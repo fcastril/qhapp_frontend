@@ -16,6 +16,7 @@ import { MenuItem } from "./menu.model";
 import { Router, NavigationEnd } from "@angular/router";
 import { ApiService } from "../../../services/api.service";
 import { TypeAgendaModel } from "../../../models/type-agenda.model";
+import { ProfileOptionModel } from "src/app/models/profileOption.model";
 
 @Component({
   selector: "app-sidebar",
@@ -32,6 +33,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   regs: TypeAgendaModel[] = [];
   item;
+  regsOptions: ProfileOptionModel[] = [];
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -39,22 +41,15 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     router: Router,
     private api: ApiService
   ) {
-    router.events.forEach((event) => {
-      if (event instanceof NavigationEnd) {
-        /**
-         * Activating the current active item dropdown
-         */
-        this._activateMenuDropdown();
+    let idProfile: number = Number(localStorage.getItem("idProfile"));
 
-        /**
-         * closing the sidebar
-         */
-        // if (window.matchMedia('(max-width: 991px)').matches) {
-        //   this.document.body.classList.remove('sidebar-open');
-        // }
-      }
-    });
-
+    this.api
+      .getProfileOption(idProfile)
+      .subscribe((resp: ProfileOptionModel[]) => {
+        this.regsOptions = resp;
+        this.asignarMenu();
+        console.log("menu:", this.menuItems);
+      });
     // construcción de memú agendas dinamicas
     this.api.get("TypesAgenda").subscribe((resp: any) => {
       this.regs = resp;
@@ -73,11 +68,24 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         i++;
       });
     });
+    router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        /**
+         * Activating the current active item dropdown
+         */
+        this._activateMenuDropdown();
+
+        /**
+         * closing the sidebar
+         */
+        // if (window.matchMedia('(max-width: 991px)').matches) {
+        //   this.document.body.classList.remove('sidebar-open');
+        // }
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.menuItems = MENU;
-
     this.theme = localStorage.getItem("theme");
     /**
      * Sidebar-folded on desktop (min-width:992px and max-width: 1199px)
@@ -92,7 +100,24 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.document.body.classList.remove("sidebar-light", "sidebar-dark");
     this.document.body.classList.add(localStorage.getItem("theme"));
   }
-
+  asignarMenu() {
+    this.menuItems = MENU;
+    this.menuItems.forEach((menu: MenuItem) => {
+      menu.access = this.GetPermission(menu.id);
+      if (menu.subItems?.length > 0) {
+        menu.subItems.forEach((subitem: MenuItem) => {
+          subitem.access = this.GetPermission(subitem.id);
+          if (subitem.subItems?.length > 0) {
+            subitem.subItems.forEach((subSubitem: MenuItem) => {
+              subSubitem.access = this.GetPermission(subSubitem.id);
+            });
+          }
+        });
+      }
+    });
+    this.resetMenuItems();
+    this.activateMenuItems();
+  }
   ngAfterViewInit() {
     // activate menu item
     new MetisMenu(this.sidebarMenu.nativeElement);
@@ -228,7 +253,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
    */
   activateMenuItems() {
     const links = document.getElementsByClassName("nav-link-ref");
-
     let menuItemEl = null;
 
     for (let i = 0; i < links.length; i++) {
@@ -278,16 +302,13 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  GetPermission(option: string, typeOption: string) {
-    this.api
-      .getPermission(
-        "ProfileOptions/Options",
-        localStorage.getItem("idProfile"),
-        option,
-        typeOption
-      )
-      .subscribe((resp: any) => {
-        return resp;
-      });
+  GetPermission(option: string) {
+    let obj: ProfileOptionModel = this.regsOptions.find(
+      (x) => x.codeOption == option
+    );
+    if (obj != null) {
+      return obj.access;
+    }
+    return false;
   }
 }
