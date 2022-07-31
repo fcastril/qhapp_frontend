@@ -43,6 +43,23 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   ) {
     let idProfile: number = Number(localStorage.getItem("idProfile"));
 
+    router.events.forEach((event) => {
+      if (event instanceof NavigationEnd) {
+        /**
+         * Activating the current active item dropdown
+         */
+        this._activateMenuDropdown();
+
+        /**
+         * closing the sidebar
+         */
+        // if (window.matchMedia('(max-width: 991px)').matches) {
+        //   this.document.body.classList.remove('sidebar-open');
+        // }
+      }
+    });
+
+
     this.api
       .getProfileOption(idProfile)
       .subscribe((resp: ProfileOptionModel[]) => {
@@ -68,21 +85,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         i++;
       });
     });
-    router.events.forEach((event) => {
-      if (event instanceof NavigationEnd) {
-        /**
-         * Activating the current active item dropdown
-         */
-        this._activateMenuDropdown();
 
-        /**
-         * closing the sidebar
-         */
-        // if (window.matchMedia('(max-width: 991px)').matches) {
-        //   this.document.body.classList.remove('sidebar-open');
-        // }
-      }
-    });
   }
 
   ngOnInit(): void {
@@ -116,7 +119,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       }
     });
     this.resetMenuItems();
-    this.activateMenuItems();
+   // this.activateMenuItems();
   }
   ngAfterViewInit() {
     // activate menu item
