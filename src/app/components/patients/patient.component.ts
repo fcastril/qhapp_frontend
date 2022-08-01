@@ -13,6 +13,17 @@ import { AuthService } from "../../services/auth.service";
 import { BaseClass } from "src/app/class/base.class";
 import { WebcamImage, WebcamInitError } from "ngx-webcam";
 import { Observable, Subject } from "rxjs";
+import { CustomerBasicModel } from "src/app/models/customer-basic.model";
+import {
+  AddressSIIGOModel,
+  CitySIIGOModel,
+  PhonesSIIGOMOdel,
+  ContactsSIIGOModel,
+} from "../../models/customer-basic.model";
+import { CityModel } from "../../models/city.model";
+import { SIIGOFECustomerRequestModel } from "src/app/models/siigofeCustomerRequest.model";
+import { environment } from "src/environments/environment";
+import { ResponseModel } from "src/app/models/response.model";
 
 @Component({
   selector: "app-patient",
@@ -56,12 +67,12 @@ export class PatientComponent extends BaseClass implements OnInit {
 
   valueGender = "";
 
-  patientOld: PatientModel ;
+  patientOld: PatientModel;
   isCamaraVisible: boolean = false;
 
-//Camara WEB
+  //Camara WEB
 
-public showWebcam = true;
+  public showWebcam = true;
   public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
@@ -77,8 +88,9 @@ public showWebcam = true;
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
   // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
-  private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
-
+  private nextWebcam: Subject<boolean | string> = new Subject<
+    boolean | string
+  >();
 
   // lista manual para Zona Residencial
   public listResidentialZone = [
@@ -304,18 +316,20 @@ public showWebcam = true;
 
   // Se genera el dato de Digito de Verificación para los tipos de documentos que lo necesiten
   public DVGenerator(event: any) {
-    this.api.getParameter('Patients','documentpatient',this.reg.documentPatient).subscribe((resp:PatientModel)=>{
-      this.reg = resp;
-      if (this.reg.idPatient > 0){
-        this.id = this.reg.idPatient.toString();
-        Swal.fire({
-          title: "Error",
-          text: "El Paciente ya existe, se le permite actualizarlo",
-          icon: "error",
-        });
-      }
-    });
-    
+    this.api
+      .getParameter("Patients", "documentpatient", this.reg.documentPatient)
+      .subscribe((resp: PatientModel) => {
+        this.reg = resp;
+        if (this.reg.idPatient > 0) {
+          this.id = this.reg.idPatient.toString();
+          Swal.fire({
+            title: "Error",
+            text: "El Paciente ya existe, se le permite actualizarlo",
+            icon: "error",
+          });
+        }
+      });
+
     if (this.regTypeDocument.requiredDV === true) {
       const nroDocumento = this.reg.documentPatient;
       let digito = 0;
@@ -417,6 +431,71 @@ public showWebcam = true;
                 }
               });
           }
+          // Enviar los datos a SIIGO
+          let names: string[] = [
+            `${this.reg.firstName} ${this.reg.secondName}`,
+            `${this.reg.lastName} ${this.reg.lastSecondName}`,
+          ];
+
+          let cityReg: CityModel = this.listCities.find(
+            (x) => x.idCity === this.reg.idCity
+          );
+          let city: CitySIIGOModel = new CitySIIGOModel(
+            "CO",
+            "Colombia",
+            "05",
+            "Antioquia",
+            cityReg.codeCity,
+            cityReg.nameCity
+          );
+          let address: AddressSIIGOModel = new AddressSIIGOModel(
+            this.reg.addressPatient,
+            city,
+            this.reg.codePostal
+          );
+          let phones: PhonesSIIGOMOdel[] = [
+            new PhonesSIIGOMOdel(this.reg.cellphonePatient),
+            new PhonesSIIGOMOdel(this.reg.telephonePatient),
+          ];
+          let contact: ContactsSIIGOModel = new ContactsSIIGOModel(
+            `${this.reg.firstName} ${this.reg.secondName}`,
+            `${this.reg.lastName} ${this.reg.lastSecondName}`,
+            this.reg.emailPatient,
+            new PhonesSIIGOMOdel(this.reg.cellphonePatient)
+          );
+          let contacts: ContactsSIIGOModel[] = [contact];
+
+          let customerBasic: CustomerBasicModel = new CustomerBasicModel(
+            "Person",
+            "13",
+            this.reg.documentPatient,
+            names,
+            address,
+            phones,
+            contacts
+          );
+          let siigoFECustomerRequestModel: SIIGOFECustomerRequestModel =
+            new SIIGOFECustomerRequestModel();
+          siigoFECustomerRequestModel.username = environment.Username;
+          siigoFECustomerRequestModel.access_key = environment.AccessKey;
+          siigoFECustomerRequestModel.uri = environment.urlSIIGOFE;
+          siigoFECustomerRequestModel.customerBasic = customerBasic;
+          this.api
+            .post("ElectronicInvoice/PostCustomer", siigoFECustomerRequestModel)
+            .subscribe((resp: ResponseModel) => {
+              if (!resp.response) {
+                Swal.fire(
+                  "Error al actualizar el Registro en SIIGO",
+                  resp.message,
+                  "error"
+                );
+                console.error(resp);
+              } else {
+                console.log(
+                  "Registro creado/actualizado en SIIGO Correctamente"
+                );
+              }
+            });
         }
       },
       (error: any) => {
@@ -460,7 +539,6 @@ public showWebcam = true;
         image.onload = (rs) => {
           const img_height = rs.currentTarget["height"];
           const img_width = rs.currentTarget["width"];
-
 
           if (img_height > max_height && img_width > max_width) {
             this.imageError =
@@ -506,8 +584,6 @@ public showWebcam = true;
     this.isCamaraVisible = !this.isCamaraVisible;
   }
 
-
-  
   public triggerSnapshot(): void {
     this.trigger.next();
   }
@@ -520,7 +596,7 @@ public showWebcam = true;
     this.errors.push(error);
   }
 
-  public showNextWebcam(directionOrDeviceId: boolean|string): void {
+  public showNextWebcam(directionOrDeviceId: boolean | string): void {
     // true => move forward through devices
     // false => move backwards through devices
     // string => move to device with given deviceId
@@ -528,14 +604,13 @@ public showWebcam = true;
   }
 
   public handleImage(webcamImage: WebcamImage): void {
-
     const imgBase64Path = webcamImage.imageAsDataUrl;
-            this.reg.picturePatient = imgBase64Path;
-            this.cardImageBase64 = imgBase64Path;
-            this.isImageSaved = true;
+    this.reg.picturePatient = imgBase64Path;
+    this.cardImageBase64 = imgBase64Path;
+    this.isImageSaved = true;
 
     this.isCamaraVisible = false;
-            
+
     this.webcamImage = webcamImage;
   }
 
@@ -547,7 +622,7 @@ public showWebcam = true;
     return this.trigger.asObservable();
   }
 
-  public get nextWebcamObservable(): Observable<boolean|string> {
+  public get nextWebcamObservable(): Observable<boolean | string> {
     return this.nextWebcam.asObservable();
   }
 }
