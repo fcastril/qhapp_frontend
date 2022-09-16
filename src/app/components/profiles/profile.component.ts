@@ -33,7 +33,6 @@ export class ProfileComponent implements OnInit {
       .getId("ProfileOptions/GetOptions", this.id)
       .subscribe((resp: any) => {
         this.regs = resp;
-        console.log("resp - profiles", this.regs);
       });
 
     if (this.id === "0") {

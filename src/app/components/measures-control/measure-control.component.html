@@ -20,11 +20,16 @@
                 <tr>
                     <th scope="col" class="title"></th>
                     <th *ngFor="let reg of regs; let idx = index" scope="col">
-                        <mat-form-field appearance="fill" class="form-group col-7">
-                            <input class="form-control input-measure" matInput [matDatepicker]="picker" [(ngModel)]="reg.dateRegistry" id="dateRegistry + {{reg.idDetailMeasureControl}}" name="dateRegistry + {{reg.idDetailMeasureControl}}" autocomplete="off" [disabled]="reg.isBlock">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker startView="year"></mat-datepicker>
+                      <ng-container *ngIf="reg.isIdeal==false else Ideal">
+                        <mat-form-field appearance="fill" class="form-group col-7"  >
+                          <input class="form-control input-measure" matInput [matDatepicker]="picker" [(ngModel)]="reg.dateRegistry" id="dateRegistry + {{reg.idDetailMeasureControl}}" name="dateRegistry + {{reg.idDetailMeasureControl}}" autocomplete="off" [disabled]="reg.isBlock">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker startView="year"></mat-datepicker>
                         </mat-form-field>
+                      </ng-container>
+                      <ng-template #Ideal >
+                          <label>Medidas Ideales</label>
+                      </ng-template>
                     </th>
                     <th scope="col">
                         <mat-form-field appearance="fill" class="form-group col-8">
