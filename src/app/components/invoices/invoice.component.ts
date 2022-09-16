@@ -77,7 +77,7 @@ export class InvoiceComponent implements OnInit {
           });
         }
       );
- 
+
       // List Products
       this.api.get('Products').subscribe(
         (resp: any) =>{
@@ -86,7 +86,7 @@ export class InvoiceComponent implements OnInit {
             idProduct: 0,
             descriptionProduct: 'Seleccione el producto'
           });
-          
+
         }
       );
       // List UENs
@@ -167,7 +167,7 @@ export class InvoiceComponent implements OnInit {
       ).then((result)=> {
         if (result.isConfirmed) {
           this.reg.idTypeMovement = Number(this.reg.idTypeMovement);
-          this.reg.idUserUpdated = Number(localStorage.getItem('idUserLogin'));          
+          this.reg.idUserUpdated = Number(localStorage.getItem('idUserLogin'));
           this.reg.idCustomer = Number(this.reg.idCustomer);
           this.reg.idTypePayment = Number(this.reg.idTypePayment);
           this.reg.idSeller = Number(this.reg.idSeller);
@@ -185,7 +185,7 @@ export class InvoiceComponent implements OnInit {
               if (resp.error) {
                   Swal.fire('Error al crear el Registro','Se presentó un error al crear el registro', 'error');
               } else {
-                window.location.replace(`/invoices/${resp.idMovement}`);
+                window.location.replace(`#/invoices/${resp.idMovement}`);
               }
             });
           } else {
@@ -194,7 +194,7 @@ export class InvoiceComponent implements OnInit {
               if (resp.error) {
                   Swal.fire('Error al actualizar el Registro','Se presentó un error al actualizar el registro', 'error');
               } else {
-                window.location.replace(`/invoices/${resp.idMovement}`);
+                window.location.replace(`#/invoices/${resp.idMovement}`);
               }
             });
           }
@@ -243,7 +243,7 @@ export class InvoiceComponent implements OnInit {
     public LoadPrice(event: any){
       const ID = event.target.value;
       this.regDetail.value = 0;
-      
+
       if(ID){
         this.api.getCode('ListPrices/GetPrice', ID, this.reg.idTypePriceList).subscribe(
           (resp: any) =>{
@@ -365,7 +365,7 @@ export class InvoiceComponent implements OnInit {
           this.reg.nameCustomer = resp.fullName;
         },
         (error: HttpErrorResponse) => {
-  
+
           if (error.status == 404) // NOt fount
           {
             Swal.fire({
@@ -382,7 +382,7 @@ export class InvoiceComponent implements OnInit {
             );
           }
           this.reg.nameCustomer = '';
-        } 
+        }
       );
     }
 
