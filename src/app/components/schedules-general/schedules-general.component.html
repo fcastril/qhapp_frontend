@@ -1,5 +1,13 @@
 <div class="row">
+  <div class="col-7">
     <span class="title">{{title}}</span>
+  </div>
+  <div class="col-5">
+    <button class="btn btn-primary" style="margin-bottom:10px; float:right" (click)="handleDateClick($event)">Agregar Cita</button>
+  </div>
+</div>
+<div class="row">
+
     <div class="col-md-12">
         <div class="row">
             <div class="col-12 col-md-12">
@@ -8,9 +16,9 @@
                         <full-calendar id="calendar" defaultView="resourceTimeGrid" [header]="{
                             left: 'prev,today,next',
                             center: 'title'
-                        }" 
+                        }"
                         timeZone="UTC" [resources]="resources"
-                        [plugins]="calendarPlugins" [weekends]="false" [slotDuration]="'00:05:00'" [slotEventOverlap]="true" [locales]="locales" locale="es-CO" 
+                        [plugins]="calendarPlugins" [weekends]="false" [slotDuration]="'00:05:00'" [slotEventOverlap]="true" [locales]="locales" locale="es-CO"
                         [events]="calendarEvents" (dateClick)="handleDateClick($event)" [eventLimit]="true" [editable]="true"
                             (eventClick)="eventClick($event)" (eventDrop)="eventDrop($event)" (eventResize)="eventResize($event)"> </full-calendar>
                     </div>

@@ -62,7 +62,7 @@ export class SchedulesComponent implements OnInit {
                     }
                   );
                   this.changeTitle(val.id);
-                  
+
                 });
               }
   changeTitle(id:string) {
@@ -142,7 +142,7 @@ eventDrop(arg){
    let dateFinalSelected = item.dateTimeFinal.getMinutes()-(5*60);
    item.dateTimeFinal.setMinutes(dateFinalSelected);
    this.api.put('appointmentRecords',item, idunic).subscribe((resp:any)=>console.log(resp));
- 
+
 }
 
 eventResize(arg){

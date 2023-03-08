@@ -3,7 +3,7 @@ import { ApiService } from "src/app/services/api.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import Swal from "sweetalert2";
-import { ViewUserModel } from "src/app/models/v_users.model";
+import { ViewUserModel } from '../../models/v_Users.model';
 
 @Component({
   selector: "app-users",

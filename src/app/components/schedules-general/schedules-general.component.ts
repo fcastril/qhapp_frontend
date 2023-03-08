@@ -7,6 +7,7 @@ import { EventInput } from '@fullcalendar/core';
 import { ApiService } from 'src/app/services/api.service';
 import { ViewAppointmentRecords } from '../../models/v_AppointmentRecords.model';
 import { SchedulingModel } from '../../models/scheduling.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class SchedulesGeneralComponent implements OnInit {
 
   resources:any[] =[];
 
-  constructor(private api: ApiService) {
+  constructor(private router: Router, private api: ApiService) {
     this.resources = [
       { id: '51', title: 'Doctora' },
       { id: '61', title: 'Accent Prime'},
@@ -57,7 +58,6 @@ export class SchedulesGeneralComponent implements OnInit {
               }
             );
           });
-          console.log(this.resources);
         }
     );
   }
@@ -71,7 +71,6 @@ export class SchedulesGeneralComponent implements OnInit {
 
     this.api.get('AppointmentRecords').subscribe(
       (resp: any)=>{
-        console.log('agendas',resp);
         this.regs = resp;
         this.ListEvent(this.regs);
       }
@@ -102,12 +101,18 @@ export class SchedulesGeneralComponent implements OnInit {
     this.calendarEvents = [... this.listEvents];
   }
 
- 
-  handleDateClick($event){
 
+  handleDateClick(arg){
+    console.log('handleDateClick',arg);
+    let id = 0;
+    this.router.navigate(['appointment-record','0','',id]);
   }
 
   eventClick(arg){
+    console.log('eventClick',arg);
+    const idunic = arg.event.id;
+    let id = 0;
+    this.router.navigate(['appointment-record',idunic,'',id]);
   }
 
   handleModalTodoFormClose(){

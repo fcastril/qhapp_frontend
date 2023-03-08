@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { ApiService } from "src/app/services/api.service";
-import { ViewUserModel } from "src/app/models/v_users.model";
 import { ViewRecipePatientModel } from "src/app/models/v_recipe-patient.model";
+import { ViewUserModel } from '../../models/v_Users.model';
 
 @Component({
   selector: "app-recipe-patient-print",

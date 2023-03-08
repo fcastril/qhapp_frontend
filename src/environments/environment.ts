@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   userpatients: "creapaciente",
   passworduserpatients: "Qu4l1tyH34lth",
-  urlAPI: "https://localhost:44358/api/",
+  urlAPI: "https://localhost:5001/api/",
   Username: "admin@qualityhealth.co",
   AccessKey: "NjM3NmEyOGQtZGYyZC00MTU3LTk3ZGQtODBlZmNlMWI0MzcwOkBDdzElKT88PEs=",
   urlSIIGOFE: "https://api.siigo.com/",
