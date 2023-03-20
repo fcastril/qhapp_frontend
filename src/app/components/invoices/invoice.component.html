@@ -135,8 +135,8 @@
         </div>
     </div>
 
-    <div class="form-group text-right mr-5 col-md-12 col-sm-12 col-xl-12 col-lg-12">
-        <button type="submit " class="btn btn-success "><i class="fas fa-save "></i> Guardar</button>
+    <div class="form-group text-right mr-5 col-md-12 col-sm-12 col-xl-12 col-lg-12" >
+        <button type="button " class="btn btn-success " *ngIf="reg.idMovement === 0"><i class="fas fa-save " ></i> Agregar Detalle</button>
         <button type="button " class="btn btn-danger ml-1 " [routerLink]="['/invoices']"><i class="fa fa-ban " aria-hidden="true "></i> Regresar</button>
     </div>
     <br>

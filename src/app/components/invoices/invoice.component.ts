@@ -40,6 +40,7 @@ export class InvoiceComponent implements OnInit {
   idxSeleccionado: number;
   multiplier: number;
   patients: Observable<any[]>;
+  isDetailVisible = false;
 
   constructor(private route: ActivatedRoute,
     private api: ApiService,
@@ -124,8 +125,10 @@ export class InvoiceComponent implements OnInit {
       if (this.id === '0') {
         this.subtitle = 'CREANDO';
         this.reg = new MovementModel();
+        this.isDetailVisible = false;
       } else {
         this.subtitle = 'EDITANDO';
+        this.isDetailVisible = true;
         this.api.getId('Movements',this.id).subscribe(
           (resp: MovementModel) => {
             this.reg = resp;
@@ -186,6 +189,7 @@ export class InvoiceComponent implements OnInit {
                   Swal.fire('Error al crear el Registro','Se presentó un error al crear el registro', 'error');
               } else {
                 window.location.replace(`#/invoices/${resp.idMovement}`);
+                window.location.reload();
               }
             });
           } else {
@@ -195,6 +199,7 @@ export class InvoiceComponent implements OnInit {
                   Swal.fire('Error al actualizar el Registro','Se presentó un error al actualizar el registro', 'error');
               } else {
                 window.location.replace(`#/invoices/${resp.idMovement}`);
+                window.location.reload();
               }
             });
           }
