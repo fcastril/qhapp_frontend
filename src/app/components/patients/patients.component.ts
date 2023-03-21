@@ -8,6 +8,7 @@ import { ViewPatientsFull } from '../../models/v_PatientsFull.model';
 
 import { Subject } from 'rxjs';
 // import 'rxjs/add/operator/map';
+import { PaginationRequestModel } from '../../models/pagination.model';
 
 @Component({
   selector: 'app-patients',
@@ -19,9 +20,9 @@ export class PatientsComponent implements OnInit {
   regs: ViewPatientsFull[] = [];
   searchText: '';
   title= 'Pacientes';
-  currentPage: number = 1;
+  currentPage: number = 0;
   records: number = 10;
-  
+
   constructor(private api: ApiService,
               private route: Router) { }
 
@@ -34,20 +35,27 @@ export class PatientsComponent implements OnInit {
   {
   }
   paginate(){
-    this.api.getPaginate('Patients', this.currentPage, this.records, this.searchText).subscribe(
-      (resp: any) =>{
-        this.regs = resp;
+    let paginationRequest = new PaginationRequestModel();
+    paginationRequest.current = this.currentPage;
+    paginationRequest.lenght = this.records;
+    paginationRequest.search = this.searchText??'';
+
+
+    this.api.getPagination(paginationRequest, 'Patients').subscribe(
+      (resp: any) => {
+        this.regs = resp.data;
       }
+
     );
   }
   search(){
-    this.currentPage = 1;
+    this.currentPage = 0;
     this.paginate();
 
   }
   keyupSearch(e: any)
   {
-    if (e.keyCode === 13)
+    if (this.searchText.length > 5 || this.searchText.length == 0)
     {
       this.search();
     }
@@ -90,7 +98,7 @@ export class PatientsComponent implements OnInit {
     if (this.currentPage>0){
       this.currentPage --;
       this.paginate();
-    }  
+    }
   }
   next(){
     this.currentPage++;

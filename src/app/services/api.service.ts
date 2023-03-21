@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { PhotoInterface } from "../interfaces/photo.interface";
 import { AuthService } from "./auth.service";
 import { CommonService } from "./common.service";
+import { PaginationRequestModel } from '../models/pagination.model';
 
 @Injectable({
   providedIn: "root",
@@ -64,7 +65,13 @@ export class ApiService {
         { headers: this.auth.getHeaders() }
       );
   }
-
+  getPagination(request: PaginationRequestModel, controller: string){
+    return this.http.post(
+      `${this.common.getUrl()}${controller}/paginate`,
+        request,
+        { headers: this.auth.getHeaders() }
+    );
+  }
   getParameter(controller: string, type: string, search: string) {
     return this.http.get(
       `${this.common.getUrl()}${controller}/${type}/${search}`,
