@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PaginationRequestModel } from 'src/app/models/pagination.model';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
 import { ViewMovementsModel } from '../../models/v_Movements.model';
@@ -16,10 +17,14 @@ export class InvoicesComponent implements OnInit {
   search: string;
   icon = 'compass';
   title = 'Facturas';
+  currentPage = 0;
+  records=10;
+
 
   constructor( private api: ApiService, private route: Router) { }
 
   ngOnInit(): void {
+    this.buscar();
   }
 
   Submit(Form: NgForm)
@@ -28,16 +33,25 @@ export class InvoicesComponent implements OnInit {
   }
 
   buscar(){
-    this.api.getMovement('Movements','51',this.search).subscribe(
-      (resp: any)=>{
-        this.regs = resp;
+    debugger;
+    let paginationRequest = new PaginationRequestModel();
+    paginationRequest.current = this.currentPage;
+    paginationRequest.lenght = this.records;
+    paginationRequest.search = this.search??'';
+
+
+    this.api.getPagination(paginationRequest, 'Movements', '51').subscribe(
+      (resp: any) => {
+        this.regs = resp.data;
       }
+
     );
   }
   keyupSearch(e: any)
   {
     if (e.keyCode === 13)
     {
+      this.currentPage = 0;
       this.buscar();
     }
   }
@@ -72,5 +86,14 @@ export class InvoicesComponent implements OnInit {
       }
     });
   }
-
+  back(){
+    if (this.currentPage>0){
+      this.currentPage --;
+      this.buscar();
+    }
+  }
+  next(){
+    this.currentPage++;
+    this.buscar();
+  }
 }

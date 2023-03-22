@@ -65,7 +65,16 @@ export class ApiService {
         { headers: this.auth.getHeaders() }
       );
   }
-  getPagination(request: PaginationRequestModel, controller: string){
+  getPagination(request: PaginationRequestModel, controller: string, parameter: string=''){
+
+    if (parameter != ''){
+      return this.http.post(
+        `${this.common.getUrl()}${controller}/paginate/${parameter}`,
+          request,
+          { headers: this.auth.getHeaders() }
+      );
+    }
+
     return this.http.post(
       `${this.common.getUrl()}${controller}/paginate`,
         request,

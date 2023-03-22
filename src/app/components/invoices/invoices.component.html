@@ -19,16 +19,18 @@
         </div>
     </div>
     <br>
-    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xl-12" style="height: 500px; overflow-y: auto;">
+    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xl-12">
         <table class="table" *ngIf="regs.length > 0">
             <thead>
                 <tr>
-                    <th scope="col" width="10%">Acciones</th>
-                    <th scope="col" width="10%">Tipo de Movimiento</th>
-                    <th scope="col" width="10%">Consecutivo</th>
-                    <th scope="col" width="10%">Fecha</th>
-                    <th scope="col" width="10%">Cantidad</th>
-                    <th scope="col" width="10%">Valor Total</th>
+                    <th scope="col" >Acciones</th>
+                    <th scope="col" >Mvto</th>
+                    <th scope="col" >Fecha</th>
+                    <th scope="col" >Venc.</th>
+                    <th scope="col" >Cliente</th>
+                    <th scope="col" >Forma de Pago</th>
+                    <th scope="col" >Cancelada</th>
+                    <th scope="col" >Valor Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,13 +39,32 @@
                         <button class="btn btn-success fa fa-pencil rounded" [routerLink]="['/invoices', reg.idMovement]" title="Actualizar Registro"></button>
                         <button class="btn btn-danger fa fa-trash ml-1 rounded" (click)=delete(reg.idMovement,idx) title="Eliminar Registro"></button>
                     </td>
-                    <td>{{reg.codeTypeMovement}}</td>
-                    <td>{{reg.consecutive}}</td>
+                    <td>{{reg.codeTypeMovement}}-{{reg.consecutive}}</td>
                     <td>{{reg.dateMovement | date:'dd/MM/yyyy'}}</td>
-                    <td>{{reg.quantity}}</td>
-                    <td>{{reg.valorTotal | currency: 'COP'}}</td>
+                    <td>{{reg.expireMovemente | date:'dd/MM/yyyy'}}</td>
+                    <td>{{reg.fullNameCustomer}}</td>
+                    <td>{{reg.descriptionTypePayment}}</td>
+                    <td>
+                      <span class="badge badge-success" *ngIf="reg.canceled">Cancelada</span>
+                      <span class="badge badge-danger" *ngIf="!reg.canceled">Pendiente</span>
+                    </td>
+                    <td class="float-right">{{reg.valorTotal | currency: 'COP'}}</td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <hr>
+    <div class="row" *ngIf="regs.length>0">
+        <div class="col-2">
+
+            <button class="btn btn-success float-left" (click)="back()">Anterior</button>
+        </div>
+        <div class="col-8">
+
+        </div>
+        <div class="col-2">
+
+            <button class="btn btn-success float-right" (click)="next()">Siguiente</button>
+        </div>
     </div>
 </form>
