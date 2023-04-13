@@ -216,9 +216,9 @@
                                 <th scope="col" width="20%">Acciones</th>
                                 <th scope="col" width="20%">Producto</th>
                                 <th scope="col" width="20%">Bodega</th>
-                                <th scope="col" width="20%">Cantidad</th>
-                                <th scope="col" width="20%">Valor</th>
-                                <th scope="col" width="20%">Subtotal</th>
+                                <th scope="col" width="20%" style="text-align: right">Cantidad</th>
+                                <th scope="col" width="20%" style="text-align: right">Valor</th>
+                                <th scope="col" width="20%" style="text-align: right">Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -229,13 +229,37 @@
                                 </td>
                                 <td>{{reg.descriptionProduct}}</td>
                                 <td>{{reg.descriptionWarehouse}}</td>
-                                <td>{{reg.quantity}}</td>
-                                <td>{{reg.value | currency: 'COP'}}</td>
-                                <td>{{reg.valorBruto | currency: 'COP'}}</td>
+                                <td style="text-align: right">{{reg.quantity}}</td>
+                                <td style="text-align: right">{{reg.value | currency: 'COP'}}</td>
+                                <td style="text-align: right">{{reg.valorBruto | currency: 'COP'}}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <br>
+            <br>
+            <div class="float-right" style="width: 30%">
+              <div class="row">
+                <div class="col"><b>Cantidad:</b></div>
+                <div class="col" style="text-align: right">{{quantity | number}}</div>
+              </div>
+              <div class="row">
+                <div class="col"><b>SubTotal:</b></div>
+                <div class="col" style="text-align: right">{{valorBruto | currency: 'COP'}}</div>
+              </div>
+              <div class="row">
+                <div class="col"><b>Descuento:</b></div>
+                <div class="col" style="text-align: right">{{valorDescuento| currency: 'COP'}}</div>
+              </div>
+              <div class="row">
+                <div class="col"><b>Impuesto:</b></div>
+                <div class="col" style="text-align: right">{{valorImpuesto| currency: 'COP'}}</div>
+              </div>
+              <div class="row">
+                <div class="col"><b>VALOR TOTAL:</b></div>
+                <div class="col" style="text-align: right"><b>{{valorTotal| currency: 'COP'}}</b></div>
+              </div>
             </div>
         </form>
     </div>

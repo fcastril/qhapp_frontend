@@ -41,6 +41,12 @@ export class InvoiceComponent implements OnInit {
   multiplier: number;
   patients: Observable<any[]>;
   isDetailVisible = false;
+  quantity: number = 0;
+  valorBruto: number = 0;
+  valorDescuento: number = 0;
+  valorSubtotal: number = 0;
+  valorImpuesto: number = 0;
+  valorTotal: number = 0;
 
   constructor(private route: ActivatedRoute,
     private api: ApiService,
@@ -314,6 +320,7 @@ export class InvoiceComponent implements OnInit {
       this.api.getSearch('MovementsDetails', this.id).subscribe(
         (resp: any) =>{
           this.regsDetail = resp;
+          this.calculate();
         }
       );
     }
@@ -389,6 +396,27 @@ export class InvoiceComponent implements OnInit {
           this.reg.nameCustomer = '';
         }
       );
+    }
+    calculate(){
+      this.quantity = 0;
+      this.valorBruto = 0;
+      this.valorDescuento = 0;
+      this.valorSubtotal = 0;
+      this.valorImpuesto = 0;
+      this.valorTotal = 0;
+      this.regsDetail.forEach(element=>{
+        this.quantity+= element.quantity;
+        let valorBruto = element.quantity * element.value;
+        this.valorBruto += valorBruto;
+        let valorDescuento = element.quantity * element.valorBruto * element.discount / 100
+        this.valorDescuento += valorDescuento;
+        let subtotal = valorBruto - valorDescuento;
+        this.valorSubtotal += subtotal;
+        let impuesto = subtotal * element.taxAdd / 100;
+        this.valorImpuesto += impuesto;
+        let valorTotal = subtotal + impuesto;
+        this.valorTotal += valorTotal;
+      })
     }
 
 }
