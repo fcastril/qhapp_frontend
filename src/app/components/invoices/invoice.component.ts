@@ -222,6 +222,7 @@ export class InvoiceComponent implements OnInit {
           (resp: TypeMovementModel) => {
             this.reg.consecutive = resp.consecutive + 1;
             this.reg.multiplier = resp.multiplier;
+            this.reg.docReferen = `FV-${this.reg.consecutive}`;
           }
         );
       }
