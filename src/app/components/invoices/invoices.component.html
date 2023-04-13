@@ -36,7 +36,8 @@
             <tbody>
                 <tr *ngFor="let reg of regs; let idx = index">
                     <td>
-                        <button class="btn btn-success fa fa-pencil rounded" [routerLink]="['/invoices', reg.idMovement]" title="Actualizar Registro"></button>
+                        <button class="btn btn-warning fa fa-eye rounded" (click)="openView(reg.idMovement)" title="Ver Documento"></button>
+                        <button class="btn btn-success fa fa-pencil ml-1 rounded" [routerLink]="['/invoices', reg.idMovement]" title="Actualizar Registro"></button>
                         <button class="btn btn-danger fa fa-trash ml-1 rounded" (click)=delete(reg.idMovement,idx) title="Eliminar Registro"></button>
                     </td>
                     <td>{{reg.codeTypeMovement}}-{{reg.consecutive}}</td>

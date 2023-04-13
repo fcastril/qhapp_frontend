@@ -174,6 +174,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { MatCardModule } from "@angular/material/card";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { SignaturePadModule } from "angular2-signaturepad";
+import { InvoiceViewComponent } from './components/invoices/invoice-view/invoice-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -296,6 +297,7 @@ import { SignaturePadModule } from "angular2-signaturepad";
     ConsetmedicalComponent,
     SchedulesGeneralComponent,
     RecipePatientPrintComponent,
+    InvoiceViewComponent,
   ],
   imports: [
     BrowserModule,

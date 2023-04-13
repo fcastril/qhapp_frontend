@@ -120,6 +120,7 @@ import { ConsentsmedicalComponent } from './components/consentsmedical/consentsm
 import { ConsetmedicalComponent } from './components/consentsmedical/consetmedical.component';
 import { SchedulesGeneralComponent } from './components/schedules-general/schedules-general.component';
 import { RecipePatientPrintComponent } from './components/recipes-patients/recipe-patient-print.component';
+import { InvoiceViewComponent } from './components/invoices/invoice-view/invoice-view.component';
 
 const routes: Routes = [
   { path: 'initialpatient/:id',component: PatientComponent},
@@ -286,6 +287,7 @@ const routes: Routes = [
       { path: 'list-price/:id',component: ListPriceComponent,canActivate: [AuthGuard]},
       { path: 'invoices',component: InvoicesComponent,canActivate: [AuthGuard]},
       { path: 'invoices/:id', component: InvoiceComponent,canActivate: [AuthGuard]},
+      { path: 'invoices-view/:id', component: InvoiceViewComponent,canActivate: [AuthGuard]},
       { path: 'credit-notes',component: CreditNotesComponent,canActivate: [AuthGuard]},
       { path: 'credit-notes/:id', component: CreditNoteComponent,canActivate: [AuthGuard]},
       { path: 'debit-notes',component: DebitNotesComponent,canActivate: [AuthGuard]},

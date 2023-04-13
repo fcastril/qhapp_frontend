@@ -1,0 +1,87 @@
+<form #f = "ngForm">
+<div class="container">
+    <div class="row">
+      <div class="col-10">
+          <h3 class="text-primary"><i class="fas fa-file-invoice-dollar "></i> {{ title | uppercase}}</h3>
+      </div>
+      <hr>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-3 col-sm-12 col-lg-3">
+      <b>Movimiento: </b>{{movement.codeTypeMovement}}-{{movement.consecutive}}
+    </div>
+    <div class="col-3 col-sm-12 col-lg-3">
+      <b>Doc. Referencia: </b>{{movement.docReferen}}
+    </div>
+    <div class="col-3 col-sm-12 col-lg-3">
+      <b>Fecha: </b>{{movement.dateMovement | date: 'yyyy-MM-dd'}}
+    </div>
+    <div class="col-3 col-sm-12 col-lg-3">
+      <b>Vencimiento: </b>{{movement.expireMovemente| date: 'yyyy-MM-dd'}}
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-3 col-sm-12 col-lg-3">
+      <b>Forma Pago: </b>{{movement.descriptionTypePayment}}
+    </div>
+    <div class="col-9 col-sm-12 col-lg-8">
+      <b>Cliente: </b>{{movement.documentCustomer}} - {{movement.fullNameCustomer}}
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-12">
+      <b>Observaciones: </b>{{movement.notes}}
+    </div>
+  </div>
+  <br>
+  <table class="table" *ngIf="movementDetail.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">Producto</th>
+        <th scope="col">Bodega</th>
+        <th scope="col" style="text-align: right">Cantidad</th>
+        <th scope="col" style="text-align: right">Vr. Unitario</th>
+        <th scope="col" style="text-align: right">Subtotal</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let item of movementDetail">
+        <td>{{item.codeProduct}}-{{item.descriptionProduct}}</td>
+        <td>{{item.descriptionWarehouse}}</td>
+        <td style="text-align: right">{{item.quantity | number}}</td>
+        <td style="text-align: right">{{item.value | currency: 'COP'}}</td>
+        <td style="text-align: right">{{item.quantity * item.value| currency: 'COP'}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <div class="float-right" style="width: 30%">
+    <div class="row">
+      <div class="col"><b>Cantidad:</b></div>
+      <div class="col" style="text-align: right">{{movement.quantity | number}}</div>
+    </div>
+    <div class="row">
+      <div class="col"><b>SubTotal:</b></div>
+      <div class="col" style="text-align: right">{{movement.valorBruto | currency: 'COP'}}</div>
+    </div>
+    <div class="row">
+      <div class="col"><b>Descuento:</b></div>
+      <div class="col" style="text-align: right">{{movement.valorDescuento| currency: 'COP'}}</div>
+    </div>
+    <div class="row">
+      <div class="col"><b>Impuesto:</b></div>
+      <div class="col" style="text-align: right">{{movement.valorImpuesto| currency: 'COP'}}</div>
+    </div>
+    <div class="row">
+      <div class="col"><b>VALOR TOTAL:</b></div>
+      <div class="col" style="text-align: right"><b>{{movement.valorTotal| currency: 'COP'}}</b></div>
+    </div>
+  </div>
+</div>
+</form>

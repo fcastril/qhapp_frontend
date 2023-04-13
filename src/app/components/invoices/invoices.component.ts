@@ -5,6 +5,8 @@ import { PaginationRequestModel } from 'src/app/models/pagination.model';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
 import { ViewMovementsModel } from '../../models/v_Movements.model';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 
 @Component({
   selector: 'app-invoices',
@@ -21,7 +23,9 @@ export class InvoicesComponent implements OnInit {
   records=10;
 
 
-  constructor( private api: ApiService, private route: Router) { }
+  constructor( private api: ApiService,
+    public dialog: MatDialog,
+    private route: Router) { }
 
   ngOnInit(): void {
     this.buscar();
@@ -33,7 +37,6 @@ export class InvoicesComponent implements OnInit {
   }
 
   buscar(){
-    debugger;
     let paginationRequest = new PaginationRequestModel();
     paginationRequest.current = this.currentPage;
     paginationRequest.lenght = this.records;
@@ -95,5 +98,23 @@ export class InvoicesComponent implements OnInit {
   next(){
     this.currentPage++;
     this.buscar();
+  }
+  animal: string;
+  openView(id: number){
+
+    let config: MatDialogConfig = {
+      panelClass : 'dialog-responsive',
+      data: id,
+      id: 'invoiceDialog'
+    }
+
+    let dialogRef = this.dialog.open(InvoiceViewComponent,
+      config
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
   }
 }

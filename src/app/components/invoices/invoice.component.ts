@@ -143,7 +143,7 @@ export class InvoiceComponent implements OnInit {
         );
         this.buscar();
       }
-    }
+    }f
 
     Submit( form: NgForm){
       if (form.invalid) {
