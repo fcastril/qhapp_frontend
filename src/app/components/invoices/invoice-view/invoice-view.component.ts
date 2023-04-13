@@ -31,7 +31,7 @@ export class InvoiceViewComponent implements OnInit {
       this.movement = resp;
       console.log('movement', this.movement);
     });
-    this.api.getParameter('MovementsDetails','Movement',this.data.toString()).subscribe((resp: ViewMovementsDetailsModel) =>
+    this.api.getParameter('MovementsDetails','Movement',this.data.toString()).subscribe((resp: ViewMovementsDetailsModel[]) =>
     {
       this.movementDetail = resp;
       console.log('movementDetail', this.movementDetail);

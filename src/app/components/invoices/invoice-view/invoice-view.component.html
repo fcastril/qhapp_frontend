@@ -67,21 +67,23 @@
       <div class="col" style="text-align: right">{{movement.quantity | number}}</div>
     </div>
     <div class="row">
-      <div class="col"><b>SubTotal:</b></div>
+      <div class="col"><b>Vr. Bruto:</b></div>
       <div class="col" style="text-align: right">{{movement.valorBruto | currency: 'COP'}}</div>
     </div>
     <div class="row">
       <div class="col"><b>Descuento:</b></div>
       <div class="col" style="text-align: right">{{movement.valorDescuento| currency: 'COP'}}</div>
     </div>
+    <hr>
     <div class="row">
       <div class="col"><b>Subtotal:</b></div>
-      <div class="col" style="text-align: right">{{movement.valorSubtotal| currency: 'COP'}}</div>
+      <div class="col" style="text-align: right">{{movement.valorBruto - movement.valorDescuento| currency: 'COP'}}</div>
     </div>
     <div class="row">
       <div class="col"><b>Impuesto:</b></div>
       <div class="col" style="text-align: right">{{movement.valorImpuesto| currency: 'COP'}}</div>
     </div>
+    <hr>
     <div class="row">
       <div class="col"><b>VALOR TOTAL:</b></div>
       <div class="col" style="text-align: right"><b>{{movement.valorTotal| currency: 'COP'}}</b></div>

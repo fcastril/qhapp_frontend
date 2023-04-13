@@ -245,17 +245,23 @@
                 <div class="col" style="text-align: right">{{quantity | number}}</div>
               </div>
               <div class="row">
-                <div class="col"><b>SubTotal:</b></div>
+                <div class="col"><b>Vr. Bruto:</b></div>
                 <div class="col" style="text-align: right">{{valorBruto | currency: 'COP'}}</div>
               </div>
               <div class="row">
                 <div class="col"><b>Descuento:</b></div>
                 <div class="col" style="text-align: right">{{valorDescuento| currency: 'COP'}}</div>
               </div>
+              <hr>
+              <div class="row">
+                <div class="col"><b>Subtotal:</b></div>
+                <div class="col" style="text-align: right">{{valorBruto - valorDescuento| currency: 'COP'}}</div>
+              </div>
               <div class="row">
                 <div class="col"><b>Impuesto:</b></div>
                 <div class="col" style="text-align: right">{{valorImpuesto| currency: 'COP'}}</div>
               </div>
+              <hr>
               <div class="row">
                 <div class="col"><b>VALOR TOTAL:</b></div>
                 <div class="col" style="text-align: right"><b>{{valorTotal| currency: 'COP'}}</b></div>
