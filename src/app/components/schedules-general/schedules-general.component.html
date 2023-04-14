@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-12 col-md-12">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" (click)="handleDateClick($event)">
                         <full-calendar id="calendar" defaultView="resourceTimeGrid" [header]="{
                             left: 'prev,today,next',
                             center: 'title'
@@ -21,7 +21,7 @@
                         [plugins]="calendarPlugins" [weekends]="false" [slotDuration]="'00:05:00'" [slotEventOverlap]="true" [locales]="locales" locale="es-CO"
                         [events]="calendarEvents" (dateClick)="handleDateClick($event)" [eventLimit]="true" [editable]="true"
                             (eventClick)="eventClick($event)" (eventDrop)="eventDrop($event)" (eventResize)="eventResize($event)"
-                            [nowIndicator]="true" [now]="currentTime"> </full-calendar>
+                            [nowIndicator]="true" [now]="currentTime" > </full-calendar>
                     </div>
                 </div>
             </div>

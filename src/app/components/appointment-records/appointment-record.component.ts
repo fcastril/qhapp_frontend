@@ -20,7 +20,7 @@ export class AppointmentRecordComponent implements OnInit {
   idTypeAgenda: number;
   title= 'Registro de Citas';
   controller= 'AppointmentRecords';
-  navigateToPage='/appointment-records';
+  navigateToPage='/schedules-general';
   subtitle: string;
   reg = new AppointmentRecordModel();
 
