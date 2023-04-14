@@ -40,6 +40,21 @@ export class AppointmentRecordComponent implements OnInit {
     this.date = this.route.snapshot.paramMap.get('date');
     this.idTypeAgenda = +this.route.snapshot.paramMap.get('typeAgenda');
 
+    this.loadForm();
+
+  }
+  async loadForm(){
+
+
+    await this.loadReasonsAppointmets();
+    await this.users();
+    await this.patients();
+    await this.statusAppointments();
+    await this.typesAgenda();
+
+
+
+
 
     if (this.id === '0') {
       this.subtitle = 'CREANDO';
@@ -52,7 +67,7 @@ export class AppointmentRecordComponent implements OnInit {
       let dateFinalSelected = (new Date(this.date)).getMinutes()+15;
       this.reg.dateTimeFinal.setMinutes(dateFinalSelected);
       this.reg.dateTimeFinal_ = this.datePipe.transform(this.reg.dateTimeFinal, 'yyyy-MM-ddThh:mm');
-     
+
     } else {
       this.subtitle = 'EDITANDO';
       this.api.getId(this.controller,this.id).subscribe(
@@ -64,6 +79,9 @@ export class AppointmentRecordComponent implements OnInit {
 
       );
     }
+  }
+
+  async loadReasonsAppointmets(){
 
     // se carga la lista del select para Motivo Cita
     this.api.get('ReasonsAppointments').subscribe(
@@ -75,39 +93,44 @@ export class AppointmentRecordComponent implements OnInit {
         });
       }
     );
-
-    // se carga la lista del select para Usuarios que estan habilitados para atender pacientes
-    this.api.getParameter('Users','atencion', '1').subscribe(
-      (resp: any) =>{
-        this.listUsers = resp;
-        this.listUsers.unshift({
-          idUser: 0,
-          firstNameUser: 'Seleccione el profesional.'
-        });
-      }
-    );
-
-    // se carga la lista del select para Pacientes
-    this.api.get('Patients').subscribe(
-      (resp: any) =>{
-        this.listPatients = resp;
-        this.listPatients.unshift({
-          idPatient: 0,
-          fullName: 'Seleccione el Paciente.'
-        });
-      }
-    );
-
-    // se carga la lista del select para Estado de Cita
-    this.api.get('StatusAppointments').subscribe(
-      (resp: any) =>{
-        this.listStatusAppointments = resp;
-        this.listStatusAppointments.unshift({
-          idStatusAppointment: 0,
-          statusAppointment1: 'Seleccione el Estado de la Cita.'
-        });
-      }
-    );
+  }
+  async users(){
+        // se carga la lista del select para Usuarios que estan habilitados para atender pacientes
+        this.api.getParameter('Users','atencion', '1').subscribe(
+          (resp: any) =>{
+            this.listUsers = resp;
+            this.listUsers.unshift({
+              idUser: 0,
+              firstNameUser: 'Seleccione el profesional.'
+            });
+          }
+        );
+  }
+  async patients(){
+        // se carga la lista del select para Pacientes
+        this.api.get('Patients').subscribe(
+          (resp: any) =>{
+            this.listPatients = resp;
+            this.listPatients.unshift({
+              idPatient: 0,
+              fullName: 'Seleccione el Paciente.'
+            });
+          }
+        );
+  }
+async statusAppointments(){
+   // se carga la lista del select para Estado de Cita
+   this.api.get('StatusAppointments').subscribe(
+    (resp: any) =>{
+      this.listStatusAppointments = resp;
+      this.listStatusAppointments.unshift({
+        idStatusAppointment: 0,
+        statusAppointment1: 'Seleccione el Estado de la Cita.'
+      });
+    }
+  );
+}
+async typesAgenda(){
 
     // se carga la lista del select para Tipos de Agendas
     this.api.get('TypesAgenda').subscribe(
@@ -119,8 +142,7 @@ export class AppointmentRecordComponent implements OnInit {
         });
       }
     );
-
-  }
+}
   click()
   {
     let dateTime = new Date();
@@ -165,7 +187,7 @@ export class AppointmentRecordComponent implements OnInit {
 
         let dateInitialSelected = this.reg.dateTimeInitial.getMinutes()-(5*60);
         this.reg.dateTimeInitial.setMinutes(dateInitialSelected);
-        
+
         this.reg.dateTimeFinal = new Date(this.reg.dateTimeFinal_);
         let dateFinalSelected = this.reg.dateTimeFinal.getMinutes()-(5*60);
         this.reg.dateTimeFinal.setMinutes(dateFinalSelected);
@@ -218,7 +240,7 @@ export class AppointmentRecordComponent implements OnInit {
           );
         }
         this.reg.fullName = '';
-      } 
+      }
     );
   }
 

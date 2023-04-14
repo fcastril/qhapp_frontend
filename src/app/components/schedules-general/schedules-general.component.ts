@@ -21,6 +21,9 @@ export class SchedulesGeneralComponent implements OnInit {
   @ViewChild('externalEvents', {static: true}) externalEvents: ElementRef;
   @Input() url: string;
 
+
+  currentTime : any;
+
   calendarPlugins = [resourceTimeGridPlugin]; // important!
   calendar :any;
   calendarEl: any;
@@ -63,10 +66,16 @@ export class SchedulesGeneralComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let date = new Date();
+    this.currentTime = date.toISOString();
     const calendar = document.getElementById('calendar');
+
+
     this.loadEvents();
   }
+  scrollTime(){
 
+  }
   loadEvents() {
 
     this.api.get('AppointmentRecords').subscribe(

@@ -20,7 +20,8 @@
                         timeZone="UTC" [resources]="resources"
                         [plugins]="calendarPlugins" [weekends]="false" [slotDuration]="'00:05:00'" [slotEventOverlap]="true" [locales]="locales" locale="es-CO"
                         [events]="calendarEvents" (dateClick)="handleDateClick($event)" [eventLimit]="true" [editable]="true"
-                            (eventClick)="eventClick($event)" (eventDrop)="eventDrop($event)" (eventResize)="eventResize($event)"> </full-calendar>
+                            (eventClick)="eventClick($event)" (eventDrop)="eventDrop($event)" (eventResize)="eventResize($event)"
+                            [nowIndicator]="true" [now]="currentTime"> </full-calendar>
                     </div>
                 </div>
             </div>

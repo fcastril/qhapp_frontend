@@ -34,7 +34,7 @@ export class SchedulesComponent implements OnInit {
   regs: ViewAppointmentRecords[] = [];
   searchText: '';
   title= 'Registro de Citas';
-
+  currentDate: any;
 
 
   // listEvents: SchedulingModel [] = [];
@@ -84,6 +84,8 @@ export class SchedulesComponent implements OnInit {
     this.url = this.router.url;
 
     this.id = this.route.snapshot.paramMap.get('id');
+    let date = new Date();
+    this.currentDate = date.toISOString();
   }
 
   public ListEvent(regs: any) {
