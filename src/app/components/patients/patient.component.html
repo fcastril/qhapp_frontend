@@ -155,13 +155,13 @@
 
         <div class="form-group col-lg-5 col-md-5 col-sm-6">
             <label for="telephonePatient" style="color: darkorange;">Teléfono</label>
-            <input type="text" class="form-control" id="telephonePatient" [(ngModel)]="reg.telephonePatient" name="telephonePatient" autocomplete="off" minlength="7" required #telephonePatient="ngModel" [class.is-invalid]="telephonePatient.invalid && telephonePatient.touched">
+            <input  maxlength="10" type="text" class="form-control" id="telephonePatient" [(ngModel)]="reg.telephonePatient" name="telephonePatient" autocomplete="off" minlength="7" required #telephonePatient="ngModel" [class.is-invalid]="telephonePatient.invalid && telephonePatient.touched">
             <span *ngIf="telephonePatient.invalid && telephonePatient.touched" class="text-danger">* Obligatorio</span>
         </div>
 
         <div class="form-group col-lg-5 col-md-5 col-sm-6">
             <label for="cellphonePatient" style="color: darkorange;">Celular</label>
-            <input type="text" class="form-control" id="cellphonePatient" [(ngModel)]="reg.cellphonePatient" name="cellphonePatient" autocomplete="off" minlength="10" required #cellphonePatient="ngModel" [class.is-invalid]="cellphonePatient.invalid && cellphonePatient.touched">
+            <input  maxlength="10" type="text" class="form-control" id="cellphonePatient" [(ngModel)]="reg.cellphonePatient" name="cellphonePatient" autocomplete="off" minlength="10" required #cellphonePatient="ngModel" [class.is-invalid]="cellphonePatient.invalid && cellphonePatient.touched">
             <span *ngIf="cellphonePatient.invalid && cellphonePatient.touched" class="text-danger">* Obligatorio</span>
         </div>
 
@@ -257,7 +257,7 @@
 
         <div class="form-group col-lg-4 col-md-4 col-sm-6">
             <label for="telephoneInCharge" style="color: darkorange;">Teléfono Responsable/CONTACTO DE MERGENCIA</label>
-            <input type="text" class="form-control" id="telephoneInCharge" [(ngModel)]="reg.telephoneInCharge" name="telephoneInCharge" minlength="10" autocomplete="off" required #telephoneInCharge="ngModel" [class.is-invalid]="telephoneInCharge.invalid && telephoneInCharge.touched">
+            <input  maxlength="10" type="text" class="form-control" id="telephoneInCharge" [(ngModel)]="reg.telephoneInCharge" name="telephoneInCharge" minlength="10" autocomplete="off" required #telephoneInCharge="ngModel" [class.is-invalid]="telephoneInCharge.invalid && telephoneInCharge.touched">
             <span *ngIf="telephoneInCharge.invalid && telephoneInCharge.touched" class="text-danger">* Obligatorio</span>
         </div>
 
