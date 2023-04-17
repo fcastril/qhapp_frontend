@@ -126,10 +126,8 @@ export class PatientComponent extends BaseClass implements OnInit {
 
   ngOnInit(): void {
     this.checkUser();
+    this.CargarMaestros();
 
-    setTimeout(() => {
-      this.CargarMaestros();
-    }, 1000);
 
     this.id = this.route.snapshot.paramMap.get("id");
     if (this.id === "0") {
@@ -146,9 +144,9 @@ export class PatientComponent extends BaseClass implements OnInit {
     }
   }
 
-  CargarMaestros() {
+  async CargarMaestros() {
     // se carga la lista del select para Tipo Documento
-    this.api.get("TypesDocuments").subscribe((resp: any) => {
+    await this.api.get("TypesDocuments").subscribe((resp: any) => {
       this.listTypeDocuments = resp;
       this.listTypeDocuments.unshift({
         idTypeDocument: 0,
@@ -157,7 +155,7 @@ export class PatientComponent extends BaseClass implements OnInit {
     });
 
     // se carga la lista del select para Género
-    this.api.get("Genders").subscribe((resp: any) => {
+    await this.api.get("Genders").subscribe((resp: any) => {
       this.listGenders = resp;
       this.listGenders.unshift({
         idGender: 0,
@@ -166,7 +164,7 @@ export class PatientComponent extends BaseClass implements OnInit {
     });
 
     // se carga la lista del select para Estado Civil
-    this.api.get("CivilStatus").subscribe((resp: any) => {
+    await this.api.get("CivilStatus").subscribe((resp: any) => {
       this.listCivilStatus = resp;
       this.listCivilStatus.unshift({
         idCivilStatus: 0,
@@ -175,7 +173,7 @@ export class PatientComponent extends BaseClass implements OnInit {
     });
 
     // se carga la lista del select para Ciudades
-    this.api.get("Cities").subscribe((resp: any) => {
+    await this.api.get("Cities").subscribe((resp: any) => {
       this.listCities = resp;
       this.listCities.unshift({
         idCity: 0,
@@ -184,7 +182,7 @@ export class PatientComponent extends BaseClass implements OnInit {
     });
 
     // se carga la lista del select para Aseguradoras
-    this.api.get("InsuranceCompanies").subscribe((resp: any) => {
+    await this.api.get("InsuranceCompanies").subscribe((resp: any) => {
       this.listInsuranceCompanies = resp;
       this.listInsuranceCompanies.unshift({
         idInsuranceCompany: 0,
@@ -193,7 +191,7 @@ export class PatientComponent extends BaseClass implements OnInit {
     });
 
     // se carga la lista del select para Tipo de Vinculación
-    this.api.get("TypesConnections").subscribe((resp: any) => {
+    await this.api.get("TypesConnections").subscribe((resp: any) => {
       this.listTypesConnection = resp;
       this.listTypesConnection.unshift({
         idTypeConnection: 0,
@@ -202,7 +200,7 @@ export class PatientComponent extends BaseClass implements OnInit {
     });
 
     // se carga la lista del select para Tipo de Relación con el Acompañante
-    this.api.get("Relationships").subscribe((resp: any) => {
+    await this.api.get("Relationships").subscribe((resp: any) => {
       this.listRelationShip = resp;
       this.listRelationShip.unshift({
         idRelationShip: 0,
@@ -211,7 +209,7 @@ export class PatientComponent extends BaseClass implements OnInit {
     });
 
     // se carga la lista del select para Como se entero
-    this.api.get("TypesHearAbouts").subscribe((resp: any) => {
+    await this.api.get("TypesHearAbouts").subscribe((resp: any) => {
       this.listTypeHearAbout = resp;
       this.listTypeHearAbout.unshift({
         idTypeHearAbout: 0,
@@ -220,7 +218,7 @@ export class PatientComponent extends BaseClass implements OnInit {
     });
 
     // se carga la lista del select para Regimen Contable
-    this.api.get("TypeAccountings").subscribe((resp: any) => {
+    await this.api.get("TypeAccountings").subscribe((resp: any) => {
       this.listTypeAccounting = resp;
       this.listTypeAccounting.unshift({
         idTypeAccounting: 0,
@@ -248,10 +246,10 @@ export class PatientComponent extends BaseClass implements OnInit {
   }
 
   // al seleccioanr un tipo de dcto, se busca para saber si requiere DV
-  public SearchDcto(event: any) {
+  public async SearchDcto(event: any) {
     const ID = String(event.target.value);
 
-    this.api.getId("TypesDocuments", ID).subscribe((resp: any) => {
+    await this.api.getId("TypesDocuments", ID).subscribe((resp: any) => {
       this.regTypeDocument = resp;
       this.reg.dvpatient = "";
       if (resp.requiredDV === true) {
@@ -431,71 +429,7 @@ export class PatientComponent extends BaseClass implements OnInit {
                 }
               });
           }
-          // Enviar los datos a SIIGO
-          let names: string[] = [
-            `${this.reg.firstName} ${this.reg.secondName}`,
-            `${this.reg.lastName} ${this.reg.lastSecondName}`,
-          ];
 
-          let cityReg: CityModel = this.listCities.find(
-            (x) => x.idCity === this.reg.idCity
-          );
-          let city: CitySIIGOModel = new CitySIIGOModel(
-            "CO",
-            "Colombia",
-            "05",
-            "Antioquia",
-            cityReg.codeCity,
-            cityReg.nameCity
-          );
-          let address: AddressSIIGOModel = new AddressSIIGOModel(
-            this.reg.addressPatient,
-            city,
-            this.reg.codePostal
-          );
-          let phones: PhonesSIIGOMOdel[] = [
-            new PhonesSIIGOMOdel(this.reg.cellphonePatient),
-            new PhonesSIIGOMOdel(this.reg.telephonePatient),
-          ];
-          let contact: ContactsSIIGOModel = new ContactsSIIGOModel(
-            `${this.reg.firstName} ${this.reg.secondName}`,
-            `${this.reg.lastName} ${this.reg.lastSecondName}`,
-            this.reg.emailPatient,
-            new PhonesSIIGOMOdel(this.reg.cellphonePatient)
-          );
-          let contacts: ContactsSIIGOModel[] = [contact];
-
-          let customerBasic: CustomerBasicModel = new CustomerBasicModel(
-            "Person",
-            "13",
-            this.reg.documentPatient,
-            names,
-            address,
-            phones,
-            contacts
-          );
-          let siigoFECustomerRequestModel: SIIGOFECustomerRequestModel =
-            new SIIGOFECustomerRequestModel();
-          siigoFECustomerRequestModel.username = environment.Username;
-          siigoFECustomerRequestModel.access_key = environment.AccessKey;
-          siigoFECustomerRequestModel.uri = environment.urlSIIGOFE;
-          siigoFECustomerRequestModel.customerBasic = customerBasic;
-          this.api
-            .post("ElectronicInvoice/PostCustomer", siigoFECustomerRequestModel)
-            .subscribe((resp: ResponseModel) => {
-              if (!resp.response) {
-                Swal.fire(
-                  "Error al actualizar el Registro en SIIGO",
-                  resp.message,
-                  "error"
-                );
-                console.error(resp);
-              } else {
-                console.log(
-                  "Registro creado/actualizado en SIIGO Correctamente"
-                );
-              }
-            });
         }
       },
       (error: any) => {
