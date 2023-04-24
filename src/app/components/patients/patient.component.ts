@@ -24,6 +24,7 @@ import { CityModel } from "../../models/city.model";
 import { SIIGOFECustomerRequestModel } from "src/app/models/siigofeCustomerRequest.model";
 import { environment } from "src/environments/environment";
 import { ResponseModel } from "src/app/models/response.model";
+import { ResponseApiModel } from "src/app/models/responseAPI.model";
 
 @Component({
   selector: "app-patient",
@@ -404,6 +405,20 @@ export class PatientComponent extends BaseClass implements OnInit {
                   "error"
                 );
               } else {
+                this.api.postMethod(this.controller, "sendFE","id", this.reg.idPatient.toString(), null).subscribe(
+                  (resp: ResponseApiModel)=>{
+                    console.log('SendFE - resp', resp);
+                    if (resp.isError){
+                      Swal.fire(
+                        'Error al cargar al Proveedor Tecnológico',
+                        resp.message,
+                        'error'
+                      );
+                    }
+                  },
+                  (error: any) => { console.log('SendFE - error', error);}
+
+                );
                 this.router.navigate([
                   "/inititalgeneral-attention",
                   resp.idPatient,
@@ -425,6 +440,30 @@ export class PatientComponent extends BaseClass implements OnInit {
                     "error"
                   );
                 } else {
+                  this.api.postMethod(this.controller, "sendFE","id", this.reg.idPatient.toString(), null).subscribe(
+                    (resp: ResponseApiModel)=>{
+                      if (resp.isError){
+                        let mensaje: string = `El Paciente: <b>${this.reg.fullName} - ${this.reg.documentPatient}</b>
+                          generó un error al cargar en el proveedor tecnológico <br><br>`;
+                        for (let index = 0; index < resp.result.errors.length; index++) {
+                          const element = resp.result.errors[index];
+                          mensaje += `${element.message}\n`;
+
+                        }
+
+                        Swal.fire(
+                          'Error al cargar al Proveedor Tecnológico',
+                          mensaje,
+                          'error'
+                        );
+                      }
+                      console.log('SendFE - resp', resp);
+
+                      },
+                    (error: any) => { console.log('SendFE - error', error);}
+
+                  );
+
                   this.router.navigateByUrl(this.navigateToPage);
                 }
               });

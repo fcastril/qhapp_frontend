@@ -135,6 +135,11 @@ export class ApiService {
       headers: this.auth.getHeaders(),
     });
   }
+  postMethod(controller: string, method: string, parameter: string, value: string, data: any){
+    return this.http.post(`${this.common.getUrl()}${controller}/${method}?${parameter}=${value}`, data, {
+      headers: this.auth.getHeaders(),
+    });
+  }
   put(controller: string, data: any, id: number) {
     return this.http.put(`${this.common.getUrl()}${controller}/${id}`, data, {
       headers: this.auth.getHeaders(),
